@@ -1,13 +1,12 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const NavStyles = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: large;
+  flex: 1;
   a {
     margin: 0 auto;
   }
-`
+  @media only screen and (max-width: 790px) {
+    display: none;
+  }
+`;

@@ -1,11 +1,12 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import Header from './Header';
+import MobileNav from './MobileNav';
 
 const GlobalStyles = createGlobalStyle`
   /* custom fonts */
   /* @font-face {
-    font-family: 'radnika_next';
-    src: url('/static/radnikanext-medium-webfont.woff2') format('woff2');
+    font-family: font name here;
+    src: url() format('woff2');
     font-weight: normal;
     font-style: normal;
   } */
@@ -52,10 +53,11 @@ const InnerStyles = styled.div`
 
 export default function Page({ children }) {
   return (
-    <div>
+    <>
       <GlobalStyles />
       <Header />
+      <MobileNav />
       <InnerStyles>{children}</InnerStyles>
-    </div>
+    </>
   );
 }

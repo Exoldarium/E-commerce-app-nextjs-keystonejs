@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import { NavStyles } from './styles/NavStyles';
+import { MobileNavStyles } from './styles/MobileNavStyles';
 
-export default function Nav() {
+export default function MobileNav() {
   return (
-    <NavStyles>
+    <MobileNavStyles>
       <Link href="/products">Products</Link>
       <Link href="/orders">Orders</Link>
       <Link href="/account">Account</Link>
       <Link href="/signin">Sign In</Link>
-    </NavStyles>
+    </MobileNavStyles>
   );
 }
