@@ -15,7 +15,7 @@ export const OnClickActiveButtonStyles = styled.button`
 `;
 
 export default function Header() {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(true);
   const onClick = () => setIsActive(!isActive);
   return (
     <HeaderStyles>
