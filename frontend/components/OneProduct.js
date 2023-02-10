@@ -1,4 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
+import Head from 'next/head';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { OneProductStyles } from './styles/OneProductStyles';
 
@@ -35,16 +36,14 @@ export default function OneProduct({ id }) {
 
   return (
     <OneProductStyles>
-      <div>
-        <img
-          src={product.photo.image.publicUrlTransformed}
-          alt={product.photo.altText}
-        />
-      </div>
-      <div>
-        <p>{product.name}</p>
+      <Head>
+        <title>E-commerce || {product.name}</title>
+      </Head>
+      <img src={product.photo.image.publicUrlTransformed} alt={product.name} />
+      <div className="product-info">
+        <h1>{product.name}</h1>
         <p>{product.description}</p>
-        <p>{product.price}</p>
+        <p className="product-price">{product.price}</p>
       </div>
     </OneProductStyles>
   );

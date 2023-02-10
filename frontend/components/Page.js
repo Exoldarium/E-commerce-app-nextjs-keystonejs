@@ -1,6 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import Header from './Header';
-import MobileNav from './MobileNav';
 
 const GlobalStyles = createGlobalStyle`
   /* custom fonts */
@@ -56,7 +55,6 @@ export default function Page({ children }) {
     <>
       <GlobalStyles />
       <Header />
-      <MobileNav />
       <InnerStyles>{children}</InnerStyles>
     </>
   );

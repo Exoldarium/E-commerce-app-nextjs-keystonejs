@@ -3,8 +3,10 @@ import styled from 'styled-components';
 export const MobileNavStyles = styled.ul`
   display: none;
   @media only screen and (max-width: 790px) {
+    ${(props) => props.active && `visibility: hidden`};
     position: fixed;
-    top: 5rem;
+    left: 0;
+    top: 0rem;
     height: 100%;
     display: flex;
     align-items: flex-end;
@@ -14,6 +16,7 @@ export const MobileNavStyles = styled.ul`
     border-radius: 5px;
     padding: 10px;
     background: white;
-    width: 15rem;
+    width: 80%;
+    margin: 0 auto;
   }
 `;
