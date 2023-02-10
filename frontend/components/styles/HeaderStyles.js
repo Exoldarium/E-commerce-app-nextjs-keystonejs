@@ -18,5 +18,11 @@ export const HeaderStyles = styled.header`
   @media only screen and (max-width: 790px) {
     max-height: 6.5rem;
     padding: 5px;
+    .mobileNavMenu.active {
+      visibility: hidden;
+    }
+    .mobileNavMenu.hidden {
+      visibility: show;
+    }
   }
 `;
