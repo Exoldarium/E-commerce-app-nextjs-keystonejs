@@ -6,7 +6,7 @@ export const LogoStyles = styled.div`
   font-size: 50px;
   font-weight: bolder;
   @media only screen and (max-width: 790px) {
-    text-align: center;
+    text-align: left;
     font-size: 35px;
   }
 `;
