@@ -21,7 +21,7 @@ export const HeaderStyles = styled.header`
     .mobileNavMenu.active {
       visibility: hidden;
     }
-    .mobileNavMenu.hidden {
+    .mobileNavMenu {
       visibility: show;
     }
   }

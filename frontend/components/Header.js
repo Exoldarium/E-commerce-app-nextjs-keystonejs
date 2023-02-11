@@ -6,12 +6,6 @@ import { HeaderStyles } from './styles/HeaderStyles';
 import { LogoStyles } from './styles/LogoStyles';
 import { MobileNavStyles } from './styles/MobileNavStyles';
 
-// Header should only have account and sign in options
-// Create a dropdown that will have our user options
-// Sign in should only be visible if the user is signed out
-// Add a cart tab
-// add search bar
-
 export const OnClickActiveButtonStyles = styled.button`
   display: none;
   @media only screen and (max-width: 790px) {
@@ -34,7 +28,7 @@ export default function Header() {
       <OnClickActiveButtonStyles type="button" onClick={onClick}>
         Click
       </OnClickActiveButtonStyles>
-      <div className={`mobileNavMenu ${isActive ? 'active' : 'hidden'}`}>
+      <div className={`mobileNavMenu ${isActive ? 'active' : ''}`}>
         <MobileNavStyles onClick={onClick} active={isActive}>
           <Link href="/products">Products</Link>
           <Link href="/orders">Orders</Link>
