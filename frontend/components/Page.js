@@ -2,8 +2,8 @@ import styled, { createGlobalStyle } from 'styled-components';
 import Header from './Header';
 
 // Header should only have account and sign in options
-// Create a dropdown that will have our user options
-// Sign in should only be visible if the user is signed out
+// Create a dropdown that will have our logged in user options
+// mobile menu should have the same options as desktop menu
 // Add a cart tab
 // add search bar
 

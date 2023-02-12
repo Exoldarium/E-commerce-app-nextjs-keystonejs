@@ -45,7 +45,8 @@ export default function SignUp() {
       )}
       {data?.createUser && (
         <p>
-          Successfuly signed up! Please <Link href="/signin">sign in</Link>
+          Successfuly signed up with! Please
+          <Link href="/signin">sign in</Link>
         </p>
       )}
       <div>
