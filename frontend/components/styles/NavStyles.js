@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const NavStyles = styled.div`
   display: flex;
-  flex: 1;
   button {
     background: none;
     border: none;
@@ -11,6 +10,7 @@ export const NavStyles = styled.div`
     cursor: pointer;
   }
   a {
+    padding: 2rem;
     margin: 0 auto;
   }
   @media only screen and (max-width: 790px) {
