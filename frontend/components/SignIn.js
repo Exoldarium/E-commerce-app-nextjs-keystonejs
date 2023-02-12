@@ -2,7 +2,8 @@ import { gql, useMutation } from '@apollo/client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useForm from '../lib/useForm';
-import ErrorMessage from './ErrorMessage';
+import { ParagraphStyles } from '../pages/signin';
+import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { FormStyles } from './styles/FormStyles';
 import { USER_QUERY } from './User';
 
@@ -37,17 +38,22 @@ export default function SignIn() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = await signin();
+    const res = await signin().catch(console.error);
   }
+
+  if (loading) return <ParagraphStyles>Successfuly signed In!</ParagraphStyles>;
 
   if (signIn?.__typename === 'UserAuthenticationWithPasswordSuccess') {
     router.push('/products');
   }
 
   return (
-    <FormStyles method="POST">
+    <FormStyles method="POST" onSubmit={handleSubmit}>
+      {error && (
+        <ErrorMessageStyles>{error && error.message}</ErrorMessageStyles>
+      )}
       {signIn?.__typename === 'UserAuthenticationWithPasswordFailure' && (
-        <ErrorMessage error={signIn.message} />
+        <ErrorMessageStyles>{signIn.message}</ErrorMessageStyles>
       )}
       <div>
         <label htmlFor="email">E-mail Address</label>
@@ -71,9 +77,7 @@ export default function SignIn() {
           required
         />
       </div>
-      <button type="submit" onClick={handleSubmit}>
-        Sign in
-      </button>
+      <button type="submit">Sign in</button>
       <p>
         Don't have an account? <Link href="/signup">Sign up instead!</Link>
       </p>

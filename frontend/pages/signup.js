@@ -7,5 +7,5 @@ export default function SignupPage() {
   if (!user) {
     return <SignUp />;
   }
-  return <ParagraphStyles>You already have an account!</ParagraphStyles>;
+  return <ParagraphStyles>You have an account!</ParagraphStyles>;
 }

@@ -15,5 +15,5 @@ export default function SigninPage() {
   if (!user) {
     return <SignIn />;
   }
-  return <ParagraphStyles>You are already logged in!</ParagraphStyles>;
+  return <ParagraphStyles>You are logged in!</ParagraphStyles>;
 }

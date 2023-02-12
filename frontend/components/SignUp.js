@@ -1,7 +1,8 @@
 import { gql, useMutation } from '@apollo/client';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import useForm from '../lib/useForm';
+import { ParagraphStyles } from '../pages/signin';
+import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { FormStyles } from './styles/FormStyles';
 import { USER_QUERY } from './User';
 
@@ -29,21 +30,24 @@ export default function SignUp() {
     variables: inputs,
     refetchQueries: [{ query: USER_QUERY }],
   });
-  const signIn = data?.authenticateUserWithPassword;
-  const router = useRouter();
 
   async function handleSignUp(e) {
     e.preventDefault();
-    const res = await singup();
+    const res = await singup().catch(console.error);
   }
 
-  if (signIn?.__typename === 'UserAuthenticationWithPasswordSuccess') {
-    router.push('/products');
-  }
-  console.log(error);
+  if (loading) return <ParagraphStyles>Successfuly signed up!</ParagraphStyles>;
 
   return (
-    <FormStyles method="post">
+    <FormStyles method="POST" onSubmit={handleSignUp}>
+      {error && (
+        <ErrorMessageStyles>{error && error.message}</ErrorMessageStyles>
+      )}
+      {data?.createUser && (
+        <p>
+          Successfuly signed up! Please <Link href="/signin">sign in</Link>
+        </p>
+      )}
       <div>
         <label htmlFor="name">Name</label>
         <input
@@ -76,9 +80,10 @@ export default function SignUp() {
           required
         />
       </div>
-      <button type="submit" onSubmit={handleSignUp}>
-        Register
-      </button>
+      <button type="submit">Register</button>
+      <p>
+        Already have an account? <Link href="/signin">Sign in instead!</Link>
+      </p>
     </FormStyles>
   );
 }
