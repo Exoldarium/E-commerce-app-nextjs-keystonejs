@@ -1,3 +1,5 @@
+import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
+
 export default function ErrorMessage({ error }) {
-  return <p>There was an error {error}</p>;
+  return <ErrorMessageStyles>There was an error! {error}</ErrorMessageStyles>;
 }

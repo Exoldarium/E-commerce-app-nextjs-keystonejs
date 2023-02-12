@@ -8,6 +8,7 @@ export default function SignUp() {
     email: '',
     password: '',
   });
+
   return (
     <FormStyles method="post">
       <div>

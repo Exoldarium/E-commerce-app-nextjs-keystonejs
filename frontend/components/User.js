@@ -6,6 +6,7 @@ export const USER_QUERY = gql`
       ... on User {
         id
         name
+        email
       }
     }
   }
@@ -13,5 +14,5 @@ export const USER_QUERY = gql`
 
 export function useUser() {
   const { data } = useQuery(USER_QUERY);
-  return data;
+  return data?.authenticatedItem;
 }
