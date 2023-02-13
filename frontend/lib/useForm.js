@@ -10,8 +10,13 @@ export default function useForm(initialState = {}) {
     });
   }
 
+  function clearForm() {
+    setInputs(initialState);
+  }
+
   return {
     inputs,
     handleInputs,
+    clearForm,
   };
 }

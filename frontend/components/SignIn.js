@@ -41,8 +41,6 @@ export default function SignIn() {
     const res = await signin().catch(console.error);
   }
 
-  if (loading) return <ParagraphStyles>Successfuly signed In!</ParagraphStyles>;
-
   if (signIn?.__typename === 'UserAuthenticationWithPasswordSuccess') {
     router.push('/products');
   }
@@ -55,7 +53,7 @@ export default function SignIn() {
       {signIn?.__typename === 'UserAuthenticationWithPasswordFailure' && (
         <ErrorMessageStyles>{signIn.message}</ErrorMessageStyles>
       )}
-      <div>
+      <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor="email">E-mail Address</label>
         <input
           type="text"
@@ -76,11 +74,15 @@ export default function SignIn() {
           onChange={handleInputs}
           required
         />
-      </div>
-      <button type="submit">Sign in</button>
+      </fieldset>
+      <button type="submit" disabled={loading}>
+        Sign in
+      </button>
       <p>
-        Don't have an account? <Link href="/signup">Sign up instead!</Link>
+        Don't have an account?
+        <Link href="/signup"> Click here to sign up instead!</Link>
       </p>
+      <p>Forgot your password? Reset your password here!</p>
     </FormStyles>
   );
 }

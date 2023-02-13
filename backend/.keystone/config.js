@@ -119,6 +119,43 @@ var lists = {
 var import_crypto = require("crypto");
 var import_auth = require("@keystone-6/auth");
 var import_session = require("@keystone-6/core/session");
+
+// lib/mail.ts
+var nodemailer = require("nodemailer");
+var transport = nodemailer.createTransport({
+  host: "smtp.ethereal.email",
+  port: 587,
+  auth: {
+    user: "jazmin.bednar1@ethereal.email",
+    pass: "Pnatb7JHAJMfkN1KQ3"
+  }
+});
+function makeAnEmail(text2) {
+  return `
+    <div style="
+      border: 1px solid black;
+      padding: 20px;
+      font-family: sans-serif;
+      line-height: 2;
+      font-size: 20px;
+    ">
+      <h2>Hello!</h2>
+      <p>${text2}</p>
+    </div>
+  `;
+}
+async function sendPasswordResetemail(resetToken, to) {
+  const emailInfo = await transport.sendEmail({
+    to,
+    from: "test@example.com",
+    subject: "Your password reset email",
+    html: makeAnEmail(`This is your password reset token, 
+      <a href="${process.env.FRONTEND_URL}/reset?token=${resetToken}">click the link to reset your password</a>`)
+  });
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(emailInfo));
+}
+
+// auth.ts
 var sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret && process.env.NODE_ENV !== "production") {
   sessionSecret = (0, import_crypto.randomBytes)(32).toString("hex");
@@ -130,7 +167,13 @@ var { withAuth } = (0, import_auth.createAuth)({
   initFirstItem: {
     fields: ["name", "email", "password"]
   },
-  sessionData: "id name email"
+  sessionData: "id name email",
+  passwordResetLink: {
+    async sendToken(args) {
+      console.log(args);
+      await sendPasswordResetemail(args.token, args.identity);
+    }
+  }
 });
 var sessionMaxAge = 60 * 60 * 24 * 30;
 var session = (0, import_session.statelessSessions)({

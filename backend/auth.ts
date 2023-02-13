@@ -1,6 +1,7 @@
 import { randomBytes } from 'crypto';
 import { createAuth } from '@keystone-6/auth';
 import { statelessSessions } from '@keystone-6/core/session';
+import { sendPasswordResetemail } from './lib/mail';
 
 let sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret && process.env.NODE_ENV !== 'production') {
@@ -15,6 +16,12 @@ const { withAuth } = createAuth({
     fields: ['name', 'email', 'password'],
   },
   sessionData: 'id name email',
+  passwordResetLink: {
+    async sendToken(args) {
+      console.log(args);
+      await sendPasswordResetemail(args.token, args.identity)
+    },
+  }
 });
 
 const sessionMaxAge = 60 * 60 * 24 * 30;

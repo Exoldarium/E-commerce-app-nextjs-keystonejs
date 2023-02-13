@@ -21,7 +21,7 @@ const SIGNUP_MUTATION = gql`
 `;
 
 export default function SignUp() {
-  const { inputs, handleInputs } = useForm({
+  const { inputs, handleInputs, clearForm } = useForm({
     name: '',
     email: '',
     password: '',
@@ -34,9 +34,8 @@ export default function SignUp() {
   async function handleSignUp(e) {
     e.preventDefault();
     const res = await singup().catch(console.error);
+    clearForm();
   }
-
-  if (loading) return <ParagraphStyles>Successfuly signed up!</ParagraphStyles>;
 
   return (
     <FormStyles method="POST" onSubmit={handleSignUp}>
@@ -45,11 +44,11 @@ export default function SignUp() {
       )}
       {data?.createUser && (
         <p>
-          Successfuly signed up with! Please
-          <Link href="/signin">sign in</Link>
+          Successfuly signed up with!
+          <Link href="/signin"> Click here to sign in </Link>
         </p>
       )}
-      <div>
+      <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor="name">Name</label>
         <input
           type="text"
@@ -80,11 +79,13 @@ export default function SignUp() {
           onChange={handleInputs}
           required
         />
-      </div>
+      </fieldset>
       <button type="submit">Register</button>
       <p>
-        Already have an account? <Link href="/signin">Sign in instead!</Link>
+        Already have an account?
+        <Link href="/signin"> Click here to sign in instead!</Link>
       </p>
+      <p>Forgot your password? Reset your password here!</p>
     </FormStyles>
   );
 }
