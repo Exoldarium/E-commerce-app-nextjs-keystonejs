@@ -1,7 +1,7 @@
 import { randomBytes } from 'crypto';
 import { createAuth } from '@keystone-6/auth';
 import { statelessSessions } from '@keystone-6/core/session';
-import { sendPasswordResetemail } from './lib/passwordResetMail';
+import { sendPasswordResetEmail } from './lib/passwordResetMail';
 
 let sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret && process.env.NODE_ENV !== 'production') {
@@ -17,9 +17,10 @@ const { withAuth } = createAuth({
   },
   sessionData: 'id name email',
   passwordResetLink: {
+    // sendToken: async (args) => await sendPasswordResetEmail(args.token, args.identity),
     async sendToken(args) {
       console.log(args);
-      await sendPasswordResetemail(args.token, args.identity)
+      await sendPasswordResetEmail(args.token, args.identity)
     }
   }
 });

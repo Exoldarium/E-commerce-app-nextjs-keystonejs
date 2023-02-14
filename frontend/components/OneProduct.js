@@ -27,9 +27,7 @@ export default function OneProduct({ id }) {
       id,
     },
   });
-
   const product = data?.product;
-  console.log(product);
 
   if (loading) return <ErrorMessageStyles>Loading...</ErrorMessageStyles>;
   if (error)

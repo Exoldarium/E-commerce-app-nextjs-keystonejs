@@ -59,7 +59,7 @@ export default function SignIn() {
           type="text"
           name="email"
           id="email"
-          placeholder="Email"
+          placeholder="email@example.com"
           value={inputs.email}
           onChange={handleInputs}
           required
@@ -82,7 +82,10 @@ export default function SignIn() {
         Don't have an account?
         <Link href="/signup"> Click here to sign up instead!</Link>
       </p>
-      <p>Forgot your password? Reset your password here!</p>
+      <p>
+        Forgot your password?
+        <Link href="/reset">Click here to reset your password!</Link>
+      </p>
     </FormStyles>
   );
 }

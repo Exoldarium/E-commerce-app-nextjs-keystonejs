@@ -120,14 +120,14 @@ var import_crypto = require("crypto");
 var import_auth = require("@keystone-6/auth");
 var import_session = require("@keystone-6/core/session");
 
-// lib/mail.ts
+// lib/passwordResetMail.ts
 var nodemailer = require("nodemailer");
 var transport = nodemailer.createTransport({
   host: "smtp.ethereal.email",
   port: 587,
   auth: {
-    user: "jazmin.bednar1@ethereal.email",
-    pass: "Pnatb7JHAJMfkN1KQ3"
+    user: "torrey.kuvalis71@ethereal.email",
+    pass: "HdNcd1SxphXmA7Cw6B"
   }
 });
 function makeAnEmail(text2) {
@@ -144,8 +144,8 @@ function makeAnEmail(text2) {
     </div>
   `;
 }
-async function sendPasswordResetemail(resetToken, to) {
-  const emailInfo = await transport.sendEmail({
+async function sendPasswordResetEmail(resetToken, to) {
+  const emailInfo = await transport.sendMail({
     to,
     from: "test@example.com",
     subject: "Your password reset email",
@@ -171,7 +171,7 @@ var { withAuth } = (0, import_auth.createAuth)({
   passwordResetLink: {
     async sendToken(args) {
       console.log(args);
-      await sendPasswordResetemail(args.token, args.identity);
+      await sendPasswordResetEmail(args.token, args.identity);
     }
   }
 });
