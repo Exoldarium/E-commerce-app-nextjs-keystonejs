@@ -6,14 +6,13 @@ export default function Product({ product }) {
   return (
     <ProductStyles>
       <Link href={`/product/${product.id}`}>
-        <span key={product.id}>
-          <img
-            src={product.photo?.image?.publicUrlTransformed}
-            alt={product.description}
-          />
-          <p key={product.id}>{product.name}</p>
-        </span>
+        <img
+          src={product.photo?.image?.publicUrlTransformed}
+          alt={product.description}
+          key={product.id}
+        />
       </Link>
+      <p key={product.id}>{product.name}</p>
     </ProductStyles>
   );
 }
