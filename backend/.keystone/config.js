@@ -23,7 +23,7 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_config2 = require("dotenv/config");
+var import_config3 = require("dotenv/config");
 var import_core2 = require("@keystone-6/core");
 
 // schema.ts
@@ -121,13 +121,14 @@ var import_auth = require("@keystone-6/auth");
 var import_session = require("@keystone-6/core/session");
 
 // lib/passwordResetMail.ts
+var import_config2 = require("dotenv/config");
 var nodemailer = require("nodemailer");
 var transport = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
-  port: 587,
+  host: process.env.MAIL_HOST,
+  port: process.env.MAIL_PORT,
   auth: {
-    user: "torrey.kuvalis71@ethereal.email",
-    pass: "HdNcd1SxphXmA7Cw6B"
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS
   }
 });
 function makeAnEmail(text2) {

@@ -43,7 +43,7 @@ export default function RequestPasswordReset() {
         />
       </fieldset>
       <button type="submit" disabled={loading}>
-        Request reset!
+        Request password reset!
       </button>
     </FormStyles>
   );
