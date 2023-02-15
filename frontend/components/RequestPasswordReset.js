@@ -27,6 +27,7 @@ export default function RequestPasswordReset() {
 
   return (
     <FormStyles onSubmit={handleReset}>
+      {/* shows on succesful reset */}
       {data?.sendUserPasswordResetLink && (
         <p>Check your e-mail for a password reset link!</p>
       )}

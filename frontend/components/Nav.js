@@ -21,6 +21,7 @@ export default function Nav({ active, onClick }) {
     onClick(!active);
   }
 
+  // if user is logged in
   if (user)
     return (
       <>
@@ -44,6 +45,8 @@ export default function Nav({ active, onClick }) {
         </div>
       </>
     );
+
+  // if there's no user
   if (user === null)
     return (
       <>

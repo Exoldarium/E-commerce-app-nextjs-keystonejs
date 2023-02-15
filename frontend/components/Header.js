@@ -21,6 +21,7 @@ export default function Header() {
     refetchQueries: [{ query: USER_QUERY }],
   });
   const user = useUser();
+  // close mobile menu on click
   const [isActive, setIsActive] = useState(true);
   const onClick = () => setIsActive(!isActive);
 

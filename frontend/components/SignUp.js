@@ -42,6 +42,7 @@ export default function SignUp() {
       {error && (
         <ErrorMessageStyles>{error && error.message}</ErrorMessageStyles>
       )}
+      {/* on sign up success */}
       {data?.createUser && (
         <p>
           Successfuly signed up with!

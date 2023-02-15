@@ -41,6 +41,7 @@ export default function SignIn() {
     const res = await signin().catch(console.error);
   }
 
+  // if signin successful send user to products page
   if (signIn?.__typename === 'UserAuthenticationWithPasswordSuccess') {
     router.push('/products');
   }
