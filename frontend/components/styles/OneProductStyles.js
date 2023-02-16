@@ -7,6 +7,7 @@ export const OneProductStyles = styled.div`
   grid-auto-rows: minmax(100px, auto);
   margin: 0 auto;
   padding-top: 25%;
+  height: 100vh;
   .product-info {
     padding-left: 2rem;
     text-align: left;
