@@ -33,6 +33,9 @@ export default function Products({ count }) {
     },
   });
   const products = data?.products;
+  const productsLength = data?.products?.length;
+  const hideButton = data?.products?.length < count;
+
   console.log({ data, error, loading });
 
   if (loading) return <ErrorMessageStyles>Loading...</ErrorMessageStyles>;
@@ -44,7 +47,7 @@ export default function Products({ count }) {
       <ProductStyles>
         <Head>
           <title>
-            56 Sugar Gumpaste | Showing {products.length} of {count} items
+            56 Sugar Gumpaste | Showing {productsLength} of {count} items
           </title>
         </Head>
         {products.map((product) => (
@@ -52,20 +55,22 @@ export default function Products({ count }) {
         ))}
       </ProductStyles>
       <PaginationStyles>
-        <button
-          type="button"
-          onClick={() =>
-            fetchMore({
-              variables: {
-                skip: products.length,
-              },
-            })
-          }
-        >
-          Load More
-        </button>
+        {hideButton && (
+          <button
+            type="button"
+            onClick={() =>
+              fetchMore({
+                variables: {
+                  skip: productsLength,
+                },
+              })
+            }
+          >
+            Load More
+          </button>
+        )}
         <p>
-          Showing {products.length} of {count} items
+          Showing {productsLength} of {count} items
         </p>
       </PaginationStyles>
     </>
