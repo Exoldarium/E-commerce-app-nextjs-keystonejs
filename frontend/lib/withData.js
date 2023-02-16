@@ -4,6 +4,7 @@ import { getDataFromTree } from '@apollo/client/react/ssr';
 import { createUploadLink } from 'apollo-upload-client';
 import withApollo from 'next-with-apollo';
 import { endpoint, prodEndpoint } from '../config';
+import paginationField from './paginationField';
 
 function createClient({ headers, initialState }) {
   return new ApolloClient({
@@ -32,17 +33,7 @@ function createClient({ headers, initialState }) {
       typePolicies: {
         Query: {
           fields: {
-            // we merge the cache (existing data) with our incoming data
-            products: {
-              keyArgs: false,
-              merge(existing, incoming, { args: { skip = 0 } }) {
-                const merged = existing ? existing.slice(0) : [];
-                for (let i = 0; i < incoming.length; i++) {
-                  merged[skip + i] = incoming[i];
-                }
-                return merged;
-              },
-            },
+            products: paginationField(),
           },
         },
       },
