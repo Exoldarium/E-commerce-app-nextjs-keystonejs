@@ -1,7 +1,9 @@
 import { gql, useQuery } from '@apollo/client';
+import Head from 'next/head';
 import { productsPerPage } from '../config';
 import Product from './Product';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
+import { PaginationStyles } from './styles/PaginationStyles';
 import { ProductStyles } from './styles/ProductsStyles';
 
 const ALL_PRODUCTS_QUERY = gql`
@@ -38,22 +40,34 @@ export default function Products({ count }) {
     return <ErrorMessageStyles>Error: {error.message}</ErrorMessageStyles>;
 
   return (
-    <ProductStyles>
-      {products.map((product) => (
-        <Product key={product.id} product={product} />
-      ))}
-      <button
-        type="button"
-        onClick={() =>
-          fetchMore({
-            variables: {
-              skip: products.length,
-            },
-          })
-        }
-      >
-        Load More || Showing {products.length} of {count} items
-      </button>
-    </ProductStyles>
+    <>
+      <ProductStyles>
+        <Head>
+          <title>
+            56 Sugar Gumpaste | Showing {products.length} of {count} items
+          </title>
+        </Head>
+        {products.map((product) => (
+          <Product key={product.id} product={product} />
+        ))}
+      </ProductStyles>
+      <PaginationStyles>
+        <button
+          type="button"
+          onClick={() =>
+            fetchMore({
+              variables: {
+                skip: products.length,
+              },
+            })
+          }
+        >
+          Load More
+        </button>
+        <p>
+          Showing {products.length} of {count} items
+        </p>
+      </PaginationStyles>
+    </>
   );
 }
