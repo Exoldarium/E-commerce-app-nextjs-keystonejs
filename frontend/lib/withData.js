@@ -31,7 +31,15 @@ function createClient({ headers, initialState }) {
     cache: new InMemoryCache({
       typePolicies: {
         Query: {
-          fields: {},
+          fields: {
+            // we merge the cache (existing data) with our incoming data
+            products: {
+              keyArgs: false,
+              merge(existing = [], incoming) {
+                return [...existing, ...incoming];
+              },
+            },
+          },
         },
       },
     }).restore(initialState || {}),

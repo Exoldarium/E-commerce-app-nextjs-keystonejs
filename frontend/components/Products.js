@@ -21,13 +21,13 @@ const ALL_PRODUCTS_QUERY = gql`
   }
 `;
 
-export default function Products({ page }) {
-  const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY, {
+export default function Products({ count }) {
+  const { data, fetchMore, loading, error } = useQuery(ALL_PRODUCTS_QUERY, {
     variables: {
-      // products on the first page
+      // initial number of products on page
       take: productsPerPage,
-      // skip the products based on page number
-      skip: page * productsPerPage - productsPerPage,
+      // how many products we skip when loading more
+      skip: 0,
     },
   });
   const products = data?.products;
@@ -42,6 +42,18 @@ export default function Products({ page }) {
       {products.map((product) => (
         <Product key={product.id} product={product} />
       ))}
+      <button
+        type="button"
+        onClick={() =>
+          fetchMore({
+            variables: {
+              skip: products.length,
+            },
+          })
+        }
+      >
+        Load More || Showing {products.length} of {count} items
+      </button>
     </ProductStyles>
   );
 }
