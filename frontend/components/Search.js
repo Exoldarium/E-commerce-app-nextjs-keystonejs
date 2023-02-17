@@ -15,6 +15,8 @@ const SEARCH_QUERY = gql`
     ) {
       id
       name
+      price
+      description
       photo {
         image {
           publicUrlTransformed
@@ -41,27 +43,31 @@ export default function Search() {
     });
   }
 
-  function onClick() {
-    router.push(`/product/${items.id}`);
-  }
-
   console.log(data);
 
   return (
     <SearchStyles>
-      <div>
-        <input onChange={handleChange} />
-      </div>
-      <div>
+      <input
+        onChange={handleChange}
+        type="text"
+        name="search"
+        placeholder="Search"
+      />
+      <div className="listDiv">
         {items.map((item) => (
-          <div key={item.id} onClick={() => router.push(`/product/${item.id}`)}>
+          <div
+            key={item.id}
+            onClick={() => router.push(`/product/${item.id}`)}
+            className="singleList"
+          >
             <img
               src={item.photo.image.publicUrlTransformed}
               alt={item.name}
-              width="50"
+              width="100"
               key={item.id}
             />
-            {item.name}
+            <p>{item.name}</p>
+            <p>{item.price}</p>
           </div>
         ))}
       </div>
