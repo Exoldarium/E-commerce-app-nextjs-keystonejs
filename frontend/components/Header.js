@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
 import Nav, { SIGNOUT_MUTATION } from './Nav';
+import Search from './Search';
 import { HeaderStyles } from './styles/HeaderStyles';
 import { LogoStyles } from './styles/LogoStyles';
 import { MobileNavStyles } from './styles/MobileNavStyles';
@@ -35,6 +36,9 @@ export default function Header() {
       <OnClickActiveButtonStyles type="button" onClick={onClick}>
         Click
       </OnClickActiveButtonStyles>
+      <div>
+        <Search />
+      </div>
     </HeaderStyles>
   );
 }

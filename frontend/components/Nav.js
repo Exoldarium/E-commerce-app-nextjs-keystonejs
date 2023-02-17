@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import Link from 'next/link';
+import { checkPropTypes } from 'prop-types';
 import { useState } from 'react';
 import { MobileNavStyles } from './styles/MobileNavStyles';
 import { NavStyles } from './styles/NavStyles';

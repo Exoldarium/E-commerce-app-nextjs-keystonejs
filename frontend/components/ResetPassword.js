@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import Link from 'next/link';
+import { checkPropTypes } from 'prop-types';
 import styled from 'styled-components';
 import useForm from '../lib/useForm';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';

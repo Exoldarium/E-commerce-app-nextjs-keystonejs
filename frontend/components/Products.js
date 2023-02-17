@@ -1,5 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
+import { checkPropTypes } from 'prop-types';
 import { productsPerPage } from '../config';
 import Product from './Product';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
