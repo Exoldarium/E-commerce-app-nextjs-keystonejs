@@ -6,13 +6,13 @@ export const SearchStyles = styled.div`
   text-align: left;
   padding: 2rem;
   input {
-    width: 50rem;
-    height: 4rem;
+    width: 25vw;
+    height: 3vh;
   }
   .listDiv {
     position: absolute;
     background: white;
-    width: 100rem;
+    width: 60vw;
     .singleList {
       display: flex;
       flex-wrap: wrap;
@@ -21,6 +21,21 @@ export const SearchStyles = styled.div`
       p {
         flex: 1;
       }
+    }
+  }
+  @media only screen and (max-width: 790px) {
+    /* position: absolute;
+    input {
+      width: 100vw;
+      height: 6.5rem;
+    } */
+    .listDiv {
+      position: absolute;
+      /* right: 0;
+      left: 10; */
+      height: fit-content;
+      max-height: 100vh;
+      width: 100vw;
     }
   }
 `;

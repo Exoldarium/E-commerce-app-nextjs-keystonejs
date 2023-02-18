@@ -1,6 +1,7 @@
 import { gql, useLazyQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import formatMoney from '../lib/formatMoney';
 import { SearchStyles } from './styles/SearchStyles';
 
 const SEARCH_QUERY = gql`
@@ -67,7 +68,7 @@ export default function Search() {
               key={item.id}
             />
             <p>{item.name}</p>
-            <p>{item.price}</p>
+            <p>{formatMoney(item.price)}</p>
           </div>
         ))}
       </div>

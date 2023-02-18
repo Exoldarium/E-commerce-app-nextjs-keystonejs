@@ -2,11 +2,13 @@ import styled from 'styled-components';
 
 export const NavStyles = styled.div`
   display: flex;
+  /* flex: 1; */
+  font-size: 1.3vw;
   button {
+    font-size: 1.3vw;
     background: none;
     border: none;
     font-weight: bold;
-    font-size: large;
     cursor: pointer;
   }
   a {

@@ -11,7 +11,8 @@ export const HeaderStyles = styled.header`
   font-weight: bold;
   font-size: large;
   margin: 0 auto;
-  width: 100%;
+  width: 100vw;
+  height: 12vh;
   padding-left: 50px;
   padding-right: 50px;
   border-bottom: 1px solid black;
