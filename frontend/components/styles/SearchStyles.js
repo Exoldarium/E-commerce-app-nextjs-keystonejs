@@ -15,6 +15,7 @@ export const SearchStyles = styled.div`
     background: white;
     width: 60vw;
     height: fit-content;
+    border: 1px solid black;
   }
   .listDiv.hidden {
     display: none;

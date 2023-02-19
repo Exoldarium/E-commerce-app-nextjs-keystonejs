@@ -17,8 +17,6 @@ export const OnClickActiveButtonStyles = styled.button`
 export default function Header() {
   // close mobile menu on click
   const [isActive, setIsActive] = useState(true);
-  // on focus expand search
-  const [isFocused, setIsFocused] = useState(false);
   const onClick = () => setIsActive(!isActive);
 
   return (

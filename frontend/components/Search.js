@@ -1,6 +1,4 @@
 import { gql, useLazyQuery } from '@apollo/client';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import formatMoney from '../lib/formatMoney';
 import { SearchStyles } from './styles/SearchStyles';
@@ -29,13 +27,13 @@ const SEARCH_QUERY = gql`
 `;
 
 export default function Search() {
-  const router = useRouter();
   const [inputValue, setInputValue] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [searchItems, { data, loading, error }] = useLazyQuery(SEARCH_QUERY, {
     fetchPolicy: 'no-cache',
   });
   const items = data?.products || [];
+  const empty = data?.products?.length === 0;
   const onFocus = () => setIsActive(true);
 
   function handleChange(e) {
@@ -46,8 +44,6 @@ export default function Search() {
       },
     });
   }
-
-  console.log(data);
 
   return (
     <SearchStyles active={isActive}>
@@ -67,6 +63,7 @@ export default function Search() {
         >
           X
         </button>
+        {empty && <p>We couldn't find that product. Try searching again!</p>}
         {items.map((item) => (
           <a
             href={`/product/${item.id}`}
