@@ -1,4 +1,5 @@
 import { gql, useLazyQuery } from '@apollo/client';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import formatMoney from '../lib/formatMoney';
@@ -30,10 +31,12 @@ const SEARCH_QUERY = gql`
 export default function Search() {
   const router = useRouter();
   const [inputValue, setInputValue] = useState('');
+  const [isActive, setIsActive] = useState(false);
   const [searchItems, { data, loading, error }] = useLazyQuery(SEARCH_QUERY, {
     fetchPolicy: 'no-cache',
   });
   const items = data?.products || [];
+  const onFocus = () => setIsActive(true);
 
   function handleChange(e) {
     setInputValue(e.target.value);
@@ -47,29 +50,43 @@ export default function Search() {
   console.log(data);
 
   return (
-    <SearchStyles>
+    <SearchStyles active={isActive}>
       <input
         onChange={handleChange}
+        onFocus={onFocus}
         type="text"
         name="search"
         placeholder="Search"
+        className={`inputSearch ${isActive ? 'active' : 'hidden'}`}
       />
-      <div className="listDiv">
+      <div className={`listDiv ${isActive ? 'active' : 'hidden'}`}>
+        <button
+          type="button"
+          onClick={() => setIsActive(false)}
+          onKeyDown={() => setIsActive(false)}
+        >
+          X
+        </button>
         {items.map((item) => (
-          <div
+          <a
+            href={`/product/${item.id}`}
             key={item.id}
-            onClick={() => router.push(`/product/${item.id}`)}
+            onClick={() => {
+              setIsActive(false);
+            }}
+            onKeyDown={() => {
+              setIsActive(false);
+            }}
             className="singleList"
           >
             <img
               src={item.photo.image.publicUrlTransformed}
               alt={item.name}
-              width="100"
               key={item.id}
             />
             <p>{item.name}</p>
             <p>{formatMoney(item.price)}</p>
-          </div>
+          </a>
         ))}
       </div>
     </SearchStyles>

@@ -1,41 +1,53 @@
 import styled from 'styled-components';
 
 export const SearchStyles = styled.div`
-  position: relative;
   flex: 1;
   text-align: left;
   padding: 2rem;
-  input {
+  .inputSearch {
     width: 25vw;
     height: 3vh;
   }
-  .listDiv {
+  .listDiv.active {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     background: white;
     width: 60vw;
-    .singleList {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      border: 1px solid black;
-      p {
-        flex: 1;
-      }
-    }
+    height: fit-content;
+  }
+  .listDiv.hidden {
+    display: none;
+  }
+  .singleList:hover {
+    background: grey;
+  }
+  .singleList {
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid black;
+  }
+  p {
+    flex: 1;
+  }
+  img {
+    width: 8vh;
+    height: 8vh;
+    object-fit: cover;
   }
   @media only screen and (max-width: 790px) {
-    /* position: absolute;
-    input {
+    ${(props) => props.active && `position: absolute`};
+    .inputSearch.active {
       width: 100vw;
-      height: 6.5rem;
-    } */
-    .listDiv {
-      position: absolute;
-      /* right: 0;
-      left: 10; */
+      height: 8vh;
+    }
+    .listDiv.active {
+      display: flex;
+      flex-direction: column;
+      width: 100vw;
       height: fit-content;
-      max-height: 100vh;
-      width: 100vw;
     }
   }
 `;

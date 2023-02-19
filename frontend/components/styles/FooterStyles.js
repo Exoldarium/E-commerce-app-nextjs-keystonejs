@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const FooterStyles = styled.footer`
+  z-index: -1;
   display: flex;
   flex-direction: row;
   justify-content: center;

@@ -9,4 +9,6 @@ export const ProductStyles = styled.div`
     border-radius: 10px;
     margin: 0 auto;
   }
+  @media only screen and (max-width: 790px) {
+  }
 `;
