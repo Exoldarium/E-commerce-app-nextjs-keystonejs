@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import PropTypes from '../node_modules/prop-types/prop-types';
+import AddToCart from './AddToCart';
 import { ProductStyles } from './styles/ProductStyles';
 
 export default function Product({ product }) {
@@ -13,10 +13,7 @@ export default function Product({ product }) {
         />
       </Link>
       <p key={product.id}>{product.name}</p>
+      <AddToCart />
     </ProductStyles>
   );
 }
-
-Product.propTypes = {
-  product: PropTypes.object,
-};

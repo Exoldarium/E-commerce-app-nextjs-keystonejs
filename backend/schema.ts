@@ -115,7 +115,7 @@ export const lists: Lists = {
     fields: {
       quantity: integer({
         defaultValue: 1,
-        isIndexed: true,
+        // isRequired: true,
       }),
       product: relationship({ ref: 'Product' }),
       user: relationship({ ref: 'User.cart' }),

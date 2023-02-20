@@ -54,7 +54,6 @@ model CartItem {
   user      User?    @relation("CartItem_user", fields: [userId], references: [id])
   userId    String?  @map("user")
 
-  @@index([quantity])
   @@index([productId])
   @@index([userId])
 }

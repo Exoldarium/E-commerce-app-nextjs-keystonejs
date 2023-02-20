@@ -36,7 +36,7 @@ export default function OneProduct({ id }) {
   return (
     <OneProductStyles>
       <Head>
-        <title>E-commerce || {product.name}</title>
+        <title> 56 Sugar Gumpaste || {product.name}</title>
       </Head>
       <img src={product.photo.image.publicUrlTransformed} alt={product.name} />
       <div className="product-info">

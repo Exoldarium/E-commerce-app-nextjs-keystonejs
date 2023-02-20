@@ -130,8 +130,7 @@ var lists = {
     },
     fields: {
       quantity: (0, import_fields.integer)({
-        defaultValue: 1,
-        isIndexed: true
+        defaultValue: 1
       }),
       product: (0, import_fields.relationship)({ ref: "Product" }),
       user: (0, import_fields.relationship)({ ref: "User.cart" })

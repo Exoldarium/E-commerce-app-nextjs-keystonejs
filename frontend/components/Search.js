@@ -1,6 +1,7 @@
 import { gql, useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import formatMoney from '../lib/formatMoney';
+import { useSetState } from '../lib/stateProvider';
 import { SearchStyles } from './styles/SearchStyles';
 
 const SEARCH_QUERY = gql`
@@ -28,13 +29,12 @@ const SEARCH_QUERY = gql`
 
 export default function Search() {
   const [inputValue, setInputValue] = useState('');
-  const [isActive, setIsActive] = useState(false);
+  const { isActive, closeSearchList, toggleSearchList } = useSetState();
   const [searchItems, { data, loading }] = useLazyQuery(SEARCH_QUERY, {
     fetchPolicy: 'no-cache',
   });
   const items = data?.products || [];
   const empty = data?.products?.length === 0;
-  const onFocus = () => setIsActive(true);
 
   function handleChange(e) {
     setInputValue(e.target.value);
@@ -49,7 +49,7 @@ export default function Search() {
     <SearchStyles active={isActive}>
       <input
         onChange={handleChange}
-        onFocus={onFocus}
+        onFocus={toggleSearchList}
         type="text"
         name="search"
         placeholder="Search"
@@ -58,22 +58,18 @@ export default function Search() {
       <div className={`listDiv ${isActive ? 'active' : 'hidden'}`}>
         <button
           type="button"
-          onClick={() => setIsActive(false)}
-          onKeyDown={() => setIsActive(false)}
+          onClick={closeSearchList}
+          onKeyDown={closeSearchList}
         >
-          X
+          &times;
         </button>
         {empty && <p>We couldn't find that product. Try searching again!</p>}
         {items.map((item) => (
           <a
             href={`/product/${item.id}`}
             key={item.id}
-            onClick={() => {
-              setIsActive(false);
-            }}
-            onKeyDown={() => {
-              setIsActive(false);
-            }}
+            onClick={closeSearchList}
+            onKeyDown={closeSearchList}
             className="singleList"
           >
             <img
