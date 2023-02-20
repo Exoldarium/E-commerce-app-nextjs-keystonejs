@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useSetState } from '../lib/stateProvider';
 import Nav from './Nav';
 import Search from './Search';
 import { HeaderStyles } from './styles/HeaderStyles';
@@ -16,8 +17,7 @@ export const OnClickActiveButtonStyles = styled.button`
 
 export default function Header() {
   // close mobile menu on click
-  const [isActive, setIsActive] = useState(true);
-  const onClick = () => setIsActive(!isActive);
+  const { isMenuActive, toggleMenu } = useSetState();
 
   return (
     <HeaderStyles>
@@ -25,9 +25,9 @@ export default function Header() {
         <Link href="/products">It's a LOGO</Link>
       </LogoStyles>
       <Search />
-      <Nav active={isActive} onClick={onClick} />
+      <Nav active={isMenuActive} onClick={toggleMenu} />
       {/* button visible only under 790px */}
-      <OnClickActiveButtonStyles type="button" onClick={onClick}>
+      <OnClickActiveButtonStyles type="button" onClick={toggleMenu}>
         Click
       </OnClickActiveButtonStyles>
     </HeaderStyles>

@@ -4,20 +4,32 @@ const LocalStateContext = createContext();
 const LocalStateProvider = LocalStateContext.Provider;
 
 export default function StateProvider({ children }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isActive, setIsActive] = useState(false);
+  const [isMenuActive, setIsMenuActive] = useState(true);
+  const [isSearchActive, setIsSearchActive] = useState(false);
+
+  function toggleMenu() {
+    setIsMenuActive(!isMenuActive);
+  }
 
   function toggleSearchList() {
-    setIsActive(true);
+    setIsSearchActive(true);
   }
 
   function closeSearchList() {
-    setIsActive(false);
+    setIsSearchActive(false);
   }
 
   return (
     <LocalStateProvider
-      value={{ toggleSearchList, closeSearchList, isActive, setIsActive }}
+      value={{
+        isSearchActive,
+        toggleSearchList,
+        closeSearchList,
+        setIsSearchActive,
+        isMenuActive,
+        setIsMenuActive,
+        toggleMenu,
+      }}
     >
       {children}
     </LocalStateProvider>

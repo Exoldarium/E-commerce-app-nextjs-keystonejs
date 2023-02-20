@@ -29,7 +29,7 @@ const SEARCH_QUERY = gql`
 
 export default function Search() {
   const [inputValue, setInputValue] = useState('');
-  const { isActive, closeSearchList, toggleSearchList } = useSetState();
+  const { isSearchActive, closeSearchList, toggleSearchList } = useSetState();
   const [searchItems, { data, loading }] = useLazyQuery(SEARCH_QUERY, {
     fetchPolicy: 'no-cache',
   });
@@ -46,16 +46,16 @@ export default function Search() {
   }
 
   return (
-    <SearchStyles active={isActive}>
+    <SearchStyles active={isSearchActive}>
       <input
         onChange={handleChange}
         onFocus={toggleSearchList}
         type="text"
         name="search"
         placeholder="Search"
-        className={`inputSearch ${isActive ? 'active' : 'hidden'}`}
+        className={`inputSearch ${isSearchActive ? 'active' : 'hidden'}`}
       />
-      <div className={`listDiv ${isActive ? 'active' : 'hidden'}`}>
+      <div className={`listDiv ${isSearchActive ? 'active' : 'hidden'}`}>
         <button
           type="button"
           onClick={closeSearchList}
