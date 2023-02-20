@@ -1,7 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import Link from 'next/link';
 import useForm from '../lib/useForm';
-import { ParagraphStyles } from '../pages/signin';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { FormStyles } from './styles/FormStyles';
 import { USER_QUERY } from './User';

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useState } from 'react';
 import styled from 'styled-components';
 import { useSetState } from '../lib/stateProvider';
 import Nav from './Nav';
