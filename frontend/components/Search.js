@@ -29,7 +29,7 @@ const SEARCH_QUERY = gql`
 export default function Search() {
   const [inputValue, setInputValue] = useState('');
   const [isActive, setIsActive] = useState(false);
-  const [searchItems, { data, loading, error }] = useLazyQuery(SEARCH_QUERY, {
+  const [searchItems, { data, loading }] = useLazyQuery(SEARCH_QUERY, {
     fetchPolicy: 'no-cache',
   });
   const items = data?.products || [];

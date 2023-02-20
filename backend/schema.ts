@@ -31,9 +31,16 @@ export const lists: Lists = {
         ref: 'Product.user',
         many: true,
       }),
+      cart: relationship({
+        ref: 'CartItem.user',
+        many: true,
+        ui: {
+          createView: { fieldMode: 'hidden' },
+          itemView: { fieldMode: 'read' },
+        }
+      }),
     },
   }),
-
   Product: list({
     access: allowAll,
     fields: {
@@ -68,8 +75,10 @@ export const lists: Lists = {
       user: relationship({
         ref: 'User.products',
         hooks: {
+          // when a product is created make a relationship to User.products
           resolveInput({ resolvedData, operation, context }) {
             if (operation === 'create') {
+              // we return an object with a connect property which connects to the id of the currently signed in user
               return {
                 connect: { id: context.session.itemId },
               };
@@ -80,7 +89,6 @@ export const lists: Lists = {
       }),
     },
   }),
-
   ProductImage: list({
     access: allowAll,
     fields: {
@@ -96,5 +104,21 @@ export const lists: Lists = {
         initialColumns: ['image', 'altText', 'product'],
       },
     },
+  }),
+  CartItem: list({
+    access: allowAll,
+    ui: {
+      listView: {
+        initialColumns: ['product', 'quantity', 'user'],
+      }
+    },
+    fields: {
+      quantity: integer({
+        defaultValue: 1,
+        isIndexed: true,
+      }),
+      product: relationship({ ref: 'Product' }),
+      user: relationship({ ref: 'User.cart' }),
+    }
   }),
 };

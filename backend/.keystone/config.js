@@ -48,6 +48,14 @@ var lists = {
       products: (0, import_fields.relationship)({
         ref: "Product.user",
         many: true
+      }),
+      cart: (0, import_fields.relationship)({
+        ref: "CartItem.user",
+        many: true,
+        ui: {
+          createView: { fieldMode: "hidden" },
+          itemView: { fieldMode: "read" }
+        }
       })
     }
   }),
@@ -111,6 +119,22 @@ var lists = {
       listView: {
         initialColumns: ["image", "altText", "product"]
       }
+    }
+  }),
+  CartItem: (0, import_core.list)({
+    access: import_access.allowAll,
+    ui: {
+      listView: {
+        initialColumns: ["product", "quantity", "user"]
+      }
+    },
+    fields: {
+      quantity: (0, import_fields.integer)({
+        defaultValue: 1,
+        isIndexed: true
+      }),
+      product: (0, import_fields.relationship)({ ref: "Product" }),
+      user: (0, import_fields.relationship)({ ref: "User.cart" })
     }
   })
 };
