@@ -1,13 +1,35 @@
+import Link from 'next/link';
+import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
-import { CartSliderStyles } from './styles/CartStyles';
+import { CartMenuPageStyles, CartSliderStyles } from './styles/CartStyles';
 import { useUser } from './User';
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
-  // console.log(product);
   // we can use query prop to display cart items in a separate page
   // if it's just sliding menu use a separate styled components component
-  return <div>{product.name}</div>;
+  return (
+    <CartMenuPageStyles>
+      <img src={product.photo.image.publicUrlTransformed} alt={product.name} />
+      <h1>{product.name}</h1>
+      <div>
+        <p>Price: {formatMoney(product.price)}</p>
+        <label htmlFor="number">
+          <button type="button">+</button>
+        </label>
+        <input
+          type="text"
+          name="number"
+          min="1"
+          placeholder="1"
+          inputMode="numeric"
+        />
+        <label htmlFor="number">
+          <button type="button">-</button>
+        </label>
+      </div>
+    </CartMenuPageStyles>
+  );
 }
 
 export default function CartMenu() {
@@ -22,6 +44,14 @@ export default function CartMenu() {
         <button type="button" onClick={closeCart}>
           &times;
         </button>
+        <div>
+          <p>
+            <Link href="/payment">Go to payment</Link>
+          </p>
+          <p>
+            <Link href="/cart">Go to cart</Link>
+          </p>
+        </div>
         {cartItems.map((cartItem) => (
           <CartItem cartItem={cartItem} key={cartItem.id} />
         ))}

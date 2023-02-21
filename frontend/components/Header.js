@@ -1,15 +1,13 @@
 import Link from 'next/link';
 import { useSetState } from '../lib/stateProvider';
-import Cart from './Cart';
 import CartMenu from './CartMenu';
 import Nav from './Nav';
 import Search from './Search';
-import { CartButtonStyles, MobileNavButtonStyles } from './styles/ButtonStyles';
+import { MobileNavButtonStyles } from './styles/ButtonStyles';
 import { HeaderStyles } from './styles/HeaderStyles';
 import { LogoStyles } from './styles/LogoStyles';
 
 export default function Header() {
-  // close mobile menu on click
   const { isMenuActive, toggleMenu } = useSetState();
 
   return (
@@ -18,7 +16,7 @@ export default function Header() {
         <Link href="/products">It's a LOGO</Link>
       </LogoStyles>
       <Search />
-      <CartButtonStyles type="button">Cart</CartButtonStyles>
+      <Link href="/cart">Cart</Link>
       <CartMenu />
       <Nav active={isMenuActive} onClick={toggleMenu} />
       {/* button visible only under 790px */}

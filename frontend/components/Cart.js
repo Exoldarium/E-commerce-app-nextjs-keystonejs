@@ -1,3 +1,4 @@
+import formatMoney from '../lib/formatMoney';
 import { CartPageStyles, CartStyles } from './styles/CartStyles';
 import { useUser } from './User';
 
@@ -8,7 +9,7 @@ export function CartItem({ cartItem }) {
       <img src={product.photo.image.publicUrlTransformed} alt={product.name} />
       <h1>{product.name}</h1>
       <div>
-        <p>Price: {product.price}</p>
+        <p>Price: {formatMoney(product.price)}</p>
         <label htmlFor="number">
           <button type="button">+</button>
         </label>

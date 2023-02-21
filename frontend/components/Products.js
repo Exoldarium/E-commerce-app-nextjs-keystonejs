@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
 import { productsPerPage } from '../config';
+import { useSetState } from '../lib/stateProvider';
 import Product from './Product';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { PaginationStyles } from './styles/PaginationStyles';

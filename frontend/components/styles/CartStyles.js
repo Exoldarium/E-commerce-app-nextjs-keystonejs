@@ -22,6 +22,46 @@ export const CartSliderStyles = styled.div`
   background: white;
   width: 30%;
   margin: 0 auto;
+  div {
+    display: flex;
+    flex-direction: row;
+  }
+  p {
+    margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    /* width: 10vw;
+    height: 5vh; */
+    text-align: center;
+    font-size: 1.3vw;
+  }
+`;
+
+export const CartMenuPageStyles = styled.div`
+  /* display: flex;
+  flex-direction: row; */
+  align-items: center;
+  padding: 2rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 1rem;
+  /* h1 {
+    flex: 1;
+  } */
+  img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  input {
+    height: 5vh;
+    width: 5vw;
+    text-align: center;
+    font-size: 2rem;
+  }
+  button {
+    height: 5vh;
+  }
 `;
 
 export const CartPageStyles = styled.div`
@@ -43,6 +83,8 @@ export const CartPageStyles = styled.div`
   input {
     height: 5vh;
     width: 5vw;
+    text-align: center;
+    font-size: 2rem;
   }
   button {
     height: 5vh;
@@ -51,7 +93,9 @@ export const CartPageStyles = styled.div`
     flex-direction: column;
     input {
       height: 5vh;
-      width: 10vw;
+      width: 15vw;
+      text-align: center;
+      font-size: 2rem;
     }
     button {
       height: 5vh;
