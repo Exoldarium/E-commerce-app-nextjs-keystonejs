@@ -4,8 +4,9 @@ const LocalStateContext = createContext();
 const LocalStateProvider = LocalStateContext.Provider;
 
 export default function StateProvider({ children }) {
-  const [isMenuActive, setIsMenuActive] = useState(true);
+  const [isMenuActive, setIsMenuActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   function toggleMenu() {
     setIsMenuActive(!isMenuActive);
@@ -19,6 +20,14 @@ export default function StateProvider({ children }) {
     setIsSearchActive(false);
   }
 
+  function toggleCart() {
+    setIsCartOpen(true);
+  }
+
+  function closeCart() {
+    setIsCartOpen(false);
+  }
+
   return (
     <LocalStateProvider
       value={{
@@ -29,6 +38,10 @@ export default function StateProvider({ children }) {
         isMenuActive,
         setIsMenuActive,
         toggleMenu,
+        isCartOpen,
+        setIsCartOpen,
+        toggleCart,
+        closeCart,
       }}
     >
       {children}

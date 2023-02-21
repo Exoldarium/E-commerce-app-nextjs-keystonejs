@@ -28,5 +28,6 @@ export const USER_QUERY = gql`
 export function useUser() {
   // return users info
   const { data } = useQuery(USER_QUERY);
+  console.log(data?.authenticatedItem);
   return data?.authenticatedItem;
 }

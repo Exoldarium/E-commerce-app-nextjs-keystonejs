@@ -31,16 +31,14 @@ export default function Nav({ active, onClick }) {
             Sign Out
           </button>
         </NavStyles>
-        <div className={`mobileNavMenu ${active ? 'active' : ''}`}>
-          <MobileNavStyles onClick={handleActive}>
-            <Link href="/products">Products</Link>
-            <Link href="/orders">Orders</Link>
-            <Link href="/account">Account</Link>
-            <button type="button" onClick={signout}>
-              Sign Out
-            </button>
-          </MobileNavStyles>
-        </div>
+        <MobileNavStyles onClick={handleActive} active={active}>
+          <Link href="/products">Products</Link>
+          <Link href="/orders">Orders</Link>
+          <Link href="/account">Account</Link>
+          <button type="button" onClick={signout}>
+            Sign Out
+          </button>
+        </MobileNavStyles>
       </>
     );
 
@@ -52,12 +50,10 @@ export default function Nav({ active, onClick }) {
           <Link href="/products">Products</Link>
           <Link href="/signin">Sign In</Link>
         </NavStyles>
-        <div className={`mobileNavMenu ${active ? 'active' : ''}`}>
-          <MobileNavStyles onClick={handleActive}>
-            <Link href="/products">Products</Link>
-            <Link href="/signin">Sign In</Link>
-          </MobileNavStyles>
-        </div>
+        <MobileNavStyles onClick={handleActive}>
+          <Link href="/products">Products</Link>
+          <Link href="/signin">Sign In</Link>
+        </MobileNavStyles>
       </>
     );
 }

@@ -1,3 +1,10 @@
+import { useSetState } from '../lib/stateProvider';
+
 export default function AddToCart() {
-  return <button type="button">Add to cart</button>;
+  const { toggleCart } = useSetState();
+  return (
+    <button type="button" onClick={toggleCart}>
+      Add to cart
+    </button>
+  );
 }
