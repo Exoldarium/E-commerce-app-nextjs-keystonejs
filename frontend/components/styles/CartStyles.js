@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const CartStyles = styled.div`
   padding-top: 25%;
   padding-bottom: 25%;
-  /* height: 100vh; */
 `;
 
 export const CartSliderStyles = styled.div`
@@ -30,24 +29,27 @@ export const CartSliderStyles = styled.div`
     margin: 0 auto;
     border: 1px solid black;
     border-radius: 5px;
-    /* width: 10vw;
-    height: 5vh; */
     text-align: center;
     font-size: 1.3vw;
+  }
+  @media only screen and (max-width: 790px) {
+    display: none;
   }
 `;
 
 export const CartMenuPageStyles = styled.div`
-  /* display: flex;
-  flex-direction: row; */
   align-items: center;
-  padding: 2rem;
+  text-align: center;
+  padding: 1rem;
   border: 1px solid black;
   border-radius: 5px;
-  margin: 1rem;
-  /* h1 {
+  margin: 0.5rem;
+  width: 27vw;
+  height: 10vh;
+  h1 {
+    font-size: 1.3vw;
     flex: 1;
-  } */
+  }
   img {
     width: 50px;
     height: 50px;
@@ -59,8 +61,19 @@ export const CartMenuPageStyles = styled.div`
     text-align: center;
     font-size: 2rem;
   }
+  .sliderStyles {
+    flex-direction: column;
+    align-items: center;
+    p {
+      width: fit-content;
+      border: none;
+    }
+  }
   button {
     height: 5vh;
+  }
+  @media only screen and (max-width: 790px) {
+    display: none;
   }
 `;
 
