@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useSetState } from '../lib/stateProvider';
 import Cart from './Cart';
+import CartMenu from './CartMenu';
 import Nav from './Nav';
 import Search from './Search';
 import { CartButtonStyles, MobileNavButtonStyles } from './styles/ButtonStyles';
@@ -18,8 +19,8 @@ export default function Header() {
       </LogoStyles>
       <Search />
       <CartButtonStyles type="button">Cart</CartButtonStyles>
+      <CartMenu />
       <Nav active={isMenuActive} onClick={toggleMenu} />
-      <Cart />
       {/* button visible only under 790px */}
       <MobileNavButtonStyles type="button" onClick={toggleMenu}>
         Click

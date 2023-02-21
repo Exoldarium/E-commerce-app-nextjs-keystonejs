@@ -6,7 +6,7 @@ const LocalStateProvider = LocalStateContext.Provider;
 export default function StateProvider({ children }) {
   const [isMenuActive, setIsMenuActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(true);
 
   function toggleMenu() {
     setIsMenuActive(!isMenuActive);
