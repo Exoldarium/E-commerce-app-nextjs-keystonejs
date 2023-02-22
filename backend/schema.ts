@@ -115,7 +115,8 @@ export const lists: Lists = {
     fields: {
       quantity: integer({
         defaultValue: 1,
-        // isRequired: true,
+        // validation means that integer method can't be set to 0
+        validation: { isRequired: true },
       }),
       product: relationship({ ref: 'Product' }),
       user: relationship({ ref: 'User.cart' }),

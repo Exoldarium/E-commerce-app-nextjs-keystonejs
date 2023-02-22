@@ -18,8 +18,8 @@ export function CartItem({ cartItem }) {
             type="text"
             name="number"
             min="1"
-            placeholder="1"
             inputMode="numeric"
+            placeholder="1"
           />
           <label htmlFor="number">
             <button type="button">-</button>
@@ -36,7 +36,7 @@ export function CartItem({ cartItem }) {
 export default function Cart() {
   const user = useUser();
   const cartItems = user?.cart;
-  console.log(cartItems);
+  console.log(user);
 
   // if the user is logged in
   if (user) {

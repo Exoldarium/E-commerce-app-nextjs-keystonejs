@@ -130,7 +130,8 @@ var lists = {
     },
     fields: {
       quantity: (0, import_fields.integer)({
-        defaultValue: 1
+        defaultValue: 1,
+        validation: { isRequired: true }
       }),
       product: (0, import_fields.relationship)({ ref: "Product" }),
       user: (0, import_fields.relationship)({ ref: "User.cart" })
@@ -350,6 +351,58 @@ async function insertSeedData(prisma) {
   process.exit();
 }
 
+// mutations/index.ts
+var import_schema = require("@graphql-tools/schema");
+
+// mutations/addToCart.ts
+async function addToCart(root, { productId }, context) {
+  console.log("adding to cart");
+  const session2 = context.session;
+  if (!session2.itemId) {
+    throw new Error("You must be logged in to do this");
+  }
+  const allCartItems = await context.db.CartItem.findMany({
+    where: {
+      user: { id: { equals: session2.itemId } },
+      product: { id: { equals: productId } }
+    }
+  });
+  const [existingCartItem] = allCartItems;
+  if (existingCartItem) {
+    console.log(existingCartItem);
+    console.log(
+      `There are already ${existingCartItem.quantity} items in your cart`
+    );
+    return context.db.CartItem.updateOne({
+      where: { id: existingCartItem.id },
+      data: { quantity: existingCartItem.quantity + 1 }
+    });
+  }
+  return context.db.CartItem.createOne({
+    data: {
+      product: { connect: { id: productId } },
+      user: { connect: { id: session2.itemId } }
+    }
+  });
+}
+var addToCart_default = addToCart;
+
+// mutations/index.ts
+var graphql = String.raw;
+var extendGraphqlSchema = (schema) => (0, import_schema.mergeSchemas)({
+  schemas: [schema],
+  typeDefs: graphql`
+      type Mutation {
+        addToCart(productId: ID): CartItem
+      }
+    `,
+  resolvers: {
+    Mutation: {
+      addToCart: addToCart_default
+    }
+  }
+});
+
 // keystone.ts
 var database = process.env.DATABASE_URL;
 var keystone_default = withAuth(
@@ -371,7 +424,8 @@ var keystone_default = withAuth(
       }
     },
     lists,
-    session
+    session,
+    extendGraphqlSchema
   })
 );
 // Annotate the CommonJS export names for ESM import in node:

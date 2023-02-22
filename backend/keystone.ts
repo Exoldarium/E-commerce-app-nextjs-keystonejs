@@ -1,8 +1,9 @@
 import 'dotenv/config';
-import { config } from '@keystone-6/core';
+import { config, graphql } from '@keystone-6/core';
 import { lists } from './schema';
 import { withAuth, session } from './auth';
 import { insertSeedData } from './seed-data';
+import { extendGraphqlSchema } from './mutations';
 
 const database = process.env.DATABASE_URL!;
 
@@ -26,5 +27,6 @@ export default withAuth(
     },
     lists,
     session,
+    extendGraphqlSchema,
   })
 );
