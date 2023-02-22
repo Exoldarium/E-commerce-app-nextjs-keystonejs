@@ -29,6 +29,9 @@ export function CartItem({ cartItem }) {
           </label>
         </div>
         <p>Price: {formatMoney(product.price)}</p>
+        <button type="button" className="removeFromCartMenu">
+          Remove
+        </button>
       </div>
     </CartMenuPageStyles>
   );

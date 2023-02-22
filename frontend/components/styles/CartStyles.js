@@ -56,7 +56,7 @@ export const CartMenuPageStyles = styled.div`
     object-fit: cover;
   }
   input {
-    height: 5vh;
+    height: 3vh;
     width: 5vw;
     text-align: center;
     font-size: 2rem;
@@ -68,9 +68,16 @@ export const CartMenuPageStyles = styled.div`
       width: fit-content;
       border: none;
     }
+    div {
+      display: flex;
+      align-items: center;
+    }
   }
   button {
-    height: 5vh;
+    height: 3vh;
+  }
+  .removeFromCartMenu {
+    height: 2vh;
   }
   @media only screen and (max-width: 790px) {
     display: none;
@@ -85,6 +92,11 @@ export const CartPageStyles = styled.div`
   border: 1px solid black;
   border-radius: 5px;
   margin: 1rem;
+  .cartPageInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
   h1 {
     flex: 1;
   }
@@ -102,6 +114,10 @@ export const CartPageStyles = styled.div`
   button {
     height: 5vh;
   }
+  .removeFromCart {
+    height: 30px;
+    width: 70px;
+  }
   @media only screen and (max-width: 790px) {
     flex-direction: column;
     input {
@@ -112,6 +128,11 @@ export const CartPageStyles = styled.div`
     }
     button {
       height: 5vh;
+    }
+    .cartPageInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 `;
