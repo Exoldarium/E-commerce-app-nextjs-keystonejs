@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import formatMoney from '../lib/formatMoney';
+import RemoveFromCart from './RemoveFromCart';
 import { CartPageStyles, CartStyles } from './styles/CartStyles';
 import { useUser } from './User';
 
@@ -25,9 +27,7 @@ export function CartItem({ cartItem }) {
             <button type="button">-</button>
           </label>
         </div>
-        <button type="button" className="removeFromCart">
-          Remove
-        </button>
+        <RemoveFromCart id={cartItem.id} />
       </div>
     </CartPageStyles>
   );
@@ -36,12 +36,19 @@ export function CartItem({ cartItem }) {
 export default function Cart() {
   const user = useUser();
   const cartItems = user?.cart;
+  const emptyCart = cartItems.length === 0;
   console.log(user);
 
   // if the user is logged in
   if (user) {
     return (
       <CartStyles>
+        {emptyCart && (
+          <p>
+            Your cart is empty!
+            <Link href="/products"> Go ahead and add some items!</Link>
+          </p>
+        )}
         {cartItems.map((cartItem) => (
           <CartItem cartItem={cartItem} key={cartItem.id} />
         ))}

@@ -13,7 +13,7 @@ export default function Product({ product }) {
         />
       </Link>
       <p key={product.id}>{product.name}</p>
-      <AddToCart />
+      <AddToCart id={product.id} />
     </ProductStyles>
   );
 }

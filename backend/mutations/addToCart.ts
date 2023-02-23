@@ -1,5 +1,4 @@
 import { KeystoneContext } from "@keystone-6/core/types";
-import { CartItem } from ".prisma/client";
 
 async function addToCart(
   root: any,

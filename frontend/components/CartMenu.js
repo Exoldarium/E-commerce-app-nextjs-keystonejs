@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
+import RemoveFromCart from './RemoveFromCart';
 import { CartMenuPageStyles, CartSliderStyles } from './styles/CartStyles';
 import { useUser } from './User';
 
@@ -29,9 +30,7 @@ export function CartItem({ cartItem }) {
           </label>
         </div>
         <p>Price: {formatMoney(product.price)}</p>
-        <button type="button" className="removeFromCartMenu">
-          Remove
-        </button>
+        <RemoveFromCart id={cartItem.id} />
       </div>
     </CartMenuPageStyles>
   );
