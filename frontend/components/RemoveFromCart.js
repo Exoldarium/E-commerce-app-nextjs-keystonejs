@@ -8,7 +8,7 @@ export const REMOVE_FROM_CART_MUTATION = gql`
   }
 `;
 
-function updateCache(cache, payload) {
+function update(cache, payload) {
   cache.evict(cache.identify(payload.data.deleteCartItem));
 }
 
@@ -18,14 +18,9 @@ export default function RemoveFromCart({ id }) {
     REMOVE_FROM_CART_MUTATION,
     {
       variables: { id },
-    },
-    updateCache
+      update,
+    }
   );
-
-  // function handleClick() {
-  //   removeFromCart();
-  //   updateCache();
-  // }
 
   return (
     <button type="button" onClick={removeFromCart}>

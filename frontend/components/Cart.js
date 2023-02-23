@@ -36,7 +36,7 @@ export function CartItem({ cartItem }) {
 export default function Cart() {
   const user = useUser();
   const cartItems = user?.cart;
-  const emptyCart = cartItems.length === 0;
+  const emptyCart = cartItems?.length === 0;
   console.log(user);
 
   // if the user is logged in
