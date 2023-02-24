@@ -3,6 +3,7 @@ export default function paginationField() {
     keyArgs: false,
     // we merge the cache (existing data) with our incoming data
     merge(existing, incoming, { args: { skip = 0 } }) {
+      console.log({ existing, incoming });
       const merged = existing ? existing.slice(0) : [];
       for (let i = 0; i < incoming.length; i++) {
         merged[skip + i] = incoming[i];

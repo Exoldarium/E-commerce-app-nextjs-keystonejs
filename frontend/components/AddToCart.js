@@ -11,7 +11,6 @@ export const ADD_TO_CART_MUTATION = gql`
 `;
 
 export default function AddToCart({ id }) {
-  console.log(id);
   const { isCartOpen, setIsCartOpen } = useSetState();
   const [addToCart, { data, loading, error }] = useMutation(
     ADD_TO_CART_MUTATION,
@@ -23,8 +22,8 @@ export default function AddToCart({ id }) {
     }
   );
 
-  async function handleClick() {
-    const res = await addToCart().catch(console.error);
+  function handleClick() {
+    addToCart();
     setIsCartOpen(true);
   }
 

@@ -11,7 +11,6 @@ export const USER_QUERY = gql`
           id
           quantity
           product {
-            id
             name
             price
             photo {

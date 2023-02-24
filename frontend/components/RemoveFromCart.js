@@ -1,4 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
+import { USER_QUERY } from './User';
 
 export const REMOVE_FROM_CART_MUTATION = gql`
   mutation REMOVE_FROM_CART_MUTATION($id: ID!) {
@@ -9,16 +10,16 @@ export const REMOVE_FROM_CART_MUTATION = gql`
 `;
 
 function update(cache, payload) {
-  cache.evict(cache.identify(payload.data.deleteCartItem));
+  cache.evict({ id: payload.data.deleteCartItem.id });
 }
 
 export default function RemoveFromCart({ id }) {
-  console.log(id);
   const [removeFromCart, { data, loading, error }] = useMutation(
     REMOVE_FROM_CART_MUTATION,
     {
       variables: { id },
       update,
+      refetchQueries: [{ query: USER_QUERY }],
     }
   );
 

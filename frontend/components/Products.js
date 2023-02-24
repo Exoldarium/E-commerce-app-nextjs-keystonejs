@@ -1,11 +1,11 @@
 import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
 import { productsPerPage } from '../config';
-import { useSetState } from '../lib/stateProvider';
 import Product from './Product';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
-import { PaginationStyles } from './styles/PaginationStyles';
+import { ProductsCountStyles } from './styles/ProductsCountStyles';
 import { ProductStyles } from './styles/ProductsStyles';
+import { USER_QUERY } from './User';
 
 const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY($take: Int, $skip: Int! = 0) {
@@ -55,7 +55,7 @@ export default function Products({ count }) {
           <Product key={product.id} product={product} id={product.id} />
         ))}
       </ProductStyles>
-      <PaginationStyles>
+      <ProductsCountStyles>
         {hideButton && (
           <button
             type="button"
@@ -73,7 +73,7 @@ export default function Products({ count }) {
         <p>
           Showing {productsLength} of {count} items
         </p>
-      </PaginationStyles>
+      </ProductsCountStyles>
     </>
   );
 }

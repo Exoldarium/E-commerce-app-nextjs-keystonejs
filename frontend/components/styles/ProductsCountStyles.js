@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PaginationStyles = styled.div`
+export const ProductsCountStyles = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
