@@ -40,6 +40,7 @@ export default function CartMenu() {
   const user = useUser();
   const cartItems = user?.cart;
   const { isCartOpen, closeCart } = useSetState();
+  console.log(user);
 
   // if the user is registered
   if (user) {

@@ -1,4 +1,4 @@
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { useSetState } from '../lib/stateProvider';
 import { USER_QUERY } from './User';
 
@@ -22,9 +22,12 @@ export default function AddToCart({ id }) {
     }
   );
 
-  function handleClick() {
-    addToCart();
+  async function handleClick() {
+    const res = await addToCart();
     setIsCartOpen(true);
+    // try to use this id to get the cart item
+    sessionStorage.setItem('itemId', JSON.stringify(res.data.addToCart.id));
+    console.log(res);
   }
 
   return (

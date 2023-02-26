@@ -181,7 +181,7 @@ async function sendPasswordResetEmail(resetToken, to) {
 }
 
 // auth.ts
-var sessionSecret = process.env.SESSION_SECRET;
+var sessionSecret = process.env.COOKIE_SECRET;
 if (!sessionSecret && process.env.NODE_ENV !== "production") {
   sessionSecret = (0, import_crypto.randomBytes)(32).toString("hex");
 }
@@ -358,32 +358,56 @@ var import_schema = require("@graphql-tools/schema");
 async function addToCart(root, { productId }, context) {
   console.log("adding to cart");
   const session2 = context.session;
-  if (!session2.itemId) {
-    throw new Error("You must be logged in to do this");
-  }
-  const allCartItems = await context.db.CartItem.findMany({
-    where: {
-      user: { id: { equals: session2.itemId } },
-      product: { id: { equals: productId } }
+  if (session2) {
+    const allCartItems = await context.db.CartItem.findMany({
+      where: {
+        user: { id: { equals: session2.itemId } },
+        product: { id: { equals: productId } }
+      }
+    });
+    const [existingCartItem] = allCartItems;
+    if (existingCartItem) {
+      console.log(existingCartItem);
+      console.log(
+        `There are already ${existingCartItem.quantity} items in your cart`
+      );
+      return context.db.CartItem.updateOne({
+        where: { id: existingCartItem.id },
+        data: { quantity: existingCartItem.quantity + 1 }
+      });
     }
-  });
-  const [existingCartItem] = allCartItems;
-  if (existingCartItem) {
-    console.log(existingCartItem);
-    console.log(
-      `There are already ${existingCartItem.quantity} items in your cart`
-    );
-    return context.db.CartItem.updateOne({
-      where: { id: existingCartItem.id },
-      data: { quantity: existingCartItem.quantity + 1 }
+    return context.db.CartItem.createOne({
+      data: {
+        product: { connect: { id: productId } },
+        user: { connect: { id: session2.itemId } }
+      }
     });
   }
-  return context.db.CartItem.createOne({
-    data: {
-      product: { connect: { id: productId } },
-      user: { connect: { id: session2.itemId } }
+  console.log(session2);
+  if (!session2) {
+    const allCartItems = await context.db.CartItem.findMany({
+      where: {
+        product: { id: { equals: productId } }
+      }
+    });
+    console.log(allCartItems);
+    const [existingCartItem] = allCartItems;
+    if (existingCartItem) {
+      console.log(existingCartItem);
+      console.log(
+        `There are already ${existingCartItem.quantity} items in your cart`
+      );
+      return context.db.CartItem.updateOne({
+        where: { id: existingCartItem.id },
+        data: { quantity: existingCartItem.quantity + 1 }
+      });
     }
-  });
+    return context.db.CartItem.createOne({
+      data: {
+        product: { connect: { id: productId } }
+      }
+    });
+  }
 }
 var addToCart_default = addToCart;
 

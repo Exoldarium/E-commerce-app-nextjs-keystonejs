@@ -1,3 +1,4 @@
+import { gql } from '@apollo/client';
 import Link from 'next/link';
 import formatMoney from '../lib/formatMoney';
 import RemoveFromCart from './RemoveFromCart';
@@ -38,7 +39,7 @@ export default function Cart() {
   const cartItems = user?.cart;
   const emptyCart = cartItems?.length === 0;
 
-  // add if the user is logged out
+  // add if the user is logged out or not registered
   // if (!user) {
 
   // }

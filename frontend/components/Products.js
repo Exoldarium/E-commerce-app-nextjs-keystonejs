@@ -5,9 +5,8 @@ import Product from './Product';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { ProductsCountStyles } from './styles/ProductsCountStyles';
 import { ProductStyles } from './styles/ProductsStyles';
-import { USER_QUERY } from './User';
 
-const ALL_PRODUCTS_QUERY = gql`
+export const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY($take: Int, $skip: Int! = 0) {
     products(take: $take, skip: $skip) {
       id
