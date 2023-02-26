@@ -4,6 +4,8 @@ import formatMoney from '../lib/formatMoney';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { OneProductStyles } from './styles/OneProductStyles';
 
+// ADD: add to cart button
+
 export const ONE_PRODUCT_QUERY = gql`
   query ONE_PRODUCT_QUERY($id: ID!) {
     product(where: { id: $id }) {

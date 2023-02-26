@@ -3,7 +3,10 @@ import styled from 'styled-components';
 export const CartStyles = styled.div`
   padding-top: 25%;
   padding-bottom: 25%;
-  height: 100vh;
+  min-height: 100vh;
+  @media only screen and (max-width: 790px) {
+    padding-bottom: 0;
+  }
 `;
 
 export const CartSliderStyles = styled.div`

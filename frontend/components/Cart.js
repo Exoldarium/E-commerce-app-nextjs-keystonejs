@@ -38,6 +38,11 @@ export default function Cart() {
   const cartItems = user?.cart;
   const emptyCart = cartItems?.length === 0;
 
+  // add if the user is logged out
+  // if (!user) {
+
+  // }
+
   // if the user is logged in
   if (user) {
     return (
