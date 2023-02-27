@@ -49,7 +49,7 @@ export const CartMenuPageStyles = styled.div`
   border-radius: 5px;
   margin: 0.5rem;
   width: 27vw;
-  height: 10vh;
+  height: 12vh;
   h1 {
     font-size: 1.3vw;
     flex: 1;
@@ -69,7 +69,6 @@ export const CartMenuPageStyles = styled.div`
     flex-direction: column;
     align-items: center;
     p {
-      width: fit-content;
       border: none;
     }
     div {

@@ -81,6 +81,7 @@ var lists = {
         }
       }),
       price: (0, import_fields.integer)(),
+      stock: (0, import_fields.integer)(),
       photo: (0, import_fields.relationship)({
         ref: "ProductImage.product",
         ui: {
@@ -131,7 +132,9 @@ var lists = {
     fields: {
       quantity: (0, import_fields.integer)({
         defaultValue: 1,
-        validation: { isRequired: true }
+        validation: {
+          isRequired: true
+        }
       }),
       product: (0, import_fields.relationship)({ ref: "Product" }),
       user: (0, import_fields.relationship)({ ref: "User.cart" })
@@ -380,31 +383,6 @@ async function addToCart(root, { productId }, context) {
       data: {
         product: { connect: { id: productId } },
         user: { connect: { id: session2.itemId } }
-      }
-    });
-  }
-  console.log(session2);
-  if (!session2) {
-    const allCartItems = await context.db.CartItem.findMany({
-      where: {
-        product: { id: { equals: productId } }
-      }
-    });
-    console.log(allCartItems);
-    const [existingCartItem] = allCartItems;
-    if (existingCartItem) {
-      console.log(existingCartItem);
-      console.log(
-        `There are already ${existingCartItem.quantity} items in your cart`
-      );
-      return context.db.CartItem.updateOne({
-        where: { id: existingCartItem.id },
-        data: { quantity: existingCartItem.quantity + 1 }
-      });
-    }
-    return context.db.CartItem.createOne({
-      data: {
-        product: { connect: { id: productId } }
       }
     });
   }

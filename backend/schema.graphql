@@ -210,6 +210,7 @@ type Product {
   description: String
   status: String
   price: Int
+  stock: Int
   photo: ProductImage
   user: User
 }
@@ -227,6 +228,7 @@ input ProductWhereInput {
   description: StringFilter
   status: StringNullableFilter
   price: IntNullableFilter
+  stock: IntNullableFilter
   photo: ProductImageWhereInput
   user: UserWhereInput
 }
@@ -276,6 +278,7 @@ input ProductOrderByInput {
   description: OrderDirection
   status: OrderDirection
   price: OrderDirection
+  stock: OrderDirection
 }
 
 input ProductUpdateInput {
@@ -283,6 +286,7 @@ input ProductUpdateInput {
   description: String
   status: String
   price: Int
+  stock: Int
   photo: ProductImageRelateToOneForUpdateInput
   user: UserRelateToOneForUpdateInput
 }
@@ -309,6 +313,7 @@ input ProductCreateInput {
   description: String
   status: String
   price: Int
+  stock: Int
   photo: ProductImageRelateToOneForCreateInput
   user: UserRelateToOneForCreateInput
 }

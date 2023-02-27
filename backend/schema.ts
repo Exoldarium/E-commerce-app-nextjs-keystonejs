@@ -63,6 +63,7 @@ export const lists: Lists = {
         },
       }),
       price: integer(),
+      stock: integer(),
       photo: relationship({
         ref: 'ProductImage.product',
         ui: {
@@ -116,7 +117,9 @@ export const lists: Lists = {
       quantity: integer({
         defaultValue: 1,
         // validation means that integer method can't be set to 0
-        validation: { isRequired: true },
+        validation: {
+          isRequired: true
+        },
       }),
       product: relationship({ ref: 'Product' }),
       user: relationship({ ref: 'User.cart' }),

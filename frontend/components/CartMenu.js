@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useState } from 'react';
 import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
 import RemoveFromCart from './RemoveFromCart';
@@ -6,9 +7,10 @@ import { CartMenuPageStyles, CartSliderStyles } from './styles/CartStyles';
 import { useUser } from './User';
 
 export function CartItem({ cartItem }) {
+  const [isAmount, setIsAmount] = useState('');
+  const onChange = () => setIsAmount(cartItem.quantity);
   const { product } = cartItem;
-  // we can use query prop to display cart items in a separate page
-  // if it's just sliding menu use a separate styled components component
+  console.log(cartItem.quantity);
   return (
     <CartMenuPageStyles>
       <img src={product.photo.image.publicUrlTransformed} alt={product.name} />
@@ -22,7 +24,8 @@ export function CartItem({ cartItem }) {
             type="text"
             name="number"
             min="1"
-            placeholder="1"
+            onChange={onChange}
+            value={isAmount}
             inputMode="numeric"
           />
           <label htmlFor="number">

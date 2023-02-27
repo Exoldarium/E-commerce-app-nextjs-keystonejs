@@ -1,8 +1,11 @@
 import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import formatMoney from '../lib/formatMoney';
+import AddToCart from './AddToCart';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { OneProductStyles } from './styles/OneProductStyles';
+import { useUser } from './User';
 
 // ADD: add to cart button
 
@@ -24,6 +27,8 @@ export const ONE_PRODUCT_QUERY = gql`
 `;
 
 export default function OneProduct({ id }) {
+  const user = useUser();
+  const router = useRouter();
   const { data, loading, error } = useQuery(ONE_PRODUCT_QUERY, {
     variables: {
       id,
@@ -45,6 +50,12 @@ export default function OneProduct({ id }) {
         <h1>{product.name}</h1>
         <p>{product.description}</p>
         <p className="product-price">{formatMoney(product.price)}</p>
+        {user && <AddToCart id={product.id} />}
+        {!user && (
+          <button type="button" onClick={() => router.push('/signin')}>
+            Add to Cart
+          </button>
+        )}
       </div>
     </OneProductStyles>
   );
