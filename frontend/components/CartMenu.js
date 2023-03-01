@@ -10,7 +10,8 @@ export function CartItem({ cartItem }) {
   const [isAmount, setIsAmount] = useState('');
   const onChange = () => setIsAmount(cartItem.quantity);
   const { product } = cartItem;
-  console.log(cartItem.quantity);
+  // console.log(cartItem.quantity);
+  console.log(isAmount);
   return (
     <CartMenuPageStyles>
       <img src={product.photo.image.publicUrlTransformed} alt={product.name} />
@@ -25,14 +26,16 @@ export function CartItem({ cartItem }) {
             name="number"
             min="1"
             onChange={onChange}
-            value={isAmount}
+            value={cartItem.quantity}
             inputMode="numeric"
           />
           <label htmlFor="number">
-            <button type="button">-</button>
+            <button type="button" onClick={() => isAmount - 1}>
+              -
+            </button>
           </label>
         </div>
-        <p>Price: {formatMoney(product.price)}</p>
+        <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
         <RemoveFromCart id={cartItem.id} />
       </div>
     </CartMenuPageStyles>
