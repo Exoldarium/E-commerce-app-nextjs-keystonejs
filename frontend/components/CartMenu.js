@@ -1,14 +1,14 @@
-import { useQuery } from '@apollo/client';
 import Link from 'next/link';
+import { useState } from 'react';
 import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
-import { CART_ITEMS_QUERY } from './Cart';
 import RemoveFromCart from './RemoveFromCart';
 import { CartMenuPageStyles, CartSliderStyles } from './styles/CartStyles';
 import { useUser } from './User';
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
+  const [isAmount, setIsAmount] = useState('');
 
   return (
     <CartMenuPageStyles>
@@ -24,6 +24,7 @@ export function CartItem({ cartItem }) {
             name="number"
             min="1"
             value={cartItem.quantity}
+            onChange={() => setIsAmount(cartItem.quantity)}
             inputMode="numeric"
           />
           {/* <label htmlFor="number">

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useState } from 'react';
 import formatMoney from '../lib/formatMoney';
 import AddToCart from './AddToCart';
 import RemoveFromCart from './RemoveFromCart';
@@ -23,7 +24,8 @@ export function CartItem({ cartItem }) {
             type="text"
             name="quantity"
             min="1"
-            value={cartItem.quantity}
+            value={isAmount}
+            onChange={cartItem.quantity}
           />
           <label htmlFor="number">
             <AddToCart id={product.id} />
