@@ -1,39 +1,36 @@
+import { useQuery } from '@apollo/client';
 import Link from 'next/link';
-import { useState } from 'react';
 import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
+import { CART_ITEMS_QUERY } from './Cart';
 import RemoveFromCart from './RemoveFromCart';
 import { CartMenuPageStyles, CartSliderStyles } from './styles/CartStyles';
 import { useUser } from './User';
 
 export function CartItem({ cartItem }) {
-  const [isAmount, setIsAmount] = useState('');
-  const onChange = () => setIsAmount(cartItem.quantity);
   const { product } = cartItem;
-  // console.log(cartItem.quantity);
-  console.log(isAmount);
+
   return (
     <CartMenuPageStyles>
       <img src={product.photo.image.publicUrlTransformed} alt={product.name} />
       <h1>{product.name}</h1>
       <div className="sliderStyles">
         <div>
-          <label htmlFor="number">
+          {/* <label htmlFor="number">
             <button type="button">+</button>
-          </label>
+          </label> */}
           <input
             type="text"
             name="number"
             min="1"
-            onChange={onChange}
             value={cartItem.quantity}
             inputMode="numeric"
           />
-          <label htmlFor="number">
+          {/* <label htmlFor="number">
             <button type="button" onClick={() => isAmount - 1}>
               -
             </button>
-          </label>
+          </label> */}
         </div>
         <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
         <RemoveFromCart id={cartItem.id} />

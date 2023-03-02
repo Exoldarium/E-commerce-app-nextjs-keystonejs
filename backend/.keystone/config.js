@@ -389,6 +389,32 @@ async function addToCart(root, { productId }, context) {
 }
 var addToCart_default = addToCart;
 
+// mutations/removeFromCart.ts
+async function removeFromCart(root, { productId }, context) {
+  console.log("removing from cart");
+  const session2 = context.session;
+  if (session2) {
+    const allCartItems = await context.db.CartItem.findMany({
+      where: {
+        user: { id: { equals: session2.itemId } },
+        product: { id: { equals: productId } }
+      }
+    });
+    const [existingCartItem] = allCartItems;
+    if (existingCartItem) {
+      console.log(existingCartItem);
+      console.log(
+        `There are already ${existingCartItem.quantity} items in your cart`
+      );
+      return context.db.CartItem.updateOne({
+        where: { id: existingCartItem.id },
+        data: { quantity: existingCartItem.quantity - 1 }
+      });
+    }
+  }
+}
+var removeFromCart_default = removeFromCart;
+
 // mutations/index.ts
 var graphql = String.raw;
 var extendGraphqlSchema = (schema) => (0, import_schema.mergeSchemas)({
@@ -396,11 +422,13 @@ var extendGraphqlSchema = (schema) => (0, import_schema.mergeSchemas)({
   typeDefs: graphql`
       type Mutation {
         addToCart(productId: ID): CartItem
+        removeFromCart(productId: ID): CartItem
       }
     `,
   resolvers: {
     Mutation: {
-      addToCart: addToCart_default
+      addToCart: addToCart_default,
+      removeFromCart: removeFromCart_default
     }
   }
 });

@@ -1,9 +1,8 @@
 import { useQuery } from '@apollo/client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import AddToCart from './AddToCart';
-import { ALL_PRODUCTS_QUERY } from './Products';
+import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { ProductStyles } from './styles/ProductStyles';
 import { useUser } from './User';
 
@@ -22,6 +21,7 @@ export default function Product({ product }) {
       </Link>
       <p key={product.id}>{product.name}</p>
       {user && <AddToCart id={product.id} />}
+      <RemoveSingleCartItem id={product.id} />
       {!user && (
         <button type="button" onClick={() => router.push('/signin')}>
           Add to Cart
