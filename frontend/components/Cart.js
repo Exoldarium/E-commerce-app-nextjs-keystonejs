@@ -9,6 +9,8 @@ import { useUser } from './User';
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
+  const [isAmount, setIsAmount] = useState('');
+  console.log(cartItem);
 
   return (
     <CartPageStyles>
@@ -18,17 +20,17 @@ export function CartItem({ cartItem }) {
         <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
         <div>
           <label htmlFor="number">
-            <RemoveSingleCartItem id={product.id} />
+            <RemoveSingleCartItem id={cartItem.id} />
           </label>
           <input
             type="text"
             name="quantity"
             min="1"
-            value={isAmount}
-            onChange={cartItem.quantity}
+            value={cartItem.quantity}
+            onChange={() => setIsAmount(cartItem.quantity)}
           />
           <label htmlFor="number">
-            <AddToCart id={product.id} />
+            <AddToCart id={cartItem.id} />
           </label>
         </div>
         <RemoveFromCart id={cartItem.id} />
