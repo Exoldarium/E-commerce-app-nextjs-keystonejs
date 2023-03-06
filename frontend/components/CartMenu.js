@@ -16,9 +16,6 @@ export function CartItem({ cartItem }) {
       <h1>{product.name}</h1>
       <div className="sliderStyles">
         <div>
-          {/* <label htmlFor="number">
-            <button type="button">+</button>
-          </label> */}
           <input
             type="text"
             name="number"
@@ -27,11 +24,6 @@ export function CartItem({ cartItem }) {
             onChange={() => setIsAmount(cartItem.quantity)}
             inputMode="numeric"
           />
-          {/* <label htmlFor="number">
-            <button type="button" onClick={() => isAmount - 1}>
-              -
-            </button>
-          </label> */}
         </div>
         <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
         <RemoveFromCart id={cartItem.id} />

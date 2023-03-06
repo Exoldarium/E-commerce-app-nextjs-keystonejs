@@ -23,18 +23,15 @@ export const ALL_PRODUCTS_QUERY = gql`
   }
 `;
 
-export default function Products({ count }) {
-  const { data, fetchMore, loading, error } = useQuery(ALL_PRODUCTS_QUERY, {
+export default function Products({ page }) {
+  const { data, loading, error } = useQuery(ALL_PRODUCTS_QUERY, {
+    nextFetchPolicy: 'cache-only',
     variables: {
-      // initial number of products on page
       take: productsPerPage,
-      // how many products we skip when loading more
-      skip: 0,
+      skip: page * productsPerPage - productsPerPage,
     },
   });
   const products = data?.products;
-  const productsLength = data?.products?.length;
-  const hideButton = data?.products?.length < count;
 
   console.log({ data, error, loading });
 
@@ -43,36 +40,10 @@ export default function Products({ count }) {
     return <ErrorMessageStyles>Error: {error.message}</ErrorMessageStyles>;
 
   return (
-    <>
-      <ProductStyles>
-        <Head>
-          <title>
-            56 Sugar Gumpaste | Showing {productsLength} of {count} items
-          </title>
-        </Head>
-        {products.map((product) => (
-          <Product key={product.id} product={product} id={product.id} />
-        ))}
-      </ProductStyles>
-      <ProductsCountStyles>
-        {hideButton && (
-          <button
-            type="button"
-            onClick={() =>
-              fetchMore({
-                variables: {
-                  skip: productsLength,
-                },
-              })
-            }
-          >
-            Load More
-          </button>
-        )}
-        <p>
-          Showing {productsLength} of {count} items
-        </p>
-      </ProductsCountStyles>
-    </>
+    <ProductStyles>
+      {products.map((product) => (
+        <Product key={product.id} product={product} id={product.id} />
+      ))}
+    </ProductStyles>
   );
 }

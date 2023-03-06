@@ -20,7 +20,7 @@ export function CartItem({ cartItem }) {
         <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
         <div>
           <label htmlFor="number">
-            <RemoveSingleCartItem id={cartItem.id} />
+            <RemoveSingleCartItem id={product.id} />
           </label>
           <input
             type="text"
@@ -30,7 +30,7 @@ export function CartItem({ cartItem }) {
             onChange={() => setIsAmount(cartItem.quantity)}
           />
           <label htmlFor="number">
-            <AddToCart id={cartItem.id} />
+            <AddToCart id={product.id} />
           </label>
         </div>
         <RemoveFromCart id={cartItem.id} />

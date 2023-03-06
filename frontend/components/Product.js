@@ -26,12 +26,6 @@ export default function Product({ product }) {
           Add to Cart
         </button>
       )}
-      {/* add add to cart component that will be active if the user is not logged in, pass in the product id from above 
-      create a cart object that will have our product info, and quantity and store in local storage
-      when the user creates an account or logs in grab this info from local storage (id of the product and quantity)
-      and create a cart item that matches that */}
-      {/* this add to cart component should be a button that will create our cartItem, when clicked the cartItem is created and is automaticaly 
-      mapped over into the cart */}
     </ProductStyles>
   );
 }
