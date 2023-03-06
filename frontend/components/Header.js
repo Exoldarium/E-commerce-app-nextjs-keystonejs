@@ -8,11 +8,11 @@ import { HeaderStyles } from './styles/HeaderStyles';
 import { LogoStyles } from './styles/LogoStyles';
 
 export default function Header() {
-  const { isMenuActive, toggleMenu } = useSetState();
+  const { isMenuActive, toggleMenu, closeCart } = useSetState();
 
   return (
     <HeaderStyles>
-      <LogoStyles>
+      <LogoStyles onClick={closeCart}>
         <Link href="/products">It's a LOGO</Link>
       </LogoStyles>
       <Search />

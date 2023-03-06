@@ -25,6 +25,7 @@ export const CartSliderStyles = styled.div`
   background: white;
   width: 30%;
   margin: 0 auto;
+  z-index: 2;
   div {
     display: flex;
     flex-direction: row;

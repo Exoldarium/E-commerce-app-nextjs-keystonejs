@@ -29,7 +29,8 @@ const SEARCH_QUERY = gql`
 
 export default function Search() {
   const [inputValue, setInputValue] = useState('');
-  const { isSearchActive, closeSearchList, toggleSearchList } = useSetState();
+  const { isSearchActive, closeSearchList, toggleSearchList, closeCart } =
+    useSetState();
   const [searchItems, { data, loading }] = useLazyQuery(SEARCH_QUERY, {
     fetchPolicy: 'no-cache',
   });
@@ -50,6 +51,7 @@ export default function Search() {
       <input
         onChange={handleChange}
         onFocus={toggleSearchList}
+        onClick={closeCart}
         type="text"
         name="search"
         placeholder="Search"

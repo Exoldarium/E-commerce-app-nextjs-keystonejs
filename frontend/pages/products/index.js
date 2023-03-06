@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import Products from '../../components/Products';
 import ProductsCount from '../../components/ProductsCount';
+import { useSetState } from '../../lib/stateProvider';
 
 export default function ProductsPage() {
   const { query } = useRouter();

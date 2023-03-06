@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import Link from 'next/link';
+import { useSetState } from '../lib/stateProvider';
 import { MobileNavStyles, NavStyles } from './styles/NavStyles';
 import { useUser, USER_QUERY } from './User';
 
@@ -10,6 +11,7 @@ export const SIGNOUT_MUTATION = gql`
 `;
 
 export default function Nav({ active, onClick }) {
+  const { closeCart } = useSetState();
   const [signout, { data }] = useMutation(SIGNOUT_MUTATION, {
     refetchQueries: [{ query: USER_QUERY }],
   });
@@ -23,7 +25,7 @@ export default function Nav({ active, onClick }) {
   if (user)
     return (
       <>
-        <NavStyles>
+        <NavStyles onClick={closeCart}>
           <Link href="/products">Products</Link>
           <Link href="/orders">Orders</Link>
           <Link href="/account">Account</Link>

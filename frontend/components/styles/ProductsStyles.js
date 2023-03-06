@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const ProductStyles = styled.div`
+  ${(props) => props.open && `transform: translateX(-20%)`};
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   grid-auto-rows: minmax(100px, auto);
   justify-items: center;
@@ -11,6 +12,7 @@ export const ProductStyles = styled.div`
   font-weight: bold;
   margin: 0 auto;
   padding-top: 15%;
+  z-index: -1;
   img {
     width: 300px;
     height: 300px;

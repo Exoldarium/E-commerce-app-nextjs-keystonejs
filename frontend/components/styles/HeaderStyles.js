@@ -16,6 +16,7 @@ export const HeaderStyles = styled.header`
   padding-left: 50px;
   padding-right: 50px;
   border-bottom: 1px solid black;
+  z-index: 2;
   @media only screen and (max-width: 790px) {
     max-height: 6.5rem;
     padding: 5px;
