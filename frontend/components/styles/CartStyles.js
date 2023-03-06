@@ -77,6 +77,10 @@ export const CartMenuPageStyles = styled.div`
       align-items: center;
     }
   }
+  button[aria-disabled='true'] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
   button {
     height: 3vh;
   }
@@ -120,6 +124,10 @@ export const CartPageStyles = styled.div`
   }
   .quantityDiv {
     display: flex;
+  }
+  button[aria-disabled='true'] {
+    opacity: 0.6;
+    pointer-events: none;
   }
   button {
     height: 5vh;

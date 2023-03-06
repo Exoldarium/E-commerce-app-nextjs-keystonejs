@@ -18,7 +18,7 @@ export function CartItem({ cartItem }) {
       <div className="cartPageInfo">
         <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
         <div className="quantityDiv">
-          <RemoveSingleCartItem id={product.id} />
+          <RemoveSingleCartItem id={product.id} quantity={cartItem.quantity} />
           <p
             onChange={() => setIsAmount(cartItem.quantity)}
             className="quantityParagraph"

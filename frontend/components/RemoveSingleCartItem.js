@@ -1,4 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
+import { CartButtonStyles } from './styles/ButtonStyles';
 import { USER_QUERY } from './User';
 
 export const REMOVE_SINGLE_CART_ITEM_MUTATION = gql`
@@ -9,7 +10,7 @@ export const REMOVE_SINGLE_CART_ITEM_MUTATION = gql`
   }
 `;
 
-export default function RemoveSingleCartItem({ id }) {
+export default function RemoveSingleCartItem({ id, quantity }) {
   const [removeFromCart, { data, loading, error }] = useMutation(
     REMOVE_SINGLE_CART_ITEM_MUTATION,
     {
@@ -21,7 +22,11 @@ export default function RemoveSingleCartItem({ id }) {
   );
 
   return (
-    <button type="button" onClick={removeFromCart}>
+    <button
+      type="button"
+      onClick={removeFromCart}
+      aria-disabled={quantity <= 1}
+    >
       -
     </button>
   );
