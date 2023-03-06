@@ -18,7 +18,7 @@ export function CartItem({ cartItem }) {
         <h1>{product.name}</h1>
       </Link>
       <div className="cartPageInfo">
-        <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
+        <p>{formatMoney(product.price * cartItem.quantity)}</p>
         <div className="quantityDiv">
           <RemoveSingleCartItem id={product.id} quantity={cartItem.quantity} />
           <p

@@ -20,6 +20,7 @@ export const ProductStyles = styled.div`
     object-fit: cover;
   }
   @media only screen and (max-width: 790px) {
+    ${(props) => props.open && `transform: translateX(0)`};
     display: grid;
     padding-top: 30%;
     grid-template-columns: repeat(1, 1fr);

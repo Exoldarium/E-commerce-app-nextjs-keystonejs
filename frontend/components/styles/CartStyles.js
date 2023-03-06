@@ -147,18 +147,26 @@ export const CartPageStyles = styled.div`
   @media only screen and (max-width: 790px) {
     flex-direction: column;
     p {
-      height: 5vh;
-      width: 15vw;
       text-align: center;
       font-size: 2rem;
+      padding: 0.5rem;
     }
     button {
       height: 5vh;
     }
     .cartPageInfo {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
+      .quantityParagraph {
+        height: 5vh;
+        width: 15vw;
+        text-align: center;
+        font-size: 2rem;
+        text-align: center;
+        margin: 0;
+        border: 1px solid black;
+      }
     }
   }
 `;
