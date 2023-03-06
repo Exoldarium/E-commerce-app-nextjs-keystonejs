@@ -72,15 +72,19 @@ export const CartMenuPageStyles = styled.div`
   .imageInfo {
     flex: 1;
     flex-direction: row;
-    cursor: pointer;
+    align-items: center;
     img {
       width: 50px;
       height: 50px;
       object-fit: cover;
     }
     h1 {
+      cursor: pointer;
       font-size: 1.3vw;
       flex: 1;
+    }
+    h1:hover {
+      color: violet;
     }
   }
   button[aria-disabled='true'] {
@@ -115,6 +119,9 @@ export const CartPageStyles = styled.div`
     flex: 1;
     cursor: pointer;
     padding-left: 2rem;
+  }
+  h1:hover {
+    color: violet;
   }
   img {
     width: 150px;

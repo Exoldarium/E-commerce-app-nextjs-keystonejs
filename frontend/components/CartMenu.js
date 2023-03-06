@@ -14,15 +14,15 @@ export function CartItem({ cartItem }) {
 
   return (
     <CartMenuPageStyles>
-      <Link href={`/product/${product.id}`}>
-        <div className="imageInfo">
-          <img
-            src={product.photo.image.publicUrlTransformed}
-            alt={product.name}
-          />
+      <div className="imageInfo">
+        <img
+          src={product.photo.image.publicUrlTransformed}
+          alt={product.name}
+        />
+        <Link href={`/product/${product.id}`}>
           <h1>{product.name}</h1>
-        </div>
-      </Link>
+        </Link>
+      </div>
       <div className="sliderStyles">
         <div>
           <RemoveSingleCartItem id={product.id} quantity={cartItem.quantity} />
