@@ -21,8 +21,8 @@ export default function ProductsCount({ page }) {
           56 Sugar Gumpaste - Page {page} of {pageCount}
         </title>
       </Head>
-      <Link href={`/products/${page - 1}`} aria-disabled={page <= 1}>
-        Prev
+      <Link href={`/products/${page - 1}`}>
+        <a aria-disabled={page <= 1}>Prev</a>
       </Link>
       <div>
         <p>
@@ -30,8 +30,8 @@ export default function ProductsCount({ page }) {
         </p>
         <p>{count} Items total</p>
       </div>
-      <Link href={`/products/${page + 1}`} aria-disabled={page >= pageCount}>
-        Next
+      <Link href={`/products/${page + 1}`}>
+        <a aria-disabled={page >= pageCount}>Next</a>
       </Link>
     </ProductsCountStyles>
   );

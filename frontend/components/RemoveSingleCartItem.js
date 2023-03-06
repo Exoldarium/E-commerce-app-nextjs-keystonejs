@@ -22,12 +22,12 @@ export default function RemoveSingleCartItem({ id, quantity }) {
   );
 
   return (
-    <button
+    <CartButtonStyles
       type="button"
       onClick={removeFromCart}
       aria-disabled={quantity <= 1}
     >
       -
-    </button>
+    </CartButtonStyles>
   );
 }

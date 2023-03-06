@@ -14,7 +14,9 @@ export function CartItem({ cartItem }) {
   return (
     <CartPageStyles>
       <img src={product.photo.image.publicUrlTransformed} alt={product.name} />
-      <h1>{product.name}</h1>
+      <Link href={`/product/${product.id}`}>
+        <h1>{product.name}</h1>
+      </Link>
       <div className="cartPageInfo">
         <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
         <div className="quantityDiv">

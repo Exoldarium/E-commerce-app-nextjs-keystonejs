@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import { useSetState } from '../lib/stateProvider';
+import { CartButtonStyles } from './styles/ButtonStyles';
 import { USER_QUERY } from './User';
 
 export const ADD_TO_CART_MUTATION = gql`
@@ -28,8 +29,8 @@ export default function AddToCart({ id }) {
   }
 
   return (
-    <button type="button" onClick={handleClick}>
+    <CartButtonStyles type="button" onClick={handleClick}>
       Add to cart
-    </button>
+    </CartButtonStyles>
   );
 }

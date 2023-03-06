@@ -1,4 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
+import { CartButtonStyles } from './styles/ButtonStyles';
 import { USER_QUERY } from './User';
 
 export const REMOVE_FROM_CART_MUTATION = gql`
@@ -24,8 +25,8 @@ export default function RemoveFromCart({ id }) {
   );
 
   return (
-    <button type="button" onClick={removeFromCart}>
+    <CartButtonStyles type="button" onClick={removeFromCart}>
       Remove
-    </button>
+    </CartButtonStyles>
   );
 }

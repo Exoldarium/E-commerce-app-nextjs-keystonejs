@@ -12,6 +12,7 @@ export const CartStyles = styled.div`
 export const CartSliderStyles = styled.div`
   transform: translateX(100%);
   ${(props) => props.open && `transform: translateX(0)`};
+  transition: 0.2s;
   position: fixed;
   right: 0;
   top: 0rem;
@@ -51,15 +52,6 @@ export const CartMenuPageStyles = styled.div`
   margin: 0.5rem;
   width: 27vw;
   height: 12vh;
-  h1 {
-    font-size: 1.3vw;
-    flex: 1;
-  }
-  img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-  }
   input {
     height: 3vh;
     width: 5vw;
@@ -75,6 +67,20 @@ export const CartMenuPageStyles = styled.div`
     div {
       display: flex;
       align-items: center;
+    }
+  }
+  .imageInfo {
+    flex: 1;
+    flex-direction: row;
+    cursor: pointer;
+    img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+    }
+    h1 {
+      font-size: 1.3vw;
+      flex: 1;
     }
   }
   button[aria-disabled='true'] {
@@ -107,6 +113,8 @@ export const CartPageStyles = styled.div`
   }
   h1 {
     flex: 1;
+    cursor: pointer;
+    padding-left: 2rem;
   }
   img {
     width: 150px;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const ProductStyles = styled.div`
   ${(props) => props.open && `transform: translateX(-20%)`};
+  transition: 0.2s;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
