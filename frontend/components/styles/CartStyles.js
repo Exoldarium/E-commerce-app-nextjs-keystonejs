@@ -108,11 +108,17 @@ export const CartPageStyles = styled.div`
     height: 150px;
     object-fit: cover;
   }
-  input {
+  .quantityParagraph {
     height: 5vh;
     width: 5vw;
     text-align: center;
     font-size: 2rem;
+    text-align: center;
+    margin: 0;
+    border: 1px solid black;
+  }
+  .quantityDiv {
+    display: flex;
   }
   button {
     height: 5vh;
@@ -123,7 +129,7 @@ export const CartPageStyles = styled.div`
   }
   @media only screen and (max-width: 790px) {
     flex-direction: column;
-    input {
+    p {
       height: 5vh;
       width: 15vw;
       text-align: center;

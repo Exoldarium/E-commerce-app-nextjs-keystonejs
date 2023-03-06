@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import formatMoney from '../lib/formatMoney';
-import AddToCart from './AddToCart';
+import AddSingleCartItem from './AddSingleCartItem';
 import RemoveFromCart from './RemoveFromCart';
 import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { CartPageStyles, CartStyles } from './styles/CartStyles';
@@ -10,7 +10,6 @@ import { useUser } from './User';
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
   const [isAmount, setIsAmount] = useState('');
-  console.log(cartItem);
 
   return (
     <CartPageStyles>
@@ -18,20 +17,15 @@ export function CartItem({ cartItem }) {
       <h1>{product.name}</h1>
       <div className="cartPageInfo">
         <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
-        <div>
-          <label htmlFor="number">
-            <RemoveSingleCartItem id={product.id} />
-          </label>
-          <input
-            type="text"
-            name="quantity"
-            min="1"
-            value={cartItem.quantity}
+        <div className="quantityDiv">
+          <RemoveSingleCartItem id={product.id} />
+          <p
             onChange={() => setIsAmount(cartItem.quantity)}
-          />
-          <label htmlFor="number">
-            <AddToCart id={product.id} />
-          </label>
+            className="quantityParagraph"
+          >
+            {cartItem.quantity}
+          </p>
+          <AddSingleCartItem id={product.id} />
         </div>
         <RemoveFromCart id={cartItem.id} />
       </div>

@@ -2,7 +2,9 @@ import Link from 'next/link';
 import { useState } from 'react';
 import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
+import AddSingleCartItem from './AddSingleCartItem';
 import RemoveFromCart from './RemoveFromCart';
+import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { CartMenuPageStyles, CartSliderStyles } from './styles/CartStyles';
 import { useUser } from './User';
 
@@ -16,6 +18,7 @@ export function CartItem({ cartItem }) {
       <h1>{product.name}</h1>
       <div className="sliderStyles">
         <div>
+          <AddSingleCartItem id={product.id} />
           <input
             type="text"
             name="number"
@@ -24,6 +27,7 @@ export function CartItem({ cartItem }) {
             onChange={() => setIsAmount(cartItem.quantity)}
             inputMode="numeric"
           />
+          <RemoveSingleCartItem id={product.id} />
         </div>
         <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
         <RemoveFromCart id={cartItem.id} />

@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
 import { productsPerPage } from '../config';
+import CartMenu from './CartMenu';
 import Product from './Product';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { ProductsCountStyles } from './styles/ProductsCountStyles';
@@ -40,10 +41,13 @@ export default function Products({ page }) {
     return <ErrorMessageStyles>Error: {error.message}</ErrorMessageStyles>;
 
   return (
-    <ProductStyles>
-      {products.map((product) => (
-        <Product key={product.id} product={product} id={product.id} />
-      ))}
-    </ProductStyles>
+    <>
+      <ProductStyles>
+        {products.map((product) => (
+          <Product key={product.id} product={product} id={product.id} />
+        ))}
+      </ProductStyles>
+      <CartMenu />
+    </>
   );
 }

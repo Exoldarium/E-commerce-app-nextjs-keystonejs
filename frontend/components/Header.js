@@ -17,7 +17,7 @@ export default function Header() {
       </LogoStyles>
       <Search />
       <Link href="/cart">Cart</Link>
-      <CartMenu />
+      {/* <CartMenu /> */}
       <Nav active={isMenuActive} onClick={toggleMenu} />
       {/* button visible only under 790px */}
       <MobileNavButtonStyles type="button" onClick={toggleMenu}>
