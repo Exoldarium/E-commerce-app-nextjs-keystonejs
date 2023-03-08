@@ -3,7 +3,6 @@ import { productsPerPage } from '../config';
 import { useSetState } from '../lib/stateProvider';
 import CartMenu from './CartMenu';
 import Product from './Product';
-import { PRODUCTS_COUNT_QUERY } from './ProductsCount';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { ProductStyles } from './styles/ProductsStyles';
 
@@ -25,7 +24,6 @@ export const ALL_PRODUCTS_QUERY = gql`
 `;
 
 export default function Products({ page }) {
-  console.log(page);
   const { isCartOpen, closeCart } = useSetState();
   const { data, loading, error } = useQuery(ALL_PRODUCTS_QUERY, {
     nextFetchPolicy: 'cache-only',

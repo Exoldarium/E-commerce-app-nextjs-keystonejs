@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import calculateTotalPrice from '../lib/calculateTotalPrice';
 import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
 import AddSingleCartItem from './AddSingleCartItem';
@@ -67,6 +68,7 @@ export default function CartMenu() {
         {cartItems.map((cartItem) => (
           <CartItem cartItem={cartItem} key={cartItem.id} />
         ))}
+        <p>Total: {formatMoney(calculateTotalPrice(cartItems))}</p>
       </CartSliderStyles>
     );
   }

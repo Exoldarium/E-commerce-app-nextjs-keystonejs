@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import calculateTotalPrice from '../lib/calculateTotalPrice';
 import formatMoney from '../lib/formatMoney';
 import AddSingleCartItem from './AddSingleCartItem';
 import RemoveFromCart from './RemoveFromCart';
@@ -60,6 +61,7 @@ export default function Cart() {
         {cartItems.map((cartItem) => (
           <CartItem cartItem={cartItem} key={cartItem.id} />
         ))}
+        <p>Total: {formatMoney(calculateTotalPrice(cartItems))}</p>
       </CartStyles>
     );
   }
