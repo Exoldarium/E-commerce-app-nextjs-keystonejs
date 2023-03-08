@@ -23,7 +23,7 @@ __export(keystone_exports, {
   default: () => keystone_default
 });
 module.exports = __toCommonJS(keystone_exports);
-var import_config3 = require("dotenv/config");
+var import_config4 = require("dotenv/config");
 var import_core2 = require("@keystone-6/core");
 
 // schema.ts
@@ -476,9 +476,10 @@ async function removeFromCart(root, { productId }, context) {
 var removeFromCart_default = removeFromCart;
 
 // lib/stripe.ts
+var import_config3 = require("dotenv/config");
 var import_stripe = require("stripe");
 var stripeConfig = new import_stripe.Stripe(
-  "sk_test_51MSJjiEe8AR9e9n8nC8xfJgFte1Sulc5y4VDkL3idSTYcDG1B21KlzeiZeKo6wENdRPDqEHs65wuon1sbzgDAVDT00iMmM0w4I",
+  process.env.STRIPE_SECRET || "",
   {
     apiVersion: "2022-11-15"
   }
