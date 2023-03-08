@@ -1,11 +1,10 @@
 import { gql, useQuery } from '@apollo/client';
-import Head from 'next/head';
 import { productsPerPage } from '../config';
 import { useSetState } from '../lib/stateProvider';
 import CartMenu from './CartMenu';
 import Product from './Product';
+import { PRODUCTS_COUNT_QUERY } from './ProductsCount';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
-import { ProductsCountStyles } from './styles/ProductsCountStyles';
 import { ProductStyles } from './styles/ProductsStyles';
 
 export const ALL_PRODUCTS_QUERY = gql`
@@ -38,7 +37,6 @@ export default function Products({ page }) {
   const products = data?.products;
 
   console.log({ data, error, loading });
-  console.log(isCartOpen);
 
   if (loading) return <ErrorMessageStyles>Loading...</ErrorMessageStyles>;
   if (error)

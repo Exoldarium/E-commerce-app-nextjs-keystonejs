@@ -9,9 +9,11 @@ import {
   timestamp,
   select,
   integer,
+  virtual,
 } from '@keystone-6/core/fields';
 import { document } from '@keystone-6/fields-document';
 import type { Lists } from '.keystone/types';
+import { graphql } from '@graphql-ts/schema';
 
 export const cloudinary = {
   cloudName: process.env.CLOUDINARY_CLOUD_NAME!,
@@ -39,6 +41,7 @@ export const lists: Lists = {
           itemView: { fieldMode: 'read' },
         }
       }),
+      orders: relationship({ ref: 'Order.user', many: true }),
     },
   }),
   Product: list({
@@ -125,4 +128,48 @@ export const lists: Lists = {
       user: relationship({ ref: 'User.cart' }),
     }
   }),
+  Order: list({
+    access: allowAll,
+    fields: {
+      label: virtual({
+        field: graphql.field({
+          type: graphql.String,
+          resolve() {
+            return "Helloo"
+          }
+        })
+      }),
+      total: integer(),
+      items: relationship({ ref: 'OrderItem.order', many: true }),
+      user: relationship({ ref: 'User.orders' }),
+      charge: text(),
+    }
+  }),
+  OrderItem: list({
+    access: allowAll,
+    fields: {
+      name: text({
+        validation: {
+          isRequired: true,
+        }
+      }),
+      description: text({
+        ui: {
+          displayMode: 'textarea',
+        }
+      }),
+      photo: relationship({
+        ref: 'ProductImage',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['image', 'altText'],
+          inlineCreate: { fields: ['image', 'altText'] },
+          inlineEdit: { fields: ['image', 'altText'] },
+        }
+      }),
+      price: integer(),
+      quantity: integer(),
+      order: relationship({ ref: 'Order.items' }),
+    }
+  })
 };

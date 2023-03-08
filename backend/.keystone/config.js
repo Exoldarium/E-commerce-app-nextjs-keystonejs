@@ -32,6 +32,7 @@ var import_core = require("@keystone-6/core");
 var import_access = require("@keystone-6/core/access");
 var import_cloudinary = require("@keystone-6/cloudinary");
 var import_fields = require("@keystone-6/core/fields");
+var import_schema = require("@graphql-ts/schema");
 var cloudinary = {
   cloudName: process.env.CLOUDINARY_CLOUD_NAME,
   apiKey: process.env.CLOUDINARY_KEY,
@@ -56,7 +57,8 @@ var lists = {
           createView: { fieldMode: "hidden" },
           itemView: { fieldMode: "read" }
         }
-      })
+      }),
+      orders: (0, import_fields.relationship)({ ref: "Order.user", many: true })
     }
   }),
   Product: (0, import_core.list)({
@@ -138,6 +140,50 @@ var lists = {
       }),
       product: (0, import_fields.relationship)({ ref: "Product" }),
       user: (0, import_fields.relationship)({ ref: "User.cart" })
+    }
+  }),
+  Order: (0, import_core.list)({
+    access: import_access.allowAll,
+    fields: {
+      label: (0, import_fields.virtual)({
+        field: import_schema.graphql.field({
+          type: import_schema.graphql.String,
+          resolve() {
+            return "Helloo";
+          }
+        })
+      }),
+      total: (0, import_fields.integer)(),
+      items: (0, import_fields.relationship)({ ref: "OrderItem.order", many: true }),
+      user: (0, import_fields.relationship)({ ref: "User.orders" }),
+      charge: (0, import_fields.text)()
+    }
+  }),
+  OrderItem: (0, import_core.list)({
+    access: import_access.allowAll,
+    fields: {
+      name: (0, import_fields.text)({
+        validation: {
+          isRequired: true
+        }
+      }),
+      description: (0, import_fields.text)({
+        ui: {
+          displayMode: "textarea"
+        }
+      }),
+      photo: (0, import_fields.relationship)({
+        ref: "ProductImage",
+        ui: {
+          displayMode: "cards",
+          cardFields: ["image", "altText"],
+          inlineCreate: { fields: ["image", "altText"] },
+          inlineEdit: { fields: ["image", "altText"] }
+        }
+      }),
+      price: (0, import_fields.integer)(),
+      quantity: (0, import_fields.integer)(),
+      order: (0, import_fields.relationship)({ ref: "Order.items" })
     }
   })
 };
@@ -355,7 +401,7 @@ async function insertSeedData(prisma) {
 }
 
 // mutations/index.ts
-var import_schema = require("@graphql-tools/schema");
+var import_schema2 = require("@graphql-tools/schema");
 
 // mutations/addToCart.ts
 async function addToCart(root, { productId }, context) {
@@ -416,10 +462,10 @@ async function removeFromCart(root, { productId }, context) {
 var removeFromCart_default = removeFromCart;
 
 // mutations/index.ts
-var graphql = String.raw;
-var extendGraphqlSchema = (schema) => (0, import_schema.mergeSchemas)({
+var graphql2 = String.raw;
+var extendGraphqlSchema = (schema) => (0, import_schema2.mergeSchemas)({
   schemas: [schema],
-  typeDefs: graphql`
+  typeDefs: graphql2`
       type Mutation {
         addToCart(productId: ID): CartItem
         removeFromCart(productId: ID): CartItem
