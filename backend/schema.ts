@@ -14,6 +14,7 @@ import {
 import { document } from '@keystone-6/fields-document';
 import type { Lists } from '.keystone/types';
 import { graphql } from '@graphql-ts/schema';
+import formatMoney from './lib/formatMoney';
 
 export const cloudinary = {
   cloudName: process.env.CLOUDINARY_CLOUD_NAME!,
@@ -131,11 +132,13 @@ export const lists: Lists = {
   Order: list({
     access: allowAll,
     fields: {
+      // virtual fields allow us to query on the fly, here we query Order.total
       label: virtual({
         field: graphql.field({
           type: graphql.String,
-          resolve() {
-            return "Helloo"
+          // grabs the total amount from Order and formats it
+          resolve(item) {
+            return `${formatMoney(item.total as number)}`;
           }
         })
       }),

@@ -33,6 +33,20 @@ var import_access = require("@keystone-6/core/access");
 var import_cloudinary = require("@keystone-6/cloudinary");
 var import_fields = require("@keystone-6/core/fields");
 var import_schema = require("@graphql-ts/schema");
+
+// lib/formatMoney.ts
+function formatMoney(cents) {
+  const currency = {
+    style: "currency",
+    currency: "USD"
+  };
+  const amount = cents / 100;
+  const formatter = new Intl.NumberFormat("en-US", currency).format(amount);
+  return formatter;
+}
+var formatMoney_default = formatMoney;
+
+// schema.ts
 var cloudinary = {
   cloudName: process.env.CLOUDINARY_CLOUD_NAME,
   apiKey: process.env.CLOUDINARY_KEY,
@@ -148,8 +162,8 @@ var lists = {
       label: (0, import_fields.virtual)({
         field: import_schema.graphql.field({
           type: import_schema.graphql.String,
-          resolve() {
-            return "Helloo";
+          resolve(item) {
+            return `${formatMoney_default(item.total)}`;
           }
         })
       }),
