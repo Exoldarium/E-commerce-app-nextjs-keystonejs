@@ -4,6 +4,7 @@ import calculateTotalPrice from '../lib/calculateTotalPrice';
 import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
 import AddSingleCartItem from './AddSingleCartItem';
+import Checkout from './Checkout';
 import RemoveFromCart from './RemoveFromCart';
 import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { CartMenuPageStyles, CartSliderStyles } from './styles/CartStyles';
@@ -69,6 +70,7 @@ export default function CartMenu() {
           <CartItem cartItem={cartItem} key={cartItem.id} />
         ))}
         <p>Total: {formatMoney(calculateTotalPrice(cartItems))}</p>
+        <Checkout />
       </CartSliderStyles>
     );
   }
