@@ -1,8 +1,10 @@
+import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import calculateTotalPrice from '../lib/calculateTotalPrice';
 import formatMoney from '../lib/formatMoney';
 import AddSingleCartItem from './AddSingleCartItem';
+import Checkout from './Checkout';
 import RemoveFromCart from './RemoveFromCart';
 import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { CartPageStyles, CartStyles } from './styles/CartStyles';
@@ -52,6 +54,9 @@ export default function Cart() {
   if (user) {
     return (
       <CartStyles>
+        <Head>
+          <title>Add cart amount here</title>
+        </Head>
         {emptyCart && (
           <p>
             Your cart is empty!
@@ -62,6 +67,7 @@ export default function Cart() {
           <CartItem cartItem={cartItem} key={cartItem.id} />
         ))}
         <p>Total: {formatMoney(calculateTotalPrice(cartItems))}</p>
+        <Checkout />
       </CartStyles>
     );
   }

@@ -70,7 +70,6 @@ export default function CartMenu() {
           <CartItem cartItem={cartItem} key={cartItem.id} />
         ))}
         <p>Total: {formatMoney(calculateTotalPrice(cartItems))}</p>
-        <Checkout />
       </CartSliderStyles>
     );
   }

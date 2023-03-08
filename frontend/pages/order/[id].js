@@ -43,7 +43,7 @@ export default function SingleOrderPage({ query }) {
   return (
     <div>
       <Head>
-        <title>56 Gumpaste {order.id}</title>
+        <title>56 Sugar Gumpaste {order.id}</title>
       </Head>
     </div>
   );

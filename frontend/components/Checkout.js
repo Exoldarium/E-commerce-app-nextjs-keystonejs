@@ -22,6 +22,25 @@ const CheckoutFormStyles = styled.form`
   grid-gap: 1rem;
 `;
 
+const cardStyle = {
+  style: {
+    base: {
+      color: '#32325d',
+      fontFamily: 'Arial, sans-serif',
+      fontSmoothing: 'antialiased',
+      fontSize: '16px',
+      '::placeholder': {
+        color: '#32325d',
+      },
+    },
+    invalid: {
+      fontFamily: 'Arial, sans-serif',
+      color: '#fa755a',
+      iconColor: '#fa755a',
+    },
+  },
+};
+
 const CHECKOUT_MUTATION = gql`
   mutation CHECKOUT_MUTATION($token: String!) {
     checkout(token: $token) {
@@ -90,7 +109,7 @@ function CheckoutForm() {
     <CheckoutFormStyles onSubmit={handleSubmit}>
       {error && <p style={{ fontSize: 12 }}>{error.message}</p>}
       {checkoutMutationError && <p style={{ fontSize: 12 }}>{error.message}</p>}
-      <CardElement />
+      <CardElement options={cardStyle} />
       <button type="submit">Checkout</button>
     </CheckoutFormStyles>
   );
