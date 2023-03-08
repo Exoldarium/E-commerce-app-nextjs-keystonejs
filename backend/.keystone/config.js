@@ -461,6 +461,69 @@ async function removeFromCart(root, { productId }, context) {
 }
 var removeFromCart_default = removeFromCart;
 
+// lib/stripe.ts
+var import_stripe = require("stripe");
+var stripeConfig = new import_stripe.Stripe(
+  "sk_test_51MSJjiEe8AR9e9n8nC8xfJgFte1Sulc5y4VDkL3idSTYcDG1B21KlzeiZeKo6wENdRPDqEHs65wuon1sbzgDAVDT00iMmM0w4I",
+  {
+    apiVersion: "2022-11-15"
+  }
+);
+var stripe_default = stripeConfig;
+
+// mutations/checkout.ts
+async function checkout(root, { token }, context) {
+  const session2 = context.session;
+  if (!session2) {
+    throw new Error("Sorry you must be signed in to do this!");
+  }
+  const user = await context.query.User.findOne({
+    where: { id: session2.itemId },
+    query: "id name email cart { id quantity product { name price description id photo { id image { id publicUrlTransformed } } } }"
+  });
+  console.dir(user, { depth: null });
+  const cartItems = user.cart.filter((cartItem) => cartItem.product);
+  const amount = cartItems.reduce(function(tally, cartItem) {
+    return tally + cartItem.quantity * cartItem.product.price;
+  }, 0);
+  console.log(amount);
+  const charge = await stripe_default.paymentIntents.create({
+    amount,
+    currency: "USD",
+    confirm: true,
+    payment_method: token
+  }).catch(
+    (err) => {
+      console.log(err);
+      throw new Error(err.message);
+    }
+  );
+  console.log(charge);
+  const orderItems = cartItems.map((cartItem) => {
+    const orderItem = {
+      name: cartItem.product.name,
+      description: cartItem.product.description,
+      price: cartItem.product.price,
+      quantity: cartItem.quantity,
+      photo: { connect: { id: cartItem.product.photo.id } }
+    };
+    return orderItem;
+  });
+  const order = await context.db.Order.createOne({
+    data: {
+      total: charge.amount,
+      charge: charge.id,
+      items: { create: orderItems },
+      user: { connect: { id: session2.itemId } }
+    }
+  });
+  await context.query.CartItem.deleteMany({
+    where: user.cart.map((cartItem) => ({ id: cartItem.id }))
+  });
+  return order;
+}
+var checkout_default = checkout;
+
 // mutations/index.ts
 var graphql2 = String.raw;
 var extendGraphqlSchema = (schema) => (0, import_schema2.mergeSchemas)({
@@ -469,12 +532,14 @@ var extendGraphqlSchema = (schema) => (0, import_schema2.mergeSchemas)({
       type Mutation {
         addToCart(productId: ID): CartItem
         removeFromCart(productId: ID): CartItem
+        checkout(token: String!): Order
       }
     `,
   resolvers: {
     Mutation: {
       addToCart: addToCart_default,
-      removeFromCart: removeFromCart_default
+      removeFromCart: removeFromCart_default,
+      checkout: checkout_default
     }
   }
 });

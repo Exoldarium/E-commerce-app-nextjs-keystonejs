@@ -4,6 +4,7 @@
 type Mutation {
   addToCart(productId: ID): CartItem
   removeFromCart(productId: ID): CartItem
+  checkout(token: String!): Order
   createUser(data: UserCreateInput!): User
   createUsers(data: [UserCreateInput!]!): [User]
   updateUser(where: UserWhereUniqueInput!, data: UserUpdateInput!): User
