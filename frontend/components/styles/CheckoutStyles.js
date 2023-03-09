@@ -20,6 +20,10 @@ export const CheckoutItemStyles = styled.div`
     text-align: right;
     flex: 1;
   }
+  a:hover {
+    color: violet;
+    text-decoration: none;
+  }
   @media only screen and (max-width: 790px) {
     display: flex;
     flex-direction: row;
@@ -45,8 +49,15 @@ export const CheckoutStyles = styled.div`
   justify-content: center;
   width: 50vw;
   margin: 0 auto;
+  .errorParagraph {
+    height: 100vw;
+    text-align: left;
+  }
   p {
     text-align: right;
+  }
+  .total {
+    font-weight: bold;
   }
   @media only screen and (max-width: 790px) {
     width: 90vw;

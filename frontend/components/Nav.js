@@ -27,7 +27,7 @@ export default function Nav({ active, onClick }) {
       <>
         <NavStyles onClick={closeCart}>
           <Link href="/products">Products</Link>
-          <Link href="/orders">Orders</Link>
+          <Link href="/orders">Order History</Link>
           <Link href="/account">Account</Link>
           <button type="button" onClick={signout}>
             Sign Out
@@ -35,7 +35,7 @@ export default function Nav({ active, onClick }) {
         </NavStyles>
         <MobileNavStyles onClick={handleActive} active={active}>
           <Link href="/products">Products</Link>
-          <Link href="/orders">Orders</Link>
+          <Link href="/orders">Order History</Link>
           <Link href="/account">Account</Link>
           <button type="button" onClick={signout}>
             Sign Out

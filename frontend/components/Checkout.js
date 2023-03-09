@@ -100,7 +100,8 @@ function CheckoutForm() {
     console.log(order);
     // send user to the order page after succesfull checkout
     router.push({
-      href: `order/${order.data.checkout.id}`,
+      pathname: '/order/[id]',
+      query: { id: order.data.checkout.id },
     });
     closeCart();
     setLoading(false);

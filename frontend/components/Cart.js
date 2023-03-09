@@ -42,6 +42,8 @@ export default function Cart() {
   const user = useUser();
   const cartItems = user?.cart;
   const emptyCart = cartItems?.length === 0;
+  const oneItem = cartItems?.length <= 1;
+  const manyItems = cartItems?.length > 1;
 
   // if the user is logged in
   if (!user) {
@@ -55,7 +57,7 @@ export default function Cart() {
     return (
       <CartStyles>
         <Head>
-          <title>Add cart amount here</title>
+          <title>Cart | 56 Sugar Gumpaste</title>
         </Head>
         {emptyCart && (
           <p>
