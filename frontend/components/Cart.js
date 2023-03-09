@@ -67,7 +67,9 @@ export default function Cart() {
           <CartItem cartItem={cartItem} key={cartItem.id} />
         ))}
         <p>Total: {formatMoney(calculateTotalPrice(cartItems))}</p>
-        <Checkout />
+        <p>
+          <Link href="/checkout">Go to payment</Link>
+        </p>
       </CartStyles>
     );
   }

@@ -60,7 +60,7 @@ export default function CartMenu() {
         </button>
         <div>
           <p>
-            <Link href="/payment">Go to payment</Link>
+            <Link href="/checkout">Go to payment</Link>
           </p>
           <p>
             <Link href="/cart">Go to cart</Link>

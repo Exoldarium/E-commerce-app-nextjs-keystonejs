@@ -11,7 +11,7 @@ import nProgress from 'nprogress';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useSetState } from '../lib/stateProvider';
-import { USER_QUERY } from './User';
+import { USER_QUERY, useUser } from './User';
 
 const CheckoutFormStyles = styled.form`
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.04);
@@ -50,6 +50,8 @@ const CHECKOUT_MUTATION = gql`
       items {
         id
         name
+        quantity
+        price
       }
     }
   }
