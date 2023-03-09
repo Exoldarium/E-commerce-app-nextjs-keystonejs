@@ -66,12 +66,12 @@ function CheckoutForm() {
   const elements = useElements();
   const router = useRouter();
   const { closeCart } = useSetState();
-  const [checkout, { error: checkoutMutationError }] = useMutation(
-    CHECKOUT_MUTATION,
-    {
-      refetchQueries: [{ query: USER_QUERY }],
-    }
-  );
+  const [
+    checkout,
+    { error: checkoutMutationError, loading: checkoutMutationLoading },
+  ] = useMutation(CHECKOUT_MUTATION, {
+    refetchQueries: [{ query: USER_QUERY }],
+  });
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -109,6 +109,7 @@ function CheckoutForm() {
   }
 
   return (
+    // TODO add a loading indicator when user checks out
     <CheckoutFormStyles onSubmit={handleSubmit}>
       {error && <p style={{ fontSize: 12 }}>{error.message}</p>}
       {checkoutMutationError && <p style={{ fontSize: 12 }}>{error.message}</p>}
