@@ -531,6 +531,7 @@ type Order {
   itemsCount(where: OrderItemWhereInput! = {}): Int
   user: User
   charge: String
+  date: DateTime
 }
 
 input OrderWhereUniqueInput {
@@ -546,6 +547,7 @@ input OrderWhereInput {
   items: OrderItemManyRelationFilter
   user: UserWhereInput
   charge: StringFilter
+  date: DateTimeNullableFilter
 }
 
 input OrderItemManyRelationFilter {
@@ -558,6 +560,7 @@ input OrderOrderByInput {
   id: OrderDirection
   total: OrderDirection
   charge: OrderDirection
+  date: OrderDirection
 }
 
 input OrderUpdateInput {
@@ -565,6 +568,7 @@ input OrderUpdateInput {
   items: OrderItemRelateToManyForUpdateInput
   user: UserRelateToOneForUpdateInput
   charge: String
+  date: DateTime
 }
 
 input OrderItemRelateToManyForUpdateInput {
@@ -584,6 +588,7 @@ input OrderCreateInput {
   items: OrderItemRelateToManyForCreateInput
   user: UserRelateToOneForCreateInput
   charge: String
+  date: DateTime
 }
 
 input OrderItemRelateToManyForCreateInput {

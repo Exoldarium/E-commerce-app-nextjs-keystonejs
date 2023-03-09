@@ -146,6 +146,11 @@ export const lists: Lists = {
       items: relationship({ ref: 'OrderItem.order', many: true }),
       user: relationship({ ref: 'User.orders' }),
       charge: text(),
+      date: timestamp({
+        defaultValue: {
+          kind: 'now',
+        },
+      }),
     }
   }),
   OrderItem: list({

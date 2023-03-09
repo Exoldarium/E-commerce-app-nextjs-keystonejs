@@ -170,7 +170,12 @@ var lists = {
       total: (0, import_fields.integer)(),
       items: (0, import_fields.relationship)({ ref: "OrderItem.order", many: true }),
       user: (0, import_fields.relationship)({ ref: "User.orders" }),
-      charge: (0, import_fields.text)()
+      charge: (0, import_fields.text)(),
+      date: (0, import_fields.timestamp)({
+        defaultValue: {
+          kind: "now"
+        }
+      })
     }
   }),
   OrderItem: (0, import_core.list)({

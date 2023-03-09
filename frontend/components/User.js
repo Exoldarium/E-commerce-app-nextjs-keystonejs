@@ -7,6 +7,17 @@ export const USER_QUERY = gql`
         id
         name
         email
+        orders {
+          id
+          charge
+          date
+          total
+          items {
+            id
+            quantity
+            price
+          }
+        }
         cart {
           id
           quantity

@@ -41,15 +41,15 @@ export default function SingleOrderPage({ query }) {
     return <ErrorMessageStyles>Error: {error.message}</ErrorMessageStyles>;
 
   const { order } = data;
-  console.log(order);
-  console.log(query);
+
   return (
     <>
       <Head>
         <title>56 Sugar Gumpaste</title>
       </Head>
       <OrderStyles>
-        <h1>Order charge id: {order.charge}</h1>
+        <h1>Order sucessfull!</h1>
+        <h2>Order reference number: {order.charge}</h2>
         {order.items.map((item) => (
           <div className="orderItems">
             <img
