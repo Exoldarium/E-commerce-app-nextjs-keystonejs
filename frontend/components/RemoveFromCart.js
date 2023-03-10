@@ -26,7 +26,7 @@ export default function RemoveFromCart({ id }) {
 
   return (
     <CartButtonStyles type="button" onClick={removeFromCart}>
-      Remove
+      &times;
     </CartButtonStyles>
   );
 }

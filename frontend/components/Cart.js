@@ -9,6 +9,8 @@ import RemoveFromCart from './RemoveFromCart';
 import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { CartPageStyles, CartStyles } from './styles/CartStyles';
 import { useUser } from './User';
+// TODO
+// add stock and a message if the request is higher than stock (max amount of products available)
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
@@ -33,8 +35,8 @@ export function CartItem({ cartItem }) {
           </p>
           <AddSingleCartItem id={product.id} />
         </div>
-        <RemoveFromCart id={cartItem.id} />
       </div>
+      <RemoveFromCart id={cartItem.id} />
     </CartPageStyles>
   );
 }

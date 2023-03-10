@@ -1,14 +1,15 @@
 import Link from 'next/link';
-import { useState } from 'react';
 import calculateTotalPrice from '../lib/calculateTotalPrice';
 import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
 import AddSingleCartItem from './AddSingleCartItem';
-import Checkout from './Checkout';
 import RemoveFromCart from './RemoveFromCart';
 import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { CartMenuPageStyles, CartSliderStyles } from './styles/CartStyles';
 import { useUser } from './User';
+// TODO
+// change input for cart amount, should be a paragraph
+// add stock and a message if the request is higher than stock (max amount of products available)
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
@@ -39,8 +40,8 @@ export function CartItem({ cartItem }) {
           <AddSingleCartItem id={product.id} />
         </div>
         <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
-        <RemoveFromCart id={cartItem.id} />
       </div>
+      <RemoveFromCart id={cartItem.id} />
     </CartMenuPageStyles>
   );
 }

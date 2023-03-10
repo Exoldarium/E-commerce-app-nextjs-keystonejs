@@ -25,6 +25,7 @@ export const USER_QUERY = gql`
             id
             name
             price
+            stock
             photo {
               image {
                 publicUrlTransformed

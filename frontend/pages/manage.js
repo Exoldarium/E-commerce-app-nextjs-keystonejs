@@ -3,6 +3,6 @@
 // the page should display all products that a user currently has
 // the page should have update, create and delete options for products
 
-export default function ManagePage() {
+export default function ManageProductsPage() {
   return <div>Heloooo!</div>;
 }
