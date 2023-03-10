@@ -8,7 +8,8 @@ export default function OrdersPage() {
   const user = useUser();
   const orders = user?.orders;
   console.log(orders);
-  // add a dropdown to display items
+  // TODO add a dropdown to display items
+  // TODO add pagination
   if (user) {
     return (
       <OrderHistoryStyles>

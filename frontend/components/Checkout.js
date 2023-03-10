@@ -9,37 +9,9 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useRouter } from 'next/router';
 import nProgress from 'nprogress';
 import { useState } from 'react';
-import styled from 'styled-components';
 import { useSetState } from '../lib/stateProvider';
+import { cardStyles, CheckoutFormStyles } from './styles/FormStyles';
 import { USER_QUERY, useUser } from './User';
-
-const CheckoutFormStyles = styled.form`
-  box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 5px;
-  padding: 1rem;
-  display: grid;
-  grid-gap: 1rem;
-`;
-
-const cardStyle = {
-  style: {
-    base: {
-      color: '#32325d',
-      fontFamily: 'Arial, sans-serif',
-      fontSmoothing: 'antialiased',
-      fontSize: '16px',
-      '::placeholder': {
-        color: '#32325d',
-      },
-    },
-    invalid: {
-      fontFamily: 'Arial, sans-serif',
-      color: '#fa755a',
-      iconColor: '#fa755a',
-    },
-  },
-};
 
 const CHECKOUT_MUTATION = gql`
   mutation CHECKOUT_MUTATION($token: String!) {
@@ -113,7 +85,7 @@ function CheckoutForm() {
     <CheckoutFormStyles onSubmit={handleSubmit}>
       {error && <p style={{ fontSize: 12 }}>{error.message}</p>}
       {checkoutMutationError && <p style={{ fontSize: 12 }}>{error.message}</p>}
-      <CardElement options={cardStyle} />
+      <CardElement options={cardStyles} />
       <button type="submit">Checkout</button>
     </CheckoutFormStyles>
   );

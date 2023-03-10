@@ -17,6 +17,21 @@ export const HeaderStyles = styled.header`
   padding-right: 50px;
   border-bottom: 1px solid black;
   z-index: 2;
+  .cartAmount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 3rem;
+    text-align: center;
+    border-radius: 20px;
+    background: violet;
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    color: black;
+    margin: 0 auto;
+  }
   @media only screen and (max-width: 790px) {
     max-height: 6.5rem;
     padding: 5px;
@@ -25,6 +40,21 @@ export const HeaderStyles = styled.header`
     }
     .mobileNavMenu {
       visibility: show;
+    }
+    .cartAmount {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 1.5rem;
+      text-align: center;
+      border-radius: 20px;
+      background: violet;
+      width: 20px;
+      height: 20px;
+      font-size: 15px;
+      color: black;
+      margin: 0 auto;
     }
   }
 `;

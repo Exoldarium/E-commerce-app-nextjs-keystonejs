@@ -12,7 +12,7 @@ import { useUser } from './User';
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
-  const [isAmount, setIsAmount] = useState('');
+  const { setAmount } = useSetState();
 
   return (
     <CartMenuPageStyles>
@@ -33,7 +33,7 @@ export function CartItem({ cartItem }) {
             name="number"
             min="1"
             value={cartItem.quantity}
-            onChange={() => setIsAmount(cartItem.quantity)}
+            onChange={() => setAmount(cartItem.quantity)}
             inputMode="numeric"
           />
           <AddSingleCartItem id={product.id} />

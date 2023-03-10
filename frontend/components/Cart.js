@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 import calculateTotalPrice from '../lib/calculateTotalPrice';
 import formatMoney from '../lib/formatMoney';
+import { useSetState } from '../lib/stateProvider';
 import AddSingleCartItem from './AddSingleCartItem';
-import Checkout from './Checkout';
 import RemoveFromCart from './RemoveFromCart';
 import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { CartPageStyles, CartStyles } from './styles/CartStyles';
@@ -12,7 +12,8 @@ import { useUser } from './User';
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
-  const [isAmount, setIsAmount] = useState('');
+  // const [isAmount, setIsAmount] = useState('');
+  const { setAmount } = useSetState();
 
   return (
     <CartPageStyles>
@@ -25,7 +26,7 @@ export function CartItem({ cartItem }) {
         <div className="quantityDiv">
           <RemoveSingleCartItem id={product.id} quantity={cartItem.quantity} />
           <p
-            onChange={() => setIsAmount(cartItem.quantity)}
+            onChange={() => setAmount(cartItem.quantity)}
             className="quantityParagraph"
           >
             {cartItem.quantity}
@@ -42,10 +43,8 @@ export default function Cart() {
   const user = useUser();
   const cartItems = user?.cart;
   const emptyCart = cartItems?.length === 0;
-  const oneItem = cartItems?.length <= 1;
-  const manyItems = cartItems?.length > 1;
 
-  // if the user is logged in
+  // if there's no user
   if (!user) {
     <CartStyles>
       <p>
@@ -53,6 +52,7 @@ export default function Cart() {
       </p>
     </CartStyles>;
   }
+  // if the user is logged in
   if (user) {
     return (
       <CartStyles>
