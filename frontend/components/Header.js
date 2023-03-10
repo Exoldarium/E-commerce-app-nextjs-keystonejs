@@ -11,11 +11,28 @@ import { useUser } from './User';
 export default function Header() {
   const user = useUser();
   const cartItems = user?.cart;
-  const cartNotEmpty = cartItems.length >= 1;
-  const cartEmpty = cartItems.length < 1;
+  const cartNotEmpty = cartItems?.length >= 1;
+  const cartEmpty = cartItems?.length < 1;
   const { isMenuActive, toggleMenu, closeCart } = useSetState();
 
-  if (user || !user) {
+  if (!user) {
+    return (
+      <HeaderStyles>
+        <LogoStyles onClick={closeCart}>
+          <Link href="/products">It's a LOGO</Link>
+        </LogoStyles>
+        <Search />
+        <Link href="/cart">Cart</Link>
+        <Nav active={isMenuActive} onClick={toggleMenu} />
+        {/* button visible only under 790px */}
+        <MobileNavButtonStyles type="button" onClick={toggleMenu}>
+          Click
+        </MobileNavButtonStyles>
+      </HeaderStyles>
+    );
+  }
+
+  if (user) {
     return (
       <HeaderStyles>
         <LogoStyles onClick={closeCart}>
@@ -33,7 +50,6 @@ export default function Header() {
           </Link>
         )}
         {cartEmpty && <Link href="/cart">Cart</Link>}
-        {/* <CartMenu /> */}
         <Nav active={isMenuActive} onClick={toggleMenu} />
         {/* button visible only under 790px */}
         <MobileNavButtonStyles type="button" onClick={toggleMenu}>
