@@ -7,6 +7,16 @@ export const USER_QUERY = gql`
         id
         name
         email
+        products {
+          id
+          name
+          description
+          photo {
+            image {
+              publicUrlTransformed
+            }
+          }
+        }
         orders {
           id
           charge
