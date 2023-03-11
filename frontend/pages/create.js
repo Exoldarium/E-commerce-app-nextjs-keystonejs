@@ -1,3 +1,5 @@
+import CreateProduct from '../components/CreateProduct';
+
 export default function CreateProductPage() {
-  return <div>Helooo</div>;
+  return <CreateProduct />;
 }
