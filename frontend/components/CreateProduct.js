@@ -1,5 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import useForm from '../lib/useForm';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { FormStyles } from './styles/FormStyles';
@@ -44,11 +44,12 @@ export default function CreateProduct() {
       variables: inputs,
     }
   );
+  const router = useRouter();
 
   async function handleSubmit(e) {
     e.preventDefault();
     const res = await createProduct().catch((err) => console.error(err));
-    Router.push({
+    router.push({
       pathname: `/product/${res?.data?.createProduct?.id}`,
     });
   }
