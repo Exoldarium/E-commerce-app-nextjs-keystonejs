@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useSetState } from '../lib/stateProvider';
 import { MobileNavStyles, NavStyles } from './styles/NavStyles';
 import { useUser, USER_QUERY } from './User';
@@ -16,6 +17,12 @@ export default function Nav({ active, onClick }) {
     refetchQueries: [{ query: USER_QUERY }],
   });
   const user = useUser();
+  const router = useRouter();
+
+  function handleSignOut() {
+    signout();
+    router.push('/products');
+  }
 
   function handleActive() {
     onClick(!active);
@@ -30,7 +37,7 @@ export default function Nav({ active, onClick }) {
           <Link href="/orders">Order History</Link>
           <Link href="/account">Account</Link>
           <Link href="/manage">Manage</Link>
-          <button type="button" onClick={signout}>
+          <button type="button" onClick={handleSignOut}>
             Sign Out
           </button>
         </NavStyles>
@@ -38,7 +45,7 @@ export default function Nav({ active, onClick }) {
           <Link href="/products">Products</Link>
           <Link href="/orders">Order History</Link>
           <Link href="/account">Account</Link>
-          <button type="button" onClick={signout}>
+          <button type="button" onClick={handleSignOut}>
             Sign Out
           </button>
         </MobileNavStyles>
