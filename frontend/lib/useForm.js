@@ -1,7 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function useForm(initialState = {}) {
   const [inputs, setInputs] = useState(initialState);
+  const initialValues = Object.values(initialState).join('');
+
+  // in order for the values to be present on page reload we have to pass our initial values through useEffect
+  // so that they are not dependent on component render
+  useEffect(() => {
+    setInputs(initialState);
+  }, [initialValues]);
+  console.log(initialValues);
 
   function handleInputs(e) {
     let { name, value, type, files } = e.target;

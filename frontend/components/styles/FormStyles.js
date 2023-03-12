@@ -9,6 +9,11 @@ export const FormStyles = styled.form`
     display: flex;
     flex-direction: column;
   }
+  .productImage {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
 `;
 
 export const CheckoutFormStyles = styled.form`

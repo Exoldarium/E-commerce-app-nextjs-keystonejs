@@ -8,6 +8,10 @@ import { HeaderStyles } from './styles/HeaderStyles';
 import { LogoStyles } from './styles/LogoStyles';
 import { useUser } from './User';
 
+// TODO
+// move all the links in the nav and header to a dropdown
+// add account page where user can update account info
+
 export default function Header() {
   const user = useUser();
   const cartItems = user?.cart;

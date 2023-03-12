@@ -7,8 +7,6 @@ import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { OneProductStyles } from './styles/OneProductStyles';
 import { useUser } from './User';
 
-// ADD: add to cart button
-
 export const ONE_PRODUCT_QUERY = gql`
   query ONE_PRODUCT_QUERY($id: ID!) {
     product(where: { id: $id }) {
@@ -16,6 +14,7 @@ export const ONE_PRODUCT_QUERY = gql`
       name
       description
       price
+      stock
       photo {
         id
         image {

@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { ManagePageStyles } from './styles/ManagePageStyles';
+import UpdateProduct from './UpdateProduct';
 import { useUser } from './User';
 
 export default function ManageProducts() {
@@ -22,9 +24,23 @@ export default function ManageProducts() {
               alt={product.description}
             />
             <p>{product.name}</p>
+            <Link
+              href={{
+                pathname: 'update',
+                query: { id: product.id },
+              }}
+            >
+              Update Product
+            </Link>
           </div>
         ))}
       </ManagePageStyles>
     );
+  }
+  if (!user) {
+    <ErrorMessageStyles>
+      You don't have permission to view this page.
+      <Link href="/products">Click here to go back to home page</Link>;
+    </ErrorMessageStyles>;
   }
 }
