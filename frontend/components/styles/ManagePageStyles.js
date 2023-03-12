@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+// TODO
+// add styling for mobile
+
 export const ManagePageStyles = styled.div`
   padding-top: 25%;
   padding-bottom: 25%;
