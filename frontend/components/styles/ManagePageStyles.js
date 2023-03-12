@@ -9,6 +9,9 @@ export const ManagePageStyles = styled.div`
   justify-content: center;
   width: 50vw;
   margin: 0 auto;
+  .createProductLink {
+    width: fit-content;
+  }
   div {
     display: flex;
     flex-direction: row;

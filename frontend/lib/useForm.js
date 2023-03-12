@@ -9,7 +9,6 @@ export default function useForm(initialState = {}) {
   useEffect(() => {
     setInputs(initialState);
   }, [initialValues]);
-  console.log(initialValues);
 
   function handleInputs(e) {
     let { name, value, type, files } = e.target;

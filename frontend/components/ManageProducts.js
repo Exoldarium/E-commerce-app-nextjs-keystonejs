@@ -1,12 +1,13 @@
 import Link from 'next/link';
+import DeleteProduct from './DeleteProduct';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { ManagePageStyles } from './styles/ManagePageStyles';
-import UpdateProduct from './UpdateProduct';
 import { useUser } from './User';
 
 export default function ManageProducts() {
   const user = useUser();
   const products = user?.products;
+
   console.log(products);
   if (user) {
     return (
@@ -16,7 +17,9 @@ export default function ManageProducts() {
           <p className="date">Date</p>
           <p className="total">Total Price</p>
         </div> */}
-        <Link href="/create">Create new product</Link>
+        <Link href="/create">
+          <a className="createProductLink">Create new product</a>
+        </Link>
         {products.map((product) => (
           <div key={product.id}>
             <img
@@ -32,6 +35,7 @@ export default function ManageProducts() {
             >
               Update Product
             </Link>
+            <DeleteProduct id={product.id} />
           </div>
         ))}
       </ManagePageStyles>
