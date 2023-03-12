@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+// TODO
+// add mobile styling for update and create products
+
 export const FooterStyles = styled.footer`
   z-index: -1;
   display: flex;

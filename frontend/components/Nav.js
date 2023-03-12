@@ -45,6 +45,7 @@ export default function Nav({ active, onClick }) {
           <Link href="/products">Products</Link>
           <Link href="/orders">Order History</Link>
           <Link href="/account">Account</Link>
+          <Link href="/manage">Manage</Link>
           <button type="button" onClick={handleSignOut}>
             Sign Out
           </button>

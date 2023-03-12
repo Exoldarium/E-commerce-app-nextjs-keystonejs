@@ -20,7 +20,7 @@ export default function OrdersPage() {
         </div>
         {orders.map((order) => (
           <div key={order.id}>
-            <p>{order.charge}</p>
+            <p className="chargeP">{order.charge}</p>
             <p>{convertDate(order.date)}</p>
             <p>{formatMoney(order.total)}</p>
           </div>

@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+// TODO
+// add styling for mobile
+
 export const OrderStyles = styled.div`
   padding-top: 25%;
   padding-bottom: 25%;
@@ -79,6 +82,14 @@ export const OrderHistoryStyles = styled.div`
     p {
       text-align: right;
       flex: 1;
+    }
+  }
+  @media only screen and (max-width: 790px) {
+    width: 100vw;
+    div {
+      display: flex;
+      padding: 1rem;
+      width: 100vw;
     }
   }
 `;
