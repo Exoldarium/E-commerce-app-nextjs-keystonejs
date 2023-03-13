@@ -45,7 +45,7 @@ export default function SingleOrderPage({ query }) {
   return (
     <>
       <Head>
-        <title>56 Sugar Gumpaste</title>
+        <title>Order | Showing your order</title>
       </Head>
       <OrderStyles>
         <h1>Order sucessfull!</h1>

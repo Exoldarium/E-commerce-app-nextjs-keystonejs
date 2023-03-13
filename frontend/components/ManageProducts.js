@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Link from 'next/link';
 import DeleteProduct from './DeleteProduct';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
@@ -7,16 +8,18 @@ import { useUser } from './User';
 export default function ManageProducts() {
   const user = useUser();
   const products = user?.products;
+  const productsLength = products?.length <= 1;
 
   console.log(products);
   if (user) {
     return (
       <ManagePageStyles>
-        {/* <div className="orderInfo">
-          <p className="ref">Name</p>
-          <p className="date">Date</p>
-          <p className="total">Total Price</p>
-        </div> */}
+        <Head>
+          <title>Manage | Showing {products?.length} items</title>
+          {productsLength && (
+            <title>Manage | Showing {products?.length} item</title>
+          )}
+        </Head>
         <Link href="/create">
           <a className="createProductLink">Create new product</a>
         </Link>

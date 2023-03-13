@@ -1,4 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
+import Head from 'next/head';
 import { OrderHistoryStyles } from '../components/styles/OrderStyles';
 import { useUser } from '../components/User';
 import { ordersPerPage } from '../config';
@@ -30,10 +31,17 @@ export default function OrdersPage() {
     },
   });
   const orders = data?.orders;
+  const orderLength = orders.length <= 1;
   // TODO add a dropdown to display items
   if (user) {
     return (
       <OrderHistoryStyles>
+        <Head>
+          <title>Orders | Showing {orders?.length} orders</title>
+          {orderLength && (
+            <title>Orders | Showing {orders?.length} order</title>
+          )}
+        </Head>
         <div className="orderInfo">
           <p className="ref">Reference number</p>
           <p className="date">Date</p>
