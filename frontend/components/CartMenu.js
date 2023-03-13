@@ -14,6 +14,7 @@ import { useUser } from './User';
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
   const { setAmount } = useSetState();
+  const maxAmount = cartItem.quantity >= product.stock;
 
   return (
     <CartMenuPageStyles>
@@ -37,9 +38,16 @@ export function CartItem({ cartItem }) {
             onChange={() => setAmount(cartItem.quantity)}
             inputMode="numeric"
           />
-          <AddSingleCartItem id={product.id} />
+          <AddSingleCartItem
+            id={product.id}
+            stock={product.stock}
+            quantity={cartItem.quantity}
+          />
         </div>
         <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
+        <div className="pdiv">
+          {maxAmount && <p className="maxAmountP">Max amount available</p>}
+        </div>
       </div>
       <RemoveFromCart id={cartItem.id} />
     </CartMenuPageStyles>

@@ -97,6 +97,13 @@ export const CartMenuPageStyles = styled.div`
   .removeFromCartMenu {
     height: 2vh;
   }
+  .maxAmountP {
+    color: red;
+    font-size: 10px;
+  }
+  .pdiv {
+    height: 1px;
+  }
   @media only screen and (max-width: 790px) {
     display: none;
   }
@@ -117,11 +124,12 @@ export const CartPageStyles = styled.div`
   }
   h1 {
     flex: 1;
-    cursor: pointer;
     padding-left: 2rem;
   }
-  h1:hover {
+  a:hover {
     color: violet;
+    cursor: pointer;
+    text-decoration: none;
   }
   img {
     width: 150px;
@@ -150,6 +158,14 @@ export const CartPageStyles = styled.div`
   .removeFromCart {
     height: 30px;
     width: 70px;
+  }
+  .maxAmountP {
+    color: red;
+    font-size: 10px;
+    margin: 0 auto;
+  }
+  .pdiv {
+    height: 60px;
   }
   @media only screen and (max-width: 790px) {
     flex-direction: column;

@@ -5,7 +5,7 @@ import { USER_QUERY } from './User';
 // TODO
 // add stock prop here and disable the button if the product amount requested is higher than stock
 
-export default function AddSingleCartItem({ id }) {
+export default function AddSingleCartItem({ id, stock, quantity }) {
   const [addToCart, { data, loading, error }] = useMutation(
     ADD_TO_CART_MUTATION,
     {
@@ -17,7 +17,11 @@ export default function AddSingleCartItem({ id }) {
   );
 
   return (
-    <CartButtonStyles type="button" onClick={addToCart}>
+    <CartButtonStyles
+      type="button"
+      onClick={addToCart}
+      aria-disabled={quantity >= stock}
+    >
       +
     </CartButtonStyles>
   );
