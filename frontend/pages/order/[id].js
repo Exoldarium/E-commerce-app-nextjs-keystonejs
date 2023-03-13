@@ -51,7 +51,7 @@ export default function SingleOrderPage({ query }) {
         <h1>Order sucessfull!</h1>
         <h2>Order reference number: {order.charge}</h2>
         {order.items.map((item) => (
-          <div className="orderItems">
+          <div className="orderItems" key={item.id}>
             <img
               src={item.photo.image.publicUrlTransformed}
               alt={item.description}

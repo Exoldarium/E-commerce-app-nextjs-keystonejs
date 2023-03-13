@@ -87,6 +87,11 @@ export const OrderHistoryStyles = styled.div`
       flex: 1;
     }
   }
+  button {
+    width: fit-content;
+    align-self: center;
+    margin: 1rem;
+  }
   @media only screen and (max-width: 790px) {
     width: 80vw;
     .orderInfo {

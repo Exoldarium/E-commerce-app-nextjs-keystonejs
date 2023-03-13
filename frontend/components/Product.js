@@ -15,7 +15,6 @@ export default function Product({ product }) {
         <img
           src={product.photo?.image?.publicUrlTransformed}
           alt={product.description}
-          key={product.id}
         />
       </Link>
       <p>{product.name}</p>

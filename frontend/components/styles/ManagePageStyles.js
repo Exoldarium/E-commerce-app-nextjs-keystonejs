@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ManagePageStyles = styled.div`
   padding-top: 25%;
-  padding-bottom: 25%;
+  /* padding-bottom: 25%; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -33,8 +33,8 @@ export const ManagePageStyles = styled.div`
     margin: 0 auto;
     display: flex;
     align-items: center;
-  }
-  div {
-    width: 80vw;
+    div {
+      width: 80vw;
+    }
   }
 `;

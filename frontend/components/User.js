@@ -17,17 +17,6 @@ export const USER_QUERY = gql`
             }
           }
         }
-        orders {
-          id
-          charge
-          date
-          total
-          items {
-            id
-            quantity
-            price
-          }
-        }
         cart {
           id
           quantity
