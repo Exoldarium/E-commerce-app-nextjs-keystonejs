@@ -34,6 +34,7 @@ export const OneProductStyles = styled.div`
     padding-top: 30%;
     grid-template-columns: repeat(1, 1fr);
     justify-content: center;
+    height: 100vh;
     img {
       justify-self: center;
       width: 300px;

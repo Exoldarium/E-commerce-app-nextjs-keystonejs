@@ -11,4 +11,5 @@ export const FooterStyles = styled.footer`
   margin: 0 auto;
   position: relative;
   bottom: 0;
+  margin-top: 10rem;
 `;
