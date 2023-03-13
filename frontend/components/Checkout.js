@@ -54,7 +54,6 @@ function CheckoutForm() {
       type: 'card',
       card: elements.getElement(CardElement),
     });
-    console.log(paymentMethod, error);
     // stop function if there's an error
     if (error) {
       setError(error);
@@ -69,7 +68,6 @@ function CheckoutForm() {
         token: paymentMethod.id,
       },
     });
-    console.log(order);
     // send user to the order page after succesfull checkout
     router.push({
       pathname: '/order/[id]',
@@ -81,7 +79,6 @@ function CheckoutForm() {
   }
 
   return (
-    // TODO add a loading indicator when user checks out
     <CheckoutFormStyles onSubmit={handleSubmit}>
       {error && <p style={{ fontSize: 12 }}>{error.message}</p>}
       {checkoutMutationError && <p style={{ fontSize: 12 }}>{error.message}</p>}

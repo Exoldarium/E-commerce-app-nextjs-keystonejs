@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useState } from 'react';
 import calculateTotalPrice from '../lib/calculateTotalPrice';
 import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
@@ -7,13 +8,10 @@ import RemoveFromCart from './RemoveFromCart';
 import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { CartMenuPageStyles, CartSliderStyles } from './styles/CartStyles';
 import { useUser } from './User';
-// TODO
-// change input for cart amount, should be a paragraph
-// add stock and a message if the request is higher than stock (max amount of products available)
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
-  const { setAmount } = useSetState();
+  const [isAmount, setIsAmount] = useState('');
   const maxAmount = cartItem.quantity >= product.stock;
 
   return (
@@ -30,14 +28,12 @@ export function CartItem({ cartItem }) {
       <div className="sliderStyles">
         <div>
           <RemoveSingleCartItem id={product.id} quantity={cartItem.quantity} />
-          <input
-            type="text"
-            name="number"
-            min="1"
-            value={cartItem.quantity}
-            onChange={() => setAmount(cartItem.quantity)}
-            inputMode="numeric"
-          />
+          <p
+            onChange={() => setIsAmount(cartItem.quantity)}
+            className="quantityParagraph"
+          >
+            {cartItem.quantity}
+          </p>
           <AddSingleCartItem
             id={product.id}
             stock={product.stock}

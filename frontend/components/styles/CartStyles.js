@@ -67,6 +67,17 @@ export const CartMenuPageStyles = styled.div`
     div {
       display: flex;
       align-items: center;
+      .quantityParagraph {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 3vh;
+        width: 3vw;
+        text-align: center;
+        font-size: 2rem;
+        margin: 0;
+        border: 1px solid black;
+      }
     }
   }
   .imageInfo {

@@ -3,14 +3,11 @@ import Link from 'next/link';
 import { useState } from 'react';
 import calculateTotalPrice from '../lib/calculateTotalPrice';
 import formatMoney from '../lib/formatMoney';
-import { useSetState } from '../lib/stateProvider';
 import AddSingleCartItem from './AddSingleCartItem';
 import RemoveFromCart from './RemoveFromCart';
 import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { CartPageStyles, CartStyles } from './styles/CartStyles';
 import { useUser } from './User';
-// TODO
-// add stock and a message if the request is higher than stock (max amount of products available)
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
