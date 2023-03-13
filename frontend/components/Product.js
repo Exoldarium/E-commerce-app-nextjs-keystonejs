@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import formatMoney from '../lib/formatMoney';
 import AddToCart from './AddToCart';
 import { ProductStyles } from './styles/ProductStyles';
 import { useUser } from './User';
@@ -17,7 +18,8 @@ export default function Product({ product }) {
           key={product.id}
         />
       </Link>
-      <p key={product.id}>{product.name}</p>
+      <p>{product.name}</p>
+      <p>{formatMoney(product.price)}</p>
       {user && <AddToCart id={product.id} />}
       {!user && (
         <button type="button" onClick={() => router.push('/signin')}>
