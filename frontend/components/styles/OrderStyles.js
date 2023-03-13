@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-// TODO
-// add styling for mobile
-
 export const OrderStyles = styled.div`
   padding-top: 25%;
   padding-bottom: 25%;
@@ -47,6 +44,12 @@ export const OrderStyles = styled.div`
       flex: 1;
     }
   }
+  @media only screen and (max-width: 790px) {
+    width: 80vw;
+    .orderItems {
+      width: 80vw;
+    }
+  }
 `;
 
 export const OrderHistoryStyles = styled.div`
@@ -85,11 +88,27 @@ export const OrderHistoryStyles = styled.div`
     }
   }
   @media only screen and (max-width: 790px) {
-    width: 100vw;
+    width: 80vw;
+    .orderInfo {
+      width: 80vw;
+      display: flex;
+      P {
+        font-size: 3.5vw;
+      }
+      .date {
+        text-align: right;
+      }
+    }
     div {
       display: flex;
-      padding: 1rem;
-      width: 100vw;
+      width: 80vw;
+      p {
+        flex: 1;
+        font-size: 3vw;
+      }
+    }
+    .chargeP {
+      font-size: 2.5vw;
     }
   }
 `;

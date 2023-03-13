@@ -14,6 +14,9 @@ export const FormStyles = styled.form`
     height: 50px;
     object-fit: cover;
   }
+  @media only screen and (max-width: 790px) {
+    max-width: 80vw;
+  }
 `;
 
 export const CheckoutFormStyles = styled.form`

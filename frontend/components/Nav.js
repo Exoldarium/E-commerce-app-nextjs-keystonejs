@@ -61,7 +61,7 @@ export default function Nav({ active, onClick }) {
           <Link href="/products">Products</Link>
           <Link href="/signin">Sign In</Link>
         </NavStyles>
-        <MobileNavStyles onClick={handleActive}>
+        <MobileNavStyles onClick={handleActive} active={active}>
           <Link href="/products">Products</Link>
           <Link href="/signin">Sign In</Link>
         </MobileNavStyles>

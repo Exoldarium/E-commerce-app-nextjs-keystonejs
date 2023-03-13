@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { OrderHistoryStyles } from '../components/styles/OrderStyles';
 import { useUser } from '../components/User';
 import { convertDate } from '../lib/convertDate';

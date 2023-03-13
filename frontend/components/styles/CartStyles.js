@@ -184,6 +184,9 @@ export const CartPageStyles = styled.div`
       text-align: center;
       font-size: 2rem;
       padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     button {
       height: 5vh;

@@ -9,6 +9,9 @@ import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { CartPageStyles, CartStyles } from './styles/CartStyles';
 import { useUser } from './User';
 
+// TODO
+// delete from cart button should be in the corner
+
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
   const [isAmount, setIsAmount] = useState('');

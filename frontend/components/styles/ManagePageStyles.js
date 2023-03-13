@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-// TODO
-// add styling for mobile
-
 export const ManagePageStyles = styled.div`
   padding-top: 25%;
   padding-bottom: 25%;
@@ -30,5 +27,14 @@ export const ManagePageStyles = styled.div`
       height: 50px;
       object-fit: cover;
     }
+  }
+  @media only screen and (max-width: 790px) {
+    width: 100vw;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+  }
+  div {
+    width: 80vw;
   }
 `;
