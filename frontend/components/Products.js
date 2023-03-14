@@ -8,7 +8,7 @@ import { ProductStyles } from './styles/ProductsStyles';
 
 export const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY($take: Int, $skip: Int! = 0) {
-    allProducts: products(take: $take, skip: $skip) {
+    products(take: $take, skip: $skip) {
       id
       name
       description
@@ -31,7 +31,7 @@ export default function Products({ page }) {
       skip: page * productsPerPage - productsPerPage,
     },
   });
-  const products = data?.allProducts;
+  const products = data?.products;
 
   console.log({ data, error, loading });
 

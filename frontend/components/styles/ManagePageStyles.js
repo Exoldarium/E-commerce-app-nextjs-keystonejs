@@ -28,6 +28,11 @@ export const ManagePageStyles = styled.div`
       object-fit: cover;
     }
   }
+  button {
+    width: fit-content;
+    align-self: center;
+    margin: 1rem;
+  }
   @media only screen and (max-width: 790px) {
     width: 100vw;
     margin: 0 auto;

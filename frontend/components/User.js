@@ -7,17 +7,6 @@ export const USER_QUERY = gql`
         id
         name
         email
-        productsCount
-        products {
-          id
-          name
-          description
-          photo {
-            image {
-              publicUrlTransformed
-            }
-          }
-        }
         cart {
           id
           quantity
@@ -41,5 +30,6 @@ export const USER_QUERY = gql`
 export function useUser() {
   // return users info
   const { data } = useQuery(USER_QUERY);
+  console.log(data);
   return data?.authenticatedItem;
 }
