@@ -15,20 +15,23 @@ import { useUser } from './User';
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
   const [isAmount, setIsAmount] = useState('');
-  const maxAmount = cartItem.quantity >= product.stock;
+  const maxAmount = cartItem.quantity >= product?.stock;
 
   return (
     <CartPageStyles>
-      <img src={product.photo.image.publicUrlTransformed} alt={product.name} />
+      <img
+        src={product?.photo.image.publicUrlTransformed}
+        alt={product?.name}
+      />
       <h1>
         <Link href={`/product/${product.id}`}>
           <a>{product.name}</a>
         </Link>
       </h1>
       <div className="cartPageInfo">
-        <p>{formatMoney(product.price * cartItem.quantity)}</p>
+        <p>{formatMoney(product?.price * cartItem.quantity)}</p>
         <div className="quantityDiv">
-          <RemoveSingleCartItem id={product.id} quantity={cartItem.quantity} />
+          <RemoveSingleCartItem id={product?.id} quantity={cartItem.quantity} />
           <p
             onChange={() => setIsAmount(cartItem.quantity)}
             className="quantityParagraph"
@@ -36,8 +39,8 @@ export function CartItem({ cartItem }) {
             {cartItem.quantity}
           </p>
           <AddSingleCartItem
-            id={product.id}
-            stock={product.stock}
+            id={product?.id}
+            stock={product?.stock}
             quantity={cartItem.quantity}
           />
         </div>
