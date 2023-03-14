@@ -2,21 +2,28 @@ import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
 import { OrderHistoryStyles } from '../components/styles/OrderStyles';
 import { useUser } from '../components/User';
-import { ordersPerPage } from '../config';
 import { convertDate } from '../lib/convertDate';
 import formatMoney from '../lib/formatMoney';
 
+// TODO
+// pagination
+
 const ORDERS_QUERY = gql`
-  query ORDERS_QUERY($take: Int, $skip: Int! = 0) {
-    orders(take: $take, skip: $skip) {
-      id
-      charge
-      date
-      total
-      items {
+  query ORDERS_QUERY {
+    authenticatedItem {
+      ... on User {
         id
-        quantity
-        price
+        orders {
+          id
+          charge
+          date
+          total
+          items {
+            id
+            quantity
+            price
+          }
+        }
       }
     }
   }
@@ -24,14 +31,9 @@ const ORDERS_QUERY = gql`
 
 export default function OrdersPage() {
   const user = useUser();
-  const { data, loading, error, fetchMore } = useQuery(ORDERS_QUERY, {
-    variables: {
-      take: ordersPerPage,
-      skip: 0,
-    },
-  });
-  const orders = data?.orders;
-  const orderLength = orders.length <= 1;
+  const { data, loading, error } = useQuery(ORDERS_QUERY);
+  const orders = data?.authenticatedItem?.orders;
+  const orderLength = orders?.length <= 1;
   // TODO add a dropdown to display items
   if (user) {
     return (
@@ -54,18 +56,6 @@ export default function OrdersPage() {
             <p>{formatMoney(order.total)}</p>
           </div>
         ))}
-        <button
-          type="button"
-          onClick={() =>
-            fetchMore({
-              variables: {
-                skip: orders?.length,
-              },
-            })
-          }
-        >
-          Load More
-        </button>
       </OrderHistoryStyles>
     );
   }

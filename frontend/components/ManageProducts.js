@@ -1,16 +1,38 @@
+import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
 import Link from 'next/link';
 import DeleteProduct from './DeleteProduct';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { ManagePageStyles } from './styles/ManagePageStyles';
 import { useUser } from './User';
+// TODO
+// pagination
+
+const MANAGE_PRODUCTS_QUERY = gql`
+  query MANAGE_PRODUCTS_QUERY {
+    authenticatedItem {
+      ... on User {
+        manageProducts: products {
+          id
+          name
+          description
+          photo {
+            image {
+              publicUrlTransformed
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default function ManageProducts() {
   const user = useUser();
-  const products = user?.products;
-  const productsLength = products?.length <= 1;
+  const { data } = useQuery(MANAGE_PRODUCTS_QUERY);
+  const products = data?.authenticatedItem?.manageProducts;
+  const productsLength = data?.authenticatedItem?.manageProducts?.length <= 1;
 
-  console.log(products);
   if (user) {
     return (
       <ManagePageStyles>

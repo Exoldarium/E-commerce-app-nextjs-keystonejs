@@ -8,7 +8,7 @@ import { ProductStyles } from './styles/ProductsStyles';
 
 export const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY($take: Int, $skip: Int! = 0) {
-    products(take: $take, skip: $skip) {
+    allProducts: products(take: $take, skip: $skip) {
       id
       name
       description
@@ -26,13 +26,12 @@ export const ALL_PRODUCTS_QUERY = gql`
 export default function Products({ page }) {
   const { isCartOpen, closeCart } = useSetState();
   const { data, loading, error } = useQuery(ALL_PRODUCTS_QUERY, {
-    nextFetchPolicy: 'cache-only',
     variables: {
       take: productsPerPage,
       skip: page * productsPerPage - productsPerPage,
     },
   });
-  const products = data?.products;
+  const products = data?.allProducts;
 
   console.log({ data, error, loading });
 

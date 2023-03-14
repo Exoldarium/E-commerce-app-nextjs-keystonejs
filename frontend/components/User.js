@@ -7,6 +7,7 @@ export const USER_QUERY = gql`
         id
         name
         email
+        productsCount
         products {
           id
           name
