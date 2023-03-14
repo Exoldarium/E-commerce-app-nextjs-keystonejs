@@ -12,22 +12,22 @@ import { useUser } from './User';
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
   const [isAmount, setIsAmount] = useState('');
-  const maxAmount = cartItem.quantity >= product.stock;
+  const maxAmount = cartItem.quantity >= product?.stock;
 
   return (
     <CartMenuPageStyles>
       <div className="imageInfo">
         <img
-          src={product.photo.image.publicUrlTransformed}
-          alt={product.name}
+          src={product?.photo.image.publicUrlTransformed}
+          alt={product?.name}
         />
-        <Link href={`/product/${product.id}`}>
-          <h1>{product.name}</h1>
+        <Link href={`/product/${product?.id}`}>
+          <h1>{product?.name}</h1>
         </Link>
       </div>
       <div className="sliderStyles">
         <div>
-          <RemoveSingleCartItem id={product.id} quantity={cartItem.quantity} />
+          <RemoveSingleCartItem id={product?.id} quantity={cartItem.quantity} />
           <p
             onChange={() => setIsAmount(cartItem.quantity)}
             className="quantityParagraph"
@@ -35,12 +35,12 @@ export function CartItem({ cartItem }) {
             {cartItem.quantity}
           </p>
           <AddSingleCartItem
-            id={product.id}
-            stock={product.stock}
+            id={product?.id}
+            stock={product?.stock}
             quantity={cartItem.quantity}
           />
         </div>
-        <p>Price: {formatMoney(product.price * cartItem.quantity)}</p>
+        <p>Price: {formatMoney(product?.price * cartItem.quantity)}</p>
         <div className="pdiv">
           {maxAmount && <p className="maxAmountP">Max amount available</p>}
         </div>

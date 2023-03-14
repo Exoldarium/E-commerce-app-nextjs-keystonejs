@@ -1,6 +1,7 @@
 import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useForm from '../lib/useForm';
+import { ALL_PRODUCTS_QUERY } from './Products';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { FormStyles } from './styles/FormStyles';
 import { USER_QUERY } from './User';
@@ -43,7 +44,7 @@ export default function CreateProduct() {
     CREATE_PRODUCT_MUTATION,
     {
       variables: inputs,
-      refetchQueries: [{ query: USER_QUERY }],
+      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
     }
   );
   const router = useRouter();

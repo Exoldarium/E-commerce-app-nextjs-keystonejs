@@ -1,16 +1,20 @@
 import { gql, useMutation } from '@apollo/client';
+import { ALL_PRODUCTS_QUERY } from './Products';
 import { USER_QUERY } from './User';
+// TODO
+// fix delete mutation not updating manage products page
 
 const DELETE_PRODUCT_MUTATION = gql`
   mutation DELETE_PRODUCT_MUTATION($id: ID!) {
     deleteProduct(where: { id: $id }) {
       id
+      name
     }
   }
 `;
 
 function update(cache, payload) {
-  cache.evict({ id: payload.data.deleteProduct.id });
+  cache.evict(cache.identify(payload.data.deleteProduct));
 }
 
 export default function DeleteProduct({ id }) {
@@ -20,8 +24,8 @@ export default function DeleteProduct({ id }) {
       variables: {
         id,
       },
+      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
       update,
-      refetchQueries: [{ query: USER_QUERY }],
     }
   );
   function handleClick() {
