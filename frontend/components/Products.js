@@ -32,6 +32,8 @@ export default function Products({ page }) {
     },
   });
   const products = data?.products;
+  // TODO
+  // add fetchMore but try to use products.length for skip variable instead of count, like in orders.js
 
   console.log({ data, error, loading });
 

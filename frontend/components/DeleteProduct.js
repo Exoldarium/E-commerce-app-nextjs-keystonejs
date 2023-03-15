@@ -24,8 +24,8 @@ export default function DeleteProduct({ id }) {
       variables: {
         id,
       },
-      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
       update,
+      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
     }
   );
   function handleClick() {
