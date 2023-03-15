@@ -26,14 +26,13 @@ export const ALL_PRODUCTS_QUERY = gql`
 export default function Products({ page }) {
   const { isCartOpen, closeCart } = useSetState();
   const { data, loading, error } = useQuery(ALL_PRODUCTS_QUERY, {
+    nextFetchPolicy: 'cache-and-network',
     variables: {
       take: productsPerPage,
       skip: page * productsPerPage - productsPerPage,
     },
   });
   const products = data?.products;
-  // TODO
-  // add fetchMore but try to use products.length for skip variable instead of count, like in orders.js
 
   console.log({ data, error, loading });
 
