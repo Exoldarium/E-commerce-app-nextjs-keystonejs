@@ -32,7 +32,7 @@ Project is created with:
 
 * [Next.js](https://nextjs.org/)
 * [Keystone.js](https://keystonejs.com/)
-* [GraphQl](https://https://graphql.org/.io/)
+* [GraphQL](https://graphql.org/)
 * [Apollo Client](https://www.apollographql.com/docs/react/)
 * Inspired by [WesBos](https://github.com/wesbos) and his amazing course!
 
