@@ -5,6 +5,7 @@ import { ordersPerPage } from '../config';
 import DeleteProduct from './DeleteProduct';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { ManagePageStyles } from './styles/ManagePageStyles';
+import UpdateProductPhoto from './UpdateProductPhoto';
 import { useUser } from './User';
 
 const MANAGE_PRODUCTS_QUERY = gql`
@@ -57,6 +58,14 @@ export default function ManageProducts() {
               alt={product.description}
             />
             <p>{product.name}</p>
+            <Link
+              href={{
+                pathname: 'updateProductPhoto',
+                query: { id: product.id },
+              }}
+            >
+              Update Photo
+            </Link>
             <Link
               href={{
                 pathname: 'update',

@@ -28,7 +28,6 @@ export default function ProductsCount({ page }) {
         <p>
           Page {page} of {pageCount}
         </p>
-        <p>{count} Items total</p>
       </div>
       <Link href={`/products/${page + 1}`}>
         <a aria-disabled={page >= pageCount}>Next</a>

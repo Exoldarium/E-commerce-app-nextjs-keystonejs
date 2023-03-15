@@ -26,6 +26,7 @@ export const ALL_PRODUCTS_QUERY = gql`
 export default function Products({ page }) {
   const { isCartOpen, closeCart } = useSetState();
   const { data, loading, error } = useQuery(ALL_PRODUCTS_QUERY, {
+    fetchPolicy: 'cache-first',
     nextFetchPolicy: 'cache-and-network',
     variables: {
       take: productsPerPage,

@@ -13,7 +13,6 @@ const UPDATE_PRODUCT_MUTATION = gql`
     $price: Int
     $stock: Int
     $id: ID!
-    $image: Upload
     $status: String
   ) {
     updateProduct(
@@ -24,7 +23,6 @@ const UPDATE_PRODUCT_MUTATION = gql`
         price: $price
         stock: $stock
         status: $status
-        photo: { create: { image: $image, altText: $name } }
       }
     ) {
       name
@@ -59,7 +57,6 @@ export default function UpdateProduct({ id }) {
       description: inputs.description,
       price: inputs.price,
       stock: inputs.stock,
-      image: inputs.image,
     },
     refetchQueries: [{ query: USER_QUERY }],
   });
@@ -82,20 +79,6 @@ export default function UpdateProduct({ id }) {
         disabled={updateProductLoading}
         aria-busy={updateProductLoading}
       >
-        <label htmlFor="photo">Photo</label>
-        <img
-          className="productImage"
-          src={data?.product?.photo.image?.publicUrlTransformed}
-          alt={data?.product.name}
-        />
-        <input
-          type="file"
-          name="image"
-          id="image"
-          placeholder="Image"
-          onChange={handleInputs}
-          required
-        />
         <label htmlFor="name">Name</label>
         <input
           type="text"
