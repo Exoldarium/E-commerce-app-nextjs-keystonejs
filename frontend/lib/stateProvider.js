@@ -5,12 +5,17 @@ const LocalStateProvider = LocalStateContext.Provider;
 
 export default function StateProvider({ children }) {
   const [isMenuActive, setIsMenuActive] = useState(false);
+  const [isUserMenuActive, setUserMenuActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAmount, setAmount] = useState('');
 
   function toggleMenu() {
     setIsMenuActive(!isMenuActive);
+  }
+
+  function toggleUserMenu() {
+    setUserMenuActive(!isUserMenuActive);
   }
 
   function toggleSearchList() {
@@ -45,6 +50,9 @@ export default function StateProvider({ children }) {
         closeCart,
         isAmount,
         setAmount,
+        isUserMenuActive,
+        setUserMenuActive,
+        toggleUserMenu,
       }}
     >
       {children}

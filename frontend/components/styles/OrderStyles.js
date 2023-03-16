@@ -87,6 +87,9 @@ export const OrderHistoryStyles = styled.div`
       flex: 1;
     }
   }
+  .chargeP {
+    text-align: left;
+  }
   button {
     width: fit-content;
     align-self: center;

@@ -17,7 +17,13 @@ export default function Header() {
   const cartItems = user?.cart;
   const cartNotEmpty = cartItems?.length >= 1;
   const cartEmpty = cartItems?.length < 1;
-  const { isMenuActive, toggleMenu, closeCart } = useSetState();
+  const {
+    isMenuActive,
+    toggleMenu,
+    closeCart,
+    isUserMenuActive,
+    toggleUserMenu,
+  } = useSetState();
 
   if (!user) {
     return (
@@ -26,8 +32,18 @@ export default function Header() {
           <Link href="/products">It's a LOGO</Link>
         </LogoStyles>
         <Search />
+        <Link href="/products">
+          <a className="productsLink">Products</a>
+        </Link>
         <Link href="/cart">Cart</Link>
-        <Nav active={isMenuActive} onClick={toggleMenu} />
+        <Link href="/signin">
+          <a className="signIn">Sign In</a>
+        </Link>
+        <Nav
+          active={isMenuActive}
+          onClick={toggleMenu}
+          userMenu={isUserMenuActive}
+        />
         {/* button visible only under 790px */}
         <MobileNavButtonStyles type="button" onClick={toggleMenu}>
           Click
@@ -43,6 +59,9 @@ export default function Header() {
           <Link href="/products">It's a LOGO</Link>
         </LogoStyles>
         <Search />
+        <Link href="/products">
+          <a className="productsLink">Products</a>
+        </Link>
         {cartNotEmpty && (
           <Link href="/cart">
             <a className="cartAmountLink">
@@ -54,7 +73,14 @@ export default function Header() {
           </Link>
         )}
         {cartEmpty && <Link href="/cart">Cart</Link>}
-        <Nav active={isMenuActive} onClick={toggleMenu} />
+        <button type="button" className="userMenu" onClick={toggleUserMenu}>
+          User Menu
+        </button>
+        <Nav
+          active={isMenuActive}
+          userMenu={isUserMenuActive}
+          onClick={toggleMenu}
+        />
         {/* button visible only under 790px */}
         <MobileNavButtonStyles type="button" onClick={toggleMenu}>
           Click

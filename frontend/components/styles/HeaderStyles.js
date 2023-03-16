@@ -56,5 +56,10 @@ export const HeaderStyles = styled.header`
       color: black;
       margin: 0 auto;
     }
+    .userMenu,
+    .productsLink,
+    .signIn {
+      display: none;
+    }
   }
 `;

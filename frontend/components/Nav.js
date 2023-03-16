@@ -11,29 +11,25 @@ export const SIGNOUT_MUTATION = gql`
   }
 `;
 
-export default function Nav({ active, onClick }) {
+export default function Nav({ active, userMenu }) {
   const { closeCart } = useSetState();
   const [signout, { data }] = useMutation(SIGNOUT_MUTATION, {
     refetchQueries: [{ query: USER_QUERY }],
   });
   const user = useUser();
   const router = useRouter();
+  console.log(userMenu);
 
   function handleSignOut() {
     signout();
     router.push('/products');
   }
 
-  function handleActive() {
-    onClick(!active);
-  }
-
   // if user is logged in
   if (user)
     return (
       <>
-        <NavStyles onClick={closeCart}>
-          <Link href="/products">Products</Link>
+        <NavStyles onClick={closeCart} userMenu={userMenu}>
           <Link href="/orders">Order History</Link>
           <Link href="/account">Account</Link>
           <Link href="/manage">Manage</Link>
@@ -41,7 +37,7 @@ export default function Nav({ active, onClick }) {
             Sign Out
           </button>
         </NavStyles>
-        <MobileNavStyles onClick={handleActive} active={active}>
+        <MobileNavStyles active={active}>
           <Link href="/products">Products</Link>
           <Link href="/orders">Order History</Link>
           <Link href="/account">Account</Link>
@@ -56,15 +52,9 @@ export default function Nav({ active, onClick }) {
   // if there's no user
   if (user === null)
     return (
-      <>
-        <NavStyles>
-          <Link href="/products">Products</Link>
-          <Link href="/signin">Sign In</Link>
-        </NavStyles>
-        <MobileNavStyles onClick={handleActive} active={active}>
-          <Link href="/products">Products</Link>
-          <Link href="/signin">Sign In</Link>
-        </MobileNavStyles>
-      </>
+      <MobileNavStyles active={active}>
+        <Link href="/products">Products</Link>
+        <Link href="/signin">Sign In</Link>
+      </MobileNavStyles>
     );
 }
