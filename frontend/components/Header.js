@@ -10,7 +10,6 @@ import { useUser } from './User';
 
 // TODO
 // add close on outside click
-// add account page where user can update account info
 
 export default function Header() {
   const user = useUser();
