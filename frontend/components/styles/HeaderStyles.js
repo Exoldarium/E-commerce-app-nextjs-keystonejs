@@ -17,6 +17,14 @@ export const HeaderStyles = styled.header`
   padding-right: 50px;
   border-bottom: 1px solid black;
   z-index: 2;
+  a,
+  button {
+    margin: 1.5rem;
+  }
+  button {
+    border-radius: 30px;
+    cursor: pointer;
+  }
   .cartAmount {
     display: flex;
     align-items: center;

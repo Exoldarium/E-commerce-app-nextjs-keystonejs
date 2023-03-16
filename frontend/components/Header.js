@@ -9,7 +9,7 @@ import { LogoStyles } from './styles/LogoStyles';
 import { useUser } from './User';
 
 // TODO
-// move all the links in the nav and header to a dropdown
+// add close on outside click
 // add account page where user can update account info
 
 export default function Header() {
@@ -73,9 +73,12 @@ export default function Header() {
           </Link>
         )}
         {cartEmpty && <Link href="/cart">Cart</Link>}
-        <button type="button" className="userMenu" onClick={toggleUserMenu}>
-          User Menu
-        </button>
+        <div>
+          <button type="button" className="userMenu" onClick={toggleUserMenu}>
+            User Menu
+          </button>
+          <span>V</span>
+        </div>
         <Nav
           active={isMenuActive}
           userMenu={isUserMenuActive}
