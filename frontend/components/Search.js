@@ -47,7 +47,7 @@ export default function Search() {
   }
 
   return (
-    <SearchStyles active={isSearchActive} className="search">
+    <SearchStyles active={isSearchActive}>
       <input
         onChange={handleChange}
         onFocus={toggleSearchList}

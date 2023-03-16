@@ -18,6 +18,10 @@ export default function StateProvider({ children }) {
     setUserMenuActive(!isUserMenuActive);
   }
 
+  function closeUserMenu() {
+    setUserMenuActive(true);
+  }
+
   function toggleSearchList() {
     setIsSearchActive(true);
   }
@@ -53,6 +57,7 @@ export default function StateProvider({ children }) {
         isUserMenuActive,
         setUserMenuActive,
         toggleUserMenu,
+        closeUserMenu,
       }}
     >
       {children}

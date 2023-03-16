@@ -12,13 +12,12 @@ export const SIGNOUT_MUTATION = gql`
 `;
 
 export default function Nav({ active, userMenu }) {
-  const { closeCart } = useSetState();
+  const { closeCart, closeUserMenu } = useSetState();
   const [signout, { data }] = useMutation(SIGNOUT_MUTATION, {
     refetchQueries: [{ query: USER_QUERY }],
   });
   const user = useUser();
   const router = useRouter();
-  console.log(userMenu);
 
   function handleSignOut() {
     signout();
@@ -30,9 +29,15 @@ export default function Nav({ active, userMenu }) {
     return (
       <>
         <NavStyles onClick={closeCart} userMenu={userMenu}>
-          <Link href="/orders">Order History</Link>
-          <Link href="/account">Account</Link>
-          <Link href="/manage">Manage</Link>
+          <Link href="/orders">
+            <a onClick={closeUserMenu}>Order History</a>
+          </Link>
+          <Link href="/account">
+            <a onClick={closeUserMenu}>Account</a>
+          </Link>
+          <Link href="/manage">
+            <a onClick={closeUserMenu}>Manage</a>
+          </Link>
           <button type="button" onClick={handleSignOut}>
             Sign Out
           </button>

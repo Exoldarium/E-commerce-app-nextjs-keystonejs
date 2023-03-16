@@ -16,6 +16,10 @@ export const SearchStyles = styled.div`
     width: 60vw;
     height: fit-content;
     border: 1px solid black;
+    button,
+    a {
+      margin: 0;
+    }
   }
   .listDiv.hidden {
     display: none;

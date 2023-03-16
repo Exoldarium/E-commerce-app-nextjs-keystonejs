@@ -41,11 +41,7 @@ export default function Header() {
         <Link href="/signin">
           <a className="signIn">Sign In</a>
         </Link>
-        <Nav
-          active={isMenuActive}
-          onClick={toggleMenu}
-          userMenu={isUserMenuActive}
-        />
+        <Nav active={isMenuActive} userMenu={isUserMenuActive} />
         {/* button visible only under 790px */}
         <MobileNavButtonStyles type="button" onClick={toggleMenu}>
           Menu
@@ -84,11 +80,7 @@ export default function Header() {
           </button>
           <span>V</span>
         </div>
-        <Nav
-          active={isMenuActive}
-          userMenu={isUserMenuActive}
-          onClick={toggleMenu}
-        />
+        <Nav active={isMenuActive} userMenu={isUserMenuActive} />
         {/* button visible only under 790px */}
         <MobileNavButtonStyles type="button" onClick={toggleMenu}>
           Menu
