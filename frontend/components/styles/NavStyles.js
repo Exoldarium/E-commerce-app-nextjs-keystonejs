@@ -7,7 +7,6 @@ export const NavStyles = styled.div`
   right: 0;
   display: flex;
   flex-direction: column;
-  /* flex: 1; */
   margin-top: 7rem;
   margin-right: 4rem;
   font-size: 1.3vw;
@@ -25,7 +24,8 @@ export const NavStyles = styled.div`
   button:hover {
     text-decoration: underline;
   }
-  a {
+  a,
+  button {
     padding: 2rem;
     margin: 0;
   }
@@ -41,6 +41,7 @@ export const MobileNavStyles = styled.ul`
   @media only screen and (max-width: 790px) {
     transform: translateX(-100%);
     ${(props) => props.active && `transform: translateX(0)`};
+    transition: 0.2s;
     position: fixed;
     left: 0;
     top: 0rem;

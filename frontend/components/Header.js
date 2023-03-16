@@ -23,6 +23,7 @@ export default function Header() {
     closeCart,
     isUserMenuActive,
     toggleUserMenu,
+    toggleSearchList,
   } = useSetState();
 
   if (!user) {
@@ -31,6 +32,7 @@ export default function Header() {
         <LogoStyles onClick={closeCart}>
           <Link href="/products">It's a LOGO</Link>
         </LogoStyles>
+        <MobileNavButtonStyles type="button">Search</MobileNavButtonStyles>
         <Search />
         <Link href="/products">
           <a className="productsLink">Products</a>
@@ -46,7 +48,7 @@ export default function Header() {
         />
         {/* button visible only under 790px */}
         <MobileNavButtonStyles type="button" onClick={toggleMenu}>
-          Click
+          Menu
         </MobileNavButtonStyles>
       </HeaderStyles>
     );
@@ -59,6 +61,9 @@ export default function Header() {
           <Link href="/products">It's a LOGO</Link>
         </LogoStyles>
         <Search />
+        <MobileNavButtonStyles type="button" onClick={toggleSearchList}>
+          Search
+        </MobileNavButtonStyles>
         <Link href="/products">
           <a className="productsLink">Products</a>
         </Link>
@@ -73,8 +78,8 @@ export default function Header() {
           </Link>
         )}
         {cartEmpty && <Link href="/cart">Cart</Link>}
-        <div>
-          <button type="button" className="userMenu" onClick={toggleUserMenu}>
+        <div className="userMenu">
+          <button type="button" onClick={toggleUserMenu}>
             User Menu
           </button>
           <span>V</span>
@@ -86,7 +91,7 @@ export default function Header() {
         />
         {/* button visible only under 790px */}
         <MobileNavButtonStyles type="button" onClick={toggleMenu}>
-          Click
+          Menu
         </MobileNavButtonStyles>
       </HeaderStyles>
     );

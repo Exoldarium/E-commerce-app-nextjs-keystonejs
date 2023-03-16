@@ -21,9 +21,11 @@ export const HeaderStyles = styled.header`
   button {
     margin: 1.5rem;
   }
-  button {
-    border-radius: 30px;
-    cursor: pointer;
+  .userMenu {
+    button {
+      border-radius: 30px;
+      cursor: pointer;
+    }
   }
   .cartAmount {
     display: flex;

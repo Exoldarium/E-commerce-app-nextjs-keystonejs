@@ -40,9 +40,16 @@ export const SearchStyles = styled.div`
   }
   @media only screen and (max-width: 790px) {
     ${(props) => props.active && `position: absolute`};
+    padding: 0;
+    flex: 0;
+    top: 0;
+    bottom: 0;
     .inputSearch.active {
       width: 100vw;
       height: 8vh;
+    }
+    .inputSearch.hidden {
+      display: none;
     }
     .listDiv.active {
       display: flex;
