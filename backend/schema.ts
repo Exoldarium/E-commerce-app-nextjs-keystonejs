@@ -23,6 +23,9 @@ export const cloudinary = {
   folder: 'e-commerce-images',
 };
 
+// TODO
+// roles and premissions
+
 export const lists: Lists = {
   User: list({
     access: allowAll,

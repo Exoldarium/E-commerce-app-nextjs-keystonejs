@@ -31,7 +31,9 @@ export default function Header() {
         <LogoStyles onClick={closeCart}>
           <Link href="/products">It's a LOGO</Link>
         </LogoStyles>
-        <MobileNavButtonStyles type="button">Search</MobileNavButtonStyles>
+        <MobileNavButtonStyles type="button" onClick={toggleSearchList}>
+          Search
+        </MobileNavButtonStyles>
         <Search />
         <Link href="/products">
           <a className="productsLink">Products</a>

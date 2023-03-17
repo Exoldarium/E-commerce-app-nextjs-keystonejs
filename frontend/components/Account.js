@@ -15,8 +15,6 @@ const UPDATE_ACCOUNT_MUTATION = gql`
   }
 `;
 
-// TODO
-// add account
 export default function Account() {
   const user = useUser();
   console.log(user);

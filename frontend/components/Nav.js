@@ -29,7 +29,6 @@ export default function Nav({ active, userMenu }) {
     return (
       <>
         <NavStyles onClick={closeCart} userMenu={userMenu}>
-          {/* TODO maybe group all links in a div and add on click on it */}
           <h1>
             Logged in as <br />
             {user.name}
