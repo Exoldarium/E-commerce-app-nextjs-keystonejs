@@ -29,6 +29,11 @@ export default function Nav({ active, userMenu }) {
     return (
       <>
         <NavStyles onClick={closeCart} userMenu={userMenu}>
+          {/* TODO maybe group all links in a div and add on click on it */}
+          <h1>
+            Logged in as <br />
+            {user.name}
+          </h1>
           <Link href="/orders">
             <a onClick={closeUserMenu}>Order History</a>
           </Link>
@@ -37,6 +42,12 @@ export default function Nav({ active, userMenu }) {
           </Link>
           <Link href="/manage">
             <a onClick={closeUserMenu}>Manage</a>
+          </Link>
+          <Link href="/help">
+            <a onClick={closeUserMenu}>Help</a>
+          </Link>
+          <Link href="/terms">
+            <a onClick={closeUserMenu}>Terms</a>
           </Link>
           <button type="button" onClick={handleSignOut}>
             Sign Out

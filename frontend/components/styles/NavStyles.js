@@ -12,6 +12,13 @@ export const NavStyles = styled.div`
   font-size: 1.3vw;
   border: 1px solid black;
   background: white;
+  h1 {
+    font-size: 1.3vw;
+    border-bottom: 1px solid black;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin: 0;
+  }
   button {
     font-size: 1.3vw;
     background: none;

@@ -5,7 +5,7 @@ const LocalStateProvider = LocalStateContext.Provider;
 
 export default function StateProvider({ children }) {
   const [isMenuActive, setIsMenuActive] = useState(false);
-  const [isUserMenuActive, setUserMenuActive] = useState(false);
+  const [isUserMenuActive, setUserMenuActive] = useState(true);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAmount, setAmount] = useState('');
