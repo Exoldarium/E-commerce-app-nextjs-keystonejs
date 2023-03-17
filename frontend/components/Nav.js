@@ -34,11 +34,11 @@ export default function Nav({ active, userMenu }) {
             Logged in as <br />
             {user.name}
           </h1>
-          <Link href="/orders">
-            <a onClick={closeUserMenu}>Order History</a>
-          </Link>
           <Link href="/account">
             <a onClick={closeUserMenu}>Account</a>
+          </Link>
+          <Link href="/orders">
+            <a onClick={closeUserMenu}>Order History</a>
           </Link>
           <Link href="/manage">
             <a onClick={closeUserMenu}>Manage</a>
@@ -58,10 +58,12 @@ export default function Nav({ active, userMenu }) {
             Logged in as <br />
             {user.name}
           </h1>
+          <Link href="/account">Account</Link>
           <Link href="/products">Products</Link>
           <Link href="/orders">Order History</Link>
-          <Link href="/account">Account</Link>
           <Link href="/manage">Manage</Link>
+          <Link href="/help">Help</Link>
+          <Link href="/terms">Terms</Link>
           <button type="button" onClick={handleSignOut}>
             Sign Out
           </button>
@@ -75,6 +77,8 @@ export default function Nav({ active, userMenu }) {
       <MobileNavStyles active={active}>
         <Link href="/products">Products</Link>
         <Link href="/signin">Sign In</Link>
+        <Link href="/help">Help</Link>
+        <Link href="/terms">Terms</Link>
       </MobileNavStyles>
     );
 }

@@ -1,5 +1,9 @@
 import CreateProduct from '../components/CreateProduct';
+import { useUser } from '../components/User';
 
 export default function CreateProductPage() {
-  return <CreateProduct />;
+  const user = useUser();
+  if (user) {
+    return <CreateProduct />;
+  }
 }

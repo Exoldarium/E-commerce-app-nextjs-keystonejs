@@ -4,7 +4,7 @@ import useForm from '../lib/useForm';
 import { ALL_PRODUCTS_QUERY } from './Products';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { FormStyles } from './styles/FormStyles';
-import { USER_QUERY } from './User';
+import { USER_QUERY, useUser } from './User';
 
 const UPDATE_PHOTO_MUTATION = gql`
   mutation UPDATE_PHOTO_MUTATION($image: Upload, $id: ID!, $name: String) {
@@ -22,6 +22,7 @@ const UPDATE_PHOTO_MUTATION = gql`
 `;
 
 export default function UpdateProductPhoto({ id }) {
+  const user = useUser();
   const { inputs, handleInputs } = useForm({
     name: '',
     image: '',
@@ -45,25 +46,27 @@ export default function UpdateProductPhoto({ id }) {
     router.push({ pathname: `/product/${res?.data?.updateProduct.id}` });
   }
 
-  return (
-    <FormStyles onSubmit={handleSubmit}>
-      {error && (
-        <ErrorMessageStyles>{error && error.message}</ErrorMessageStyles>
-      )}
-      <fieldset disabled={loading} aria-busy={loading}>
-        <label htmlFor="photo">Photo</label>
-        <input
-          type="file"
-          name="image"
-          id="image"
-          placeholder="Image"
-          onChange={handleInputs}
-          required
-        />
-      </fieldset>
-      <button type="submit" disabled={loading}>
-        Update Photo
-      </button>
-    </FormStyles>
-  );
+  if (user) {
+    return (
+      <FormStyles onSubmit={handleSubmit}>
+        {error && (
+          <ErrorMessageStyles>{error && error.message}</ErrorMessageStyles>
+        )}
+        <fieldset disabled={loading} aria-busy={loading}>
+          <label htmlFor="photo">Photo</label>
+          <input
+            type="file"
+            name="image"
+            id="image"
+            placeholder="Image"
+            onChange={handleInputs}
+            required
+          />
+        </fieldset>
+        <button type="submit" disabled={loading}>
+          Update Photo
+        </button>
+      </FormStyles>
+    );
+  }
 }

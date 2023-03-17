@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import useForm from '../lib/useForm';
 import { FormStyles } from './styles/FormStyles';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
-import { USER_QUERY } from './User';
+import { USER_QUERY, useUser } from './User';
 import { ONE_PRODUCT_QUERY } from './OneProduct';
 
 const UPDATE_PRODUCT_MUTATION = gql`
@@ -35,6 +35,7 @@ const UPDATE_PRODUCT_MUTATION = gql`
 `;
 
 export default function UpdateProduct({ id }) {
+  const user = useUser();
   const { data, error, loading } = useQuery(ONE_PRODUCT_QUERY, {
     variables: {
       id,
@@ -68,60 +69,62 @@ export default function UpdateProduct({ id }) {
     router.push(`/product/${data?.product.id}`);
   }
 
-  return (
-    <FormStyles onSubmit={handleSubmit}>
-      {updateProductError && (
-        <ErrorMessageStyles>
-          {updateProductError && updateProductError.message}
-        </ErrorMessageStyles>
-      )}
-      <fieldset
-        disabled={updateProductLoading}
-        aria-busy={updateProductLoading}
-      >
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="Name"
-          value={inputs.name}
-          onChange={handleInputs}
-          required
-        />
-        <label htmlFor="description">Description</label>
-        <input
-          type="text"
-          name="description"
-          id="description"
-          placeholder="Description"
-          value={inputs.description}
-          onChange={handleInputs}
-          required
-        />
-        <label htmlFor="description">Stock</label>
-        <input
-          type="number"
-          name="stock"
-          id="stock"
-          placeholder="Stock"
-          value={inputs.stock}
-          onChange={handleInputs}
-        />
-        <label htmlFor="price">Price</label>
-        <input
-          type="number"
-          name="price"
-          id="price"
-          placeholder="Price"
-          value={inputs.price}
-          onChange={handleInputs}
-          required
-        />
-      </fieldset>
-      <button type="submit" disabled={updateProductLoading}>
-        Update Product
-      </button>
-    </FormStyles>
-  );
+  if (user) {
+    return (
+      <FormStyles onSubmit={handleSubmit}>
+        {updateProductError && (
+          <ErrorMessageStyles>
+            {updateProductError && updateProductError.message}
+          </ErrorMessageStyles>
+        )}
+        <fieldset
+          disabled={updateProductLoading}
+          aria-busy={updateProductLoading}
+        >
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Name"
+            value={inputs.name}
+            onChange={handleInputs}
+            required
+          />
+          <label htmlFor="description">Description</label>
+          <input
+            type="text"
+            name="description"
+            id="description"
+            placeholder="Description"
+            value={inputs.description}
+            onChange={handleInputs}
+            required
+          />
+          <label htmlFor="description">Stock</label>
+          <input
+            type="number"
+            name="stock"
+            id="stock"
+            placeholder="Stock"
+            value={inputs.stock}
+            onChange={handleInputs}
+          />
+          <label htmlFor="price">Price</label>
+          <input
+            type="number"
+            name="price"
+            id="price"
+            placeholder="Price"
+            value={inputs.price}
+            onChange={handleInputs}
+            required
+          />
+        </fieldset>
+        <button type="submit" disabled={updateProductLoading}>
+          Update Product
+        </button>
+      </FormStyles>
+    );
+  }
 }

@@ -12,6 +12,7 @@ export const NavStyles = styled.div`
   font-size: 1.3vw;
   border: 1px solid black;
   background: white;
+  max-width: 12vw;
   h1 {
     font-size: 1.3vw;
     border-bottom: 1px solid black;
