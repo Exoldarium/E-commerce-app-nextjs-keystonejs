@@ -54,6 +54,10 @@ export default function Nav({ active, userMenu }) {
           </button>
         </NavStyles>
         <MobileNavStyles active={active}>
+          <h1>
+            Logged in as <br />
+            {user.name}
+          </h1>
           <Link href="/products">Products</Link>
           <Link href="/orders">Order History</Link>
           <Link href="/account">Account</Link>

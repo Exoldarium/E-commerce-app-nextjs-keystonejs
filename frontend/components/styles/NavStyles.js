@@ -62,5 +62,12 @@ export const MobileNavStyles = styled.ul`
     background: white;
     width: 80%;
     margin: 0 auto;
+    h1 {
+      font-size: 5vw;
+      width: 100%;
+      padding-left: 10px;
+      border-bottom: 1px solid black;
+      margin: 0;
+    }
   }
 `;
