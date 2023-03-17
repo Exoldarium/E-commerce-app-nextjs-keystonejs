@@ -13,6 +13,10 @@ export const NavStyles = styled.div`
   border: 1px solid black;
   background: white;
   max-width: 12vw;
+  div {
+    display: flex;
+    flex-direction: column;
+  }
   h1 {
     font-size: 1.3vw;
     border-bottom: 1px solid black;
@@ -69,6 +73,10 @@ export const MobileNavStyles = styled.ul`
       padding-left: 10px;
       border-bottom: 1px solid black;
       margin: 0;
+    }
+    div {
+      display: flex;
+      flex-direction: column;
     }
   }
 `;

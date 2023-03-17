@@ -12,7 +12,7 @@ export const SIGNOUT_MUTATION = gql`
 `;
 
 export default function Nav({ active, userMenu }) {
-  const { closeCart, closeUserMenu } = useSetState();
+  const { closeCart, toggleUserMenu, toggleMenu } = useSetState();
   const [signout, { data }] = useMutation(SIGNOUT_MUTATION, {
     refetchQueries: [{ query: USER_QUERY }],
   });
@@ -34,21 +34,13 @@ export default function Nav({ active, userMenu }) {
             Logged in as <br />
             {user.name}
           </h1>
-          <Link href="/account">
-            <a onClick={closeUserMenu}>Account</a>
-          </Link>
-          <Link href="/orders">
-            <a onClick={closeUserMenu}>Order History</a>
-          </Link>
-          <Link href="/manage">
-            <a onClick={closeUserMenu}>Manage</a>
-          </Link>
-          <Link href="/help">
-            <a onClick={closeUserMenu}>Help</a>
-          </Link>
-          <Link href="/terms">
-            <a onClick={closeUserMenu}>Terms</a>
-          </Link>
+          <div onClick={toggleUserMenu}>
+            <Link href="/account">Account</Link>
+            <Link href="/orders">Order History</Link>
+            <Link href="/manage">Manage</Link>
+            <Link href="/help">Help</Link>
+            <Link href="/terms">Terms</Link>
+          </div>
           <button type="button" onClick={handleSignOut}>
             Sign Out
           </button>
@@ -58,15 +50,17 @@ export default function Nav({ active, userMenu }) {
             Logged in as <br />
             {user.name}
           </h1>
-          <Link href="/account">Account</Link>
-          <Link href="/products">Products</Link>
-          <Link href="/orders">Order History</Link>
-          <Link href="/manage">Manage</Link>
-          <Link href="/help">Help</Link>
-          <Link href="/terms">Terms</Link>
-          <button type="button" onClick={handleSignOut}>
-            Sign Out
-          </button>
+          <div onClick={toggleMenu}>
+            <Link href="/account">Account</Link>
+            <Link href="/products">Products</Link>
+            <Link href="/orders">Order History</Link>
+            <Link href="/manage">Manage</Link>
+            <Link href="/help">Help</Link>
+            <Link href="/terms">Terms</Link>
+            <button type="button" onClick={handleSignOut}>
+              Sign Out
+            </button>
+          </div>
         </MobileNavStyles>
       </>
     );
