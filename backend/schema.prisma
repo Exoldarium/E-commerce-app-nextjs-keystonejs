@@ -20,9 +20,13 @@ model User {
   products                Product[]  @relation("Product_user")
   cart                    CartItem[] @relation("CartItem_user")
   orders                  Order[]    @relation("Order_user")
+  role                    Role?      @relation("User_role", fields: [roleId], references: [id])
+  roleId                  String?    @map("role")
   passwordResetToken      String?
   passwordResetIssuedAt   DateTime?
   passwordResetRedeemedAt DateTime?
+
+  @@index([roleId])
 }
 
 model Product {
@@ -86,4 +90,16 @@ model OrderItem {
 
   @@index([photoId])
   @@index([orderId])
+}
+
+model Role {
+  id                String  @id @default(cuid())
+  canManageProducts Boolean @default(false)
+  canSeeOtherUsers  Boolean @default(false)
+  canManageUsers    Boolean @default(false)
+  canManageRoles    Boolean @default(false)
+  canManageCart     Boolean @default(false)
+  canManageOrders   Boolean @default(false)
+  assignedTo        User[]  @relation("User_role")
+  name              String  @default("")
 }

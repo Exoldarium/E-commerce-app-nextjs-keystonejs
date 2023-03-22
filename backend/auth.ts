@@ -2,6 +2,7 @@ import { randomBytes } from 'crypto';
 import { createAuth } from '@keystone-6/auth';
 import { statelessSessions } from '@keystone-6/core/session';
 import { sendPasswordResetEmail } from './lib/passwordResetMail';
+import { permissionList } from './fields';
 
 let sessionSecret = process.env.COOKIE_SECRET;
 if (!sessionSecret && process.env.NODE_ENV !== 'production') {
@@ -15,7 +16,7 @@ const { withAuth } = createAuth({
   initFirstItem: {
     fields: ['name', 'email', 'password'],
   },
-  sessionData: 'id name email',
+  sessionData: `id name email role { ${permissionList.join(' ')} }`,
   passwordResetLink: {
     async sendToken(args) {
       console.log(args);

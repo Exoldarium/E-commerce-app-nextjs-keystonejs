@@ -31,7 +31,7 @@ var import_config = require("dotenv/config");
 var import_core = require("@keystone-6/core");
 var import_access = require("@keystone-6/core/access");
 var import_cloudinary = require("@keystone-6/cloudinary");
-var import_fields = require("@keystone-6/core/fields");
+var import_fields2 = require("@keystone-6/core/fields");
 var import_schema = require("@graphql-ts/schema");
 
 // lib/formatMoney.ts
@@ -46,6 +46,109 @@ function formatMoney(cents) {
 }
 var formatMoney_default = formatMoney;
 
+// access.ts
+function isSignedIn({ session: session2 }) {
+  return !!session2;
+}
+var permissions = {
+  canManageProducts: ({ session: session2 }) => !!session2?.data?.role?.canManageProducts,
+  canSeeOtherUsers: ({ session: session2 }) => !!session2?.data?.role?.canSeeOtherUsers,
+  canManageUsers: ({ session: session2 }) => !!session2?.data?.role?.canManageUsers,
+  canManageRoles: ({ session: session2 }) => !!session2?.data?.role?.canManageRoles,
+  canManageCart: ({ session: session2 }) => !!session2?.data?.role?.canManageCart,
+  canManageOrders: ({ session: session2 }) => !!session2?.data?.role?.canManageOrders
+};
+var rules = {
+  canManageProducts: ({ session: session2 }) => {
+    if (!isSignedIn({ session: session2 })) {
+      return false;
+    }
+    if (permissions.canManageProducts({ session: session2 })) {
+      return true;
+    }
+    return { user: { id: { equals: session2?.itemId } } };
+  },
+  canOrder: ({ session: session2 }) => {
+    if (!isSignedIn({ session: session2 })) {
+      return false;
+    }
+    if (permissions.canManageCart({ session: session2 })) {
+      return true;
+    }
+    return { user: { id: { equals: session2?.itemId } } };
+  },
+  canManageOrderItems: ({ session: session2 }) => {
+    if (!isSignedIn({ session: session2 })) {
+      return false;
+    }
+    if (permissions.canManageCart({ session: session2 })) {
+      return true;
+    }
+    return { order: { user: { id: { equals: session2?.itemId } } } };
+  },
+  canQueryProducts: ({ session: session2 }) => {
+    if (!isSignedIn({ session: session2 })) {
+      return { status: { equals: "AVAILABLE" } };
+    }
+    if (permissions.canManageProducts({ session: session2 })) {
+      return true;
+    }
+    if (isSignedIn({ session: session2 })) {
+      return { user: { id: { equals: session2?.itemId } } };
+    }
+  },
+  canManageUsers: ({ session: session2 }) => {
+    if (!isSignedIn({ session: session2 })) {
+      return false;
+    }
+    if (permissions.canManageUsers({ session: session2 })) {
+      return true;
+    }
+    return { id: { equals: session2?.itemId } };
+  },
+  canSeeOtherUsers: ({ session: session2 }) => {
+    if (!isSignedIn({ session: session2 })) {
+      return false;
+    }
+    if (permissions.canSeeOtherUsers({ session: session2 })) {
+      return true;
+    }
+    return { id: { equals: session2?.itemId } };
+  }
+};
+
+// fields.ts
+var import_fields = require("@keystone-6/core/fields");
+var permissionFields = {
+  canManageProducts: (0, import_fields.checkbox)({
+    defaultValue: false,
+    label: "User can update, delete and manage products"
+  }),
+  canSeeOtherUsers: (0, import_fields.checkbox)({
+    defaultValue: false,
+    label: "User can see and query other users"
+  }),
+  canManageUsers: (0, import_fields.checkbox)({
+    defaultValue: false,
+    label: "User can update, delete and manage other users"
+  }),
+  canManageRoles: (0, import_fields.checkbox)({
+    defaultValue: false,
+    label: "User can create, update, delete roles"
+  }),
+  canManageCart: (0, import_fields.checkbox)({
+    defaultValue: false,
+    label: "User can see and manage cart"
+  }),
+  canManageOrders: (0, import_fields.checkbox)({
+    defaultValue: false,
+    label: "User can see and manage orders"
+  })
+};
+var permissionList = Object.keys(
+  permissionFields
+);
+
 // schema.ts
 var cloudinary = {
   cloudName: process.env.CLOUDINARY_CLOUD_NAME,
@@ -55,16 +158,29 @@ var cloudinary = {
 };
 var lists = {
   User: (0, import_core.list)({
-    access: import_access.allowAll,
+    access: {
+      operation: {
+        create: () => true,
+        delete: permissions.canManageUsers
+      },
+      filter: {
+        query: rules.canManageUsers,
+        delete: rules.canManageUsers
+      }
+    },
+    ui: {
+      hideCreate: (args) => !permissions.canManageUsers(args),
+      hideDelete: (args) => !permissions.canManageUsers(args)
+    },
     fields: {
-      name: (0, import_fields.text)({ validation: { isRequired: true } }),
-      email: (0, import_fields.text)({ validation: { isRequired: true }, isIndexed: "unique" }),
-      password: (0, import_fields.password)(),
-      products: (0, import_fields.relationship)({
+      name: (0, import_fields2.text)({ validation: { isRequired: true } }),
+      email: (0, import_fields2.text)({ validation: { isRequired: true }, isIndexed: "unique" }),
+      password: (0, import_fields2.password)(),
+      products: (0, import_fields2.relationship)({
         ref: "Product.user",
         many: true
       }),
-      cart: (0, import_fields.relationship)({
+      cart: (0, import_fields2.relationship)({
         ref: "CartItem.user",
         many: true,
         ui: {
@@ -72,19 +188,35 @@ var lists = {
           itemView: { fieldMode: "read" }
         }
       }),
-      orders: (0, import_fields.relationship)({ ref: "Order.user", many: true })
+      orders: (0, import_fields2.relationship)({ ref: "Order.user", many: true }),
+      role: (0, import_fields2.relationship)({
+        ref: "Role.assignedTo",
+        access: {
+          create: permissions.canManageUsers,
+          update: permissions.canSeeOtherUsers
+        }
+      })
     }
   }),
   Product: (0, import_core.list)({
-    access: import_access.allowAll,
+    access: {
+      operation: {
+        create: isSignedIn
+      },
+      filter: {
+        query: rules.canQueryProducts,
+        update: rules.canManageProducts,
+        delete: rules.canManageProducts
+      }
+    },
     fields: {
-      name: (0, import_fields.text)({ validation: { isRequired: true } }),
-      description: (0, import_fields.text)({
+      name: (0, import_fields2.text)({ validation: { isRequired: true } }),
+      description: (0, import_fields2.text)({
         ui: {
           displayMode: "textarea"
         }
       }),
-      status: (0, import_fields.select)({
+      status: (0, import_fields2.select)({
         options: [
           { label: "Draft", value: "DRAFT" },
           { label: "Available", value: "AVAILABLE" },
@@ -96,9 +228,9 @@ var lists = {
           createView: { fieldMode: "hidden" }
         }
       }),
-      price: (0, import_fields.integer)(),
-      stock: (0, import_fields.integer)(),
-      photo: (0, import_fields.relationship)({
+      price: (0, import_fields2.integer)(),
+      stock: (0, import_fields2.integer)(),
+      photo: (0, import_fields2.relationship)({
         ref: "ProductImage.product",
         ui: {
           displayMode: "cards",
@@ -107,7 +239,7 @@ var lists = {
           inlineEdit: { fields: ["image", "altText"] }
         }
       }),
-      user: (0, import_fields.relationship)({
+      user: (0, import_fields2.relationship)({
         ref: "User.products",
         hooks: {
           resolveInput({ resolvedData, operation, context }) {
@@ -123,14 +255,21 @@ var lists = {
     }
   }),
   ProductImage: (0, import_core.list)({
-    access: import_access.allowAll,
+    access: {
+      operation: {
+        create: isSignedIn,
+        query: () => true,
+        update: permissions.canManageProducts,
+        delete: permissions.canManageProducts
+      }
+    },
     fields: {
       image: (0, import_cloudinary.cloudinaryImage)({
         cloudinary,
         label: "Source"
       }),
-      altText: (0, import_fields.text)(),
-      product: (0, import_fields.relationship)({ ref: "Product.photo" })
+      altText: (0, import_fields2.text)(),
+      product: (0, import_fields2.relationship)({ ref: "Product.photo" })
     },
     ui: {
       listView: {
@@ -146,20 +285,20 @@ var lists = {
       }
     },
     fields: {
-      quantity: (0, import_fields.integer)({
+      quantity: (0, import_fields2.integer)({
         defaultValue: 1,
         validation: {
           isRequired: true
         }
       }),
-      product: (0, import_fields.relationship)({ ref: "Product" }),
-      user: (0, import_fields.relationship)({ ref: "User.cart" })
+      product: (0, import_fields2.relationship)({ ref: "Product" }),
+      user: (0, import_fields2.relationship)({ ref: "User.cart" })
     }
   }),
   Order: (0, import_core.list)({
     access: import_access.allowAll,
     fields: {
-      label: (0, import_fields.virtual)({
+      label: (0, import_fields2.virtual)({
         field: import_schema.graphql.field({
           type: import_schema.graphql.String,
           resolve(item) {
@@ -167,11 +306,11 @@ var lists = {
           }
         })
       }),
-      total: (0, import_fields.integer)(),
-      items: (0, import_fields.relationship)({ ref: "OrderItem.order", many: true }),
-      user: (0, import_fields.relationship)({ ref: "User.orders" }),
-      charge: (0, import_fields.text)(),
-      date: (0, import_fields.timestamp)({
+      total: (0, import_fields2.integer)(),
+      items: (0, import_fields2.relationship)({ ref: "OrderItem.order", many: true }),
+      user: (0, import_fields2.relationship)({ ref: "User.orders" }),
+      charge: (0, import_fields2.text)(),
+      date: (0, import_fields2.timestamp)({
         defaultValue: {
           kind: "now"
         }
@@ -181,17 +320,17 @@ var lists = {
   OrderItem: (0, import_core.list)({
     access: import_access.allowAll,
     fields: {
-      name: (0, import_fields.text)({
+      name: (0, import_fields2.text)({
         validation: {
           isRequired: true
         }
       }),
-      description: (0, import_fields.text)({
+      description: (0, import_fields2.text)({
         ui: {
           displayMode: "textarea"
         }
       }),
-      photo: (0, import_fields.relationship)({
+      photo: (0, import_fields2.relationship)({
         ref: "ProductImage",
         ui: {
           displayMode: "cards",
@@ -200,9 +339,37 @@ var lists = {
           inlineEdit: { fields: ["image", "altText"] }
         }
       }),
-      price: (0, import_fields.integer)(),
-      quantity: (0, import_fields.integer)(),
-      order: (0, import_fields.relationship)({ ref: "Order.items" })
+      price: (0, import_fields2.integer)(),
+      quantity: (0, import_fields2.integer)(),
+      order: (0, import_fields2.relationship)({ ref: "Order.items" })
+    }
+  }),
+  Role: (0, import_core.list)({
+    access: {
+      operation: {
+        create: permissions.canManageRoles,
+        query: permissions.canManageRoles,
+        update: permissions.canManageRoles,
+        delete: permissions.canManageRoles
+      }
+    },
+    ui: {
+      hideCreate: (args) => !permissions.canManageRoles(args),
+      hideDelete: (args) => !permissions.canManageRoles(args),
+      isHidden: (args) => !permissions.canManageRoles(args)
+    },
+    fields: {
+      ...permissionFields,
+      assignedTo: (0, import_fields2.relationship)({
+        ref: "User.role",
+        many: true,
+        ui: {
+          itemView: { fieldMode: "read" }
+        }
+      }),
+      name: (0, import_fields2.text)({
+        validation: { isRequired: true }
+      })
     }
   })
 };
@@ -260,7 +427,7 @@ var { withAuth } = (0, import_auth.createAuth)({
   initFirstItem: {
     fields: ["name", "email", "password"]
   },
-  sessionData: "id name email",
+  sessionData: `id name email role { ${permissionList.join(" ")} }`,
   passwordResetLink: {
     async sendToken(args) {
       console.log(args);
@@ -586,7 +753,10 @@ var keystone_default = withAuth(
     },
     lists,
     session,
-    extendGraphqlSchema
+    extendGraphqlSchema,
+    ui: {
+      isAccessAllowed: ({ session: session2 }) => !!session2?.data
+    }
   })
 );
 // Annotate the CommonJS export names for ESM import in node:

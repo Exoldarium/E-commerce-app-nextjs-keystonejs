@@ -11,6 +11,7 @@ import { useUser } from './User';
 
 // TODO
 // delete from cart button should be in the corner
+// cart should be available even for users that are logged out
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;

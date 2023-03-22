@@ -15,6 +15,8 @@ import { document } from '@keystone-6/fields-document';
 import type { Lists } from '.keystone/types';
 import { graphql } from '@graphql-ts/schema';
 import formatMoney from './lib/formatMoney';
+import { isSignedIn, permissions, rules } from './access';
+import { permissionFields } from './fields';
 
 export const cloudinary = {
   cloudName: process.env.CLOUDINARY_CLOUD_NAME!,
@@ -28,7 +30,21 @@ export const cloudinary = {
 
 export const lists: Lists = {
   User: list({
-    access: allowAll,
+    access: {
+      operation: {
+        create: () => true,
+        delete: permissions.canManageUsers,
+      },
+      filter: {
+        query: rules.canManageUsers,
+        delete: rules.canManageUsers
+      }
+    },
+    ui: {
+      // the create user ui is hidden unless the user has permission
+      hideCreate: (args) => !permissions.canManageUsers(args),
+      hideDelete: (args) => !permissions.canManageUsers(args),
+    },
     fields: {
       name: text({ validation: { isRequired: true } }),
       email: text({ validation: { isRequired: true }, isIndexed: 'unique' }),
@@ -46,10 +62,26 @@ export const lists: Lists = {
         }
       }),
       orders: relationship({ ref: 'Order.user', many: true }),
+      role: relationship({
+        ref: 'Role.assignedTo',
+        access: {
+          create: permissions.canManageUsers,
+          update: permissions.canSeeOtherUsers,
+        }
+      }),
     },
   }),
   Product: list({
-    access: allowAll,
+    access: {
+      operation: {
+        create: isSignedIn,
+      },
+      filter: {
+        query: rules.canQueryProducts,
+        update: rules.canManageProducts,
+        delete: rules.canManageProducts,
+      }
+    },
     fields: {
       name: text({ validation: { isRequired: true } }),
       description: text({
@@ -98,7 +130,14 @@ export const lists: Lists = {
     },
   }),
   ProductImage: list({
-    access: allowAll,
+    access: {
+      operation: {
+        create: isSignedIn,
+        query: () => true,
+        update: permissions.canManageProducts,
+        delete: permissions.canManageProducts,
+      },
+    },
     fields: {
       image: cloudinaryImage({
         cloudinary,
@@ -181,6 +220,36 @@ export const lists: Lists = {
       price: integer(),
       quantity: integer(),
       order: relationship({ ref: 'Order.items' }),
+    }
+  }),
+  Role: list({
+    access: {
+      operation: {
+        // roles can be managed based on permissions 
+        create: permissions.canManageRoles,
+        query: permissions.canManageRoles,
+        update: permissions.canManageRoles,
+        delete: permissions.canManageRoles,
+      },
+    },
+    ui: {
+      // the ui is hidden unless the user has permisssion
+      hideCreate: (args) => !permissions.canManageRoles(args),
+      hideDelete: (args) => !permissions.canManageRoles(args),
+      isHidden: (args) => !permissions.canManageRoles(args),
+    },
+    fields: {
+      ...permissionFields,
+      assignedTo: relationship({
+        ref: 'User.role',
+        many: true,
+        ui: {
+          itemView: { fieldMode: 'read' },
+        }
+      }),
+      name: text({
+        validation: { isRequired: true },
+      })
     }
   })
 };

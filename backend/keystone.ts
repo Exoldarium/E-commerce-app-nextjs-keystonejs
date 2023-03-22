@@ -28,5 +28,9 @@ export default withAuth(
     lists,
     session,
     extendGraphqlSchema,
+    ui: {
+      isAccessAllowed: ({ session }) =>
+        !!session?.data,
+    },
   })
 );
