@@ -19,6 +19,10 @@ export const ProductStyles = styled.div`
     height: 300px;
     object-fit: cover;
   }
+  @media only screen and (max-width: 1250px) and (min-width: 790px) {
+    grid-template-columns: repeat(2, 350px);
+    padding-left: 20rem;
+  }
   @media only screen and (max-width: 790px) {
     ${(props) => props.open && `transform: translateX(0)`};
     display: grid;

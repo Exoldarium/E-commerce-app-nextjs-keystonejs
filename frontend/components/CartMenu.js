@@ -59,21 +59,21 @@ export default function CartMenu() {
   if (user) {
     return (
       <CartSliderStyles open={isCartOpen}>
-        <button type="button" onClick={closeCart} className="closeCartButton">
-          &times;
-        </button>
-        <div>
+        <div className="cartLinks">
           <p>
             <Link href="/checkout">Go to payment</Link>
           </p>
           <p>
             <Link href="/cart">Go to cart</Link>
           </p>
+          <button type="button" onClick={closeCart} className="closeCartButton">
+            &times;
+          </button>
         </div>
+        <p>Total: {formatMoney(calculateTotalPrice(cartItems))}</p>
         {cartItems.map((cartItem) => (
           <CartItem cartItem={cartItem} key={cartItem.id} />
         ))}
-        <p>Total: {formatMoney(calculateTotalPrice(cartItems))}</p>
       </CartSliderStyles>
     );
   }

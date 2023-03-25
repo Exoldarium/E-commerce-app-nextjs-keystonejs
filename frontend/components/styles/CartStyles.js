@@ -44,14 +44,24 @@ export const CartSliderStyles = styled.div`
   z-index: 2;
   div {
     display: flex;
-    flex-direction: row;
   }
-  p {
-    margin: 0 auto;
-    border: 1px solid black;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 1.3vw;
+  .cartLinks {
+    display: flex;
+    flex-direction: row;
+    .closeCartButton {
+      margin-left: 10rem;
+      align-self: flex-start;
+      background: white;
+      font-size: 2vw;
+      border: none;
+      cursor: pointer;
+    }
+    p {
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.3vw;
+      padding: 1rem;
+    }
   }
   @media only screen and (max-width: 790px) {
     display: none;
