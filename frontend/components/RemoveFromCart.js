@@ -25,7 +25,11 @@ export default function RemoveFromCart({ id }) {
   );
 
   return (
-    <CartButtonStyles type="button" onClick={removeFromCart}>
+    <CartButtonStyles
+      type="button"
+      className="removeFromCart"
+      onClick={removeFromCart}
+    >
       &times;
     </CartButtonStyles>
   );

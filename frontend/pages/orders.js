@@ -28,7 +28,7 @@ const ORDERS_QUERY = gql`
 `;
 
 export default function OrdersPage() {
-  const [isDropdown, setDropdown] = useState();
+  const [isDropdown, setDropdown] = useState('');
   const user = useUser();
   const userId = user?.id;
   const { data, loading, error, fetchMore } = useQuery(ORDERS_QUERY, {

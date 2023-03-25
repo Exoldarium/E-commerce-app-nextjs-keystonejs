@@ -59,7 +59,7 @@ export default function CartMenu() {
   if (user) {
     return (
       <CartSliderStyles open={isCartOpen}>
-        <button type="button" onClick={closeCart}>
+        <button type="button" onClick={closeCart} className="closeCartButton">
           &times;
         </button>
         <div>

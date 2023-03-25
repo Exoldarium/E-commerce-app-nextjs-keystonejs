@@ -10,7 +10,6 @@ import { CartPageStyles, CartStyles } from './styles/CartStyles';
 import { useUser } from './User';
 
 // TODO
-// delete from cart button should be in the corner
 // cart should be available even for users that are logged out
 
 export function CartItem({ cartItem }) {
@@ -83,10 +82,12 @@ export default function Cart() {
         {cartItems.map((cartItem) => (
           <CartItem cartItem={cartItem} key={cartItem.id} />
         ))}
-        <p>Total: {formatMoney(calculateTotalPrice(cartItems))}</p>
-        <p>
-          <Link href="/checkout">Go to payment</Link>
-        </p>
+        <div className="totalPriceCart">
+          <p>Total: {formatMoney(calculateTotalPrice(cartItems))}</p>
+          <p>
+            <Link href="/checkout">Go to payment</Link>
+          </p>
+        </div>
       </CartStyles>
     );
   }

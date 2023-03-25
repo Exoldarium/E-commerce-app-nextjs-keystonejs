@@ -4,8 +4,23 @@ export const CartStyles = styled.div`
   padding-top: 25%;
   padding-bottom: 25%;
   min-height: 100vh;
+  .totalPriceCart {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+  }
   @media only screen and (max-width: 790px) {
     padding-bottom: 0;
+    .totalPriceCart {
+      display: flex;
+      font-size: 2rem;
+      font-weight: bold;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 `;
 
@@ -40,6 +55,21 @@ export const CartSliderStyles = styled.div`
   }
   @media only screen and (max-width: 790px) {
     display: none;
+  }
+  .closeCartButton {
+    align-self: flex-end;
+    background: white;
+    font-size: 2vw;
+    border: none;
+    cursor: pointer;
+  }
+  .removeFromCart {
+    align-self: flex-start;
+    background: white;
+    border: none;
+    padding-right: 0;
+    font-size: 2vw;
+    text-align: top;
   }
 `;
 
@@ -132,6 +162,9 @@ export const CartPageStyles = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    p {
+      font-size: 2rem;
+    }
   }
   h1 {
     flex: 1;
@@ -167,8 +200,12 @@ export const CartPageStyles = styled.div`
     height: 5vh;
   }
   .removeFromCart {
-    height: 30px;
-    width: 70px;
+    align-self: flex-start;
+    background: white;
+    border: none;
+    padding-right: 0;
+    font-size: 2.5vw;
+    text-align: top;
   }
   .maxAmountP {
     color: red;
@@ -193,7 +230,7 @@ export const CartPageStyles = styled.div`
     }
     .cartPageInfo {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
       .quantityParagraph {
         height: 5vh;
@@ -204,6 +241,17 @@ export const CartPageStyles = styled.div`
         margin: 0;
         border: 1px solid black;
       }
+    }
+    .removeFromCart {
+      position: absolute;
+      right: 2rem;
+      height: 2rem;
+      background: white;
+      border: none;
+      font-size: 5vw;
+    }
+    .totalPriceCart {
+      text-align: center;
     }
   }
 `;
