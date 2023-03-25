@@ -63,7 +63,9 @@ export const OrderHistoryStyles = styled.div`
   margin: 0 auto;
   .orderInfo {
     font-weight: bold;
+    display: flex;
     p {
+      flex: 1;
       text-align: left;
     }
     .ref {
@@ -76,19 +78,40 @@ export const OrderHistoryStyles = styled.div`
       text-align: right;
     }
   }
-  div {
+  .allOrders {
     display: flex;
-    flex-direction: row;
-    width: 50vw;
+    flex-direction: column;
     border-bottom: 1px solid black;
-    padding-top: 0.5rem;
-    p {
-      text-align: right;
-      flex: 1;
+    .productOrders {
+      display: flex;
+      flex-direction: row;
+      width: 50vw;
+      padding-top: 0.5rem;
+      p {
+        text-align: right;
+        flex: 1;
+      }
+      .chargeP {
+        text-align: left;
+      }
     }
-  }
-  .chargeP {
-    text-align: left;
+    .orderItems {
+      visibility: hidden;
+      height: 0;
+      div {
+        display: flex;
+        flex-direction: row;
+        margin-left: 7rem;
+        margin-right: 5rem;
+      }
+      P {
+        flex: 1;
+      }
+    }
+    .orderItems.active {
+      visibility: visible;
+      height: fit-content;
+    }
   }
   button {
     width: fit-content;
@@ -101,22 +124,30 @@ export const OrderHistoryStyles = styled.div`
       width: 80vw;
       display: flex;
       P {
+        flex: 1;
         font-size: 3.5vw;
       }
       .date {
         text-align: right;
       }
     }
-    div {
+    .allOrders {
       display: flex;
-      width: 80vw;
-      p {
-        flex: 1;
-        font-size: 3vw;
+      flex-direction: column;
+      .productOrders {
+        display: flex;
+        width: 80vw;
+        p {
+          flex: 1;
+          font-size: 3vw;
+        }
+        .chargeP {
+          font-size: 2.5vw;
+        }
       }
     }
-    .chargeP {
-      font-size: 2.5vw;
+    .orderItems {
+      /* display: none; */
     }
   }
 `;

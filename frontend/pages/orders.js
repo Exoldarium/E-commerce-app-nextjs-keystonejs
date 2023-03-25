@@ -1,5 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
+import { useState } from 'react';
 import { OrderHistoryStyles } from '../components/styles/OrderStyles';
 import { useUser } from '../components/User';
 import { ordersPerPage } from '../config';
@@ -16,6 +17,7 @@ const ORDERS_QUERY = gql`
         date
         total
         items {
+          name
           id
           quantity
           price
@@ -26,6 +28,7 @@ const ORDERS_QUERY = gql`
 `;
 
 export default function OrdersPage() {
+  const [isDropdown, setDropdown] = useState();
   const user = useUser();
   const userId = user?.id;
   const { data, loading, error, fetchMore } = useQuery(ORDERS_QUERY, {
@@ -37,7 +40,14 @@ export default function OrdersPage() {
   });
   const orders = data?.user?.orders;
   const orderLength = orders?.length <= 1;
-  // TODO add a dropdown to display items
+
+  function handleClick(e) {
+    setDropdown(e.target.id);
+    if (isDropdown === e.target.id) {
+      setDropdown('');
+    }
+  }
+
   if (user) {
     return (
       <OrderHistoryStyles>
@@ -52,11 +62,30 @@ export default function OrdersPage() {
           <p className="date">Date</p>
           <p className="total">Total Price</p>
         </div>
-        {orders?.map((order) => (
-          <div key={order.id}>
-            <p className="chargeP">{order.charge}</p>
-            <p>{convertDate(order.date)}</p>
-            <p>{formatMoney(order.total)}</p>
+        {orders?.map((order, i) => (
+          <div key={order.id} className="allOrders">
+            <div className="productOrders">
+              <button type="button" id={order.id} onClick={handleClick}>
+                V
+              </button>
+              <p className="chargeP">{order.charge}</p>
+              <p className="dateP">{convertDate(order.date)}</p>
+              <p className="moneyP">{formatMoney(order.total)}</p>
+            </div>
+            <div
+              id={order.id}
+              className={`orderItems ${
+                isDropdown === order.id ? 'active' : ''
+              }`}
+            >
+              {order.items.map((item) => (
+                <div key={item.id}>
+                  <p>Product: {item.name}</p>
+                  <p>&times; {item.quantity}</p>
+                  <p>Price: {formatMoney(item.price)}</p>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
         <button
