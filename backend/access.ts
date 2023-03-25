@@ -32,7 +32,7 @@ export const rules = {
     if (!isSignedIn({ session })) {
       return false;
     }
-    // they can manage all orders and cart items if they an admin
+    // they can manage all orders and cart items if they are an admin
     if (permissions.canManageCart({ session })) {
       return true;
     }
@@ -59,11 +59,8 @@ export const rules = {
     }
     // users that are signed in can see the products they own regardless of it's status
     if (isSignedIn({ session })) {
-      return { user: { id: { equals: session?.itemId } } }
+      return { user: { id: { equals: session?.itemId } } } || { status: { equals: 'AVAILABLE' } };
     }
-    // if (isSignedIn({ session })) {
-    //   return { status: { equals: 'AVAILABLE' } };
-    // }
   },
   canManageUsers: ({ session }: ListAccessArgs) => {
     if (!isSignedIn({ session })) {

@@ -29,7 +29,6 @@ var import_core2 = require("@keystone-6/core");
 // schema.ts
 var import_config = require("dotenv/config");
 var import_core = require("@keystone-6/core");
-var import_access = require("@keystone-6/core/access");
 var import_cloudinary = require("@keystone-6/cloudinary");
 var import_fields2 = require("@keystone-6/core/fields");
 var import_schema = require("@graphql-ts/schema");
@@ -278,7 +277,16 @@ var lists = {
     }
   }),
   CartItem: (0, import_core.list)({
-    access: import_access.allowAll,
+    access: {
+      operation: {
+        create: isSignedIn
+      },
+      filter: {
+        query: rules.canOrder,
+        update: rules.canOrder,
+        delete: rules.canOrder
+      }
+    },
     ui: {
       listView: {
         initialColumns: ["product", "quantity", "user"]
@@ -296,7 +304,16 @@ var lists = {
     }
   }),
   Order: (0, import_core.list)({
-    access: import_access.allowAll,
+    access: {
+      operation: {
+        query: isSignedIn,
+        update: () => false,
+        delete: () => false
+      },
+      filter: {
+        query: rules.canOrder
+      }
+    },
     fields: {
       label: (0, import_fields2.virtual)({
         field: import_schema.graphql.field({
@@ -318,7 +335,16 @@ var lists = {
     }
   }),
   OrderItem: (0, import_core.list)({
-    access: import_access.allowAll,
+    access: {
+      operation: {
+        query: isSignedIn,
+        update: () => false,
+        delete: () => false
+      },
+      filter: {
+        query: rules.canManageOrderItems
+      }
+    },
     fields: {
       name: (0, import_fields2.text)({
         validation: {

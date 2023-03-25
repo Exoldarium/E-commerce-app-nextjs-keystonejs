@@ -25,16 +25,15 @@ export const cloudinary = {
   folder: 'e-commerce-images',
 };
 
-// TODO
-// roles and premissions
-
 export const lists: Lists = {
   User: list({
     access: {
+      // everyone can create an account only admin can delete accounts
       operation: {
         create: () => true,
         delete: permissions.canManageUsers,
       },
+      // signed in users can manage their own account
       filter: {
         query: rules.canManageUsers,
         delete: rules.canManageUsers
@@ -65,6 +64,7 @@ export const lists: Lists = {
       role: relationship({
         ref: 'Role.assignedTo',
         access: {
+          // only admin can see the roles
           create: permissions.canManageUsers,
           update: permissions.canSeeOtherUsers,
         }
@@ -73,9 +73,11 @@ export const lists: Lists = {
   }),
   Product: list({
     access: {
+      // only signed in users can create products
       operation: {
         create: isSignedIn,
       },
+      // signed in users can only manage their own products
       filter: {
         query: rules.canQueryProducts,
         update: rules.canManageProducts,
@@ -132,6 +134,7 @@ export const lists: Lists = {
   ProductImage: list({
     access: {
       operation: {
+        // everyone can see images, only signed in users can create them, the admin is the only one that can update and delete
         create: isSignedIn,
         query: () => true,
         update: permissions.canManageProducts,
@@ -153,7 +156,18 @@ export const lists: Lists = {
     },
   }),
   CartItem: list({
-    access: allowAll,
+    access: {
+      operation: {
+        // only signed in users can add to cart
+        create: isSignedIn,
+      },
+      filter: {
+        // signed in users can only see their own cart, the admin sees everything
+        query: rules.canOrder,
+        update: rules.canOrder,
+        delete: rules.canOrder,
+      }
+    },
     ui: {
       listView: {
         initialColumns: ['product', 'quantity', 'user'],
@@ -172,7 +186,18 @@ export const lists: Lists = {
     }
   }),
   Order: list({
-    access: allowAll,
+    access: {
+      // only signed in users can order but only admin can delete and update all orders
+      operation: {
+        query: isSignedIn,
+        update: () => false,
+        delete: () => false,
+      },
+      // signed in users can only see their own orders
+      filter: {
+        query: rules.canOrder,
+      },
+    },
     fields: {
       // virtual fields allow us to query on the fly, here we query Order.total
       label: virtual({
@@ -196,7 +221,18 @@ export const lists: Lists = {
     }
   }),
   OrderItem: list({
-    access: allowAll,
+    access: {
+      operation: {
+        // only signed in users can see their order items but only admin can update and delete all
+        query: isSignedIn,
+        update: () => false,
+        delete: () => false,
+      },
+      // signed in users can only update, delete and see their own items
+      filter: {
+        query: rules.canManageOrderItems,
+      },
+    },
     fields: {
       name: text({
         validation: {

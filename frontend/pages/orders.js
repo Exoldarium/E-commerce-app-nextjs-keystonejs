@@ -6,9 +6,6 @@ import { ordersPerPage } from '../config';
 import { convertDate } from '../lib/convertDate';
 import formatMoney from '../lib/formatMoney';
 
-// TODO
-// Figure out what to do when other users buy your products
-
 const ORDERS_QUERY = gql`
   query ORDERS_QUERY($id: ID, $skip: Int! = 0, $take: Int) {
     user(where: { id: $id }) {
