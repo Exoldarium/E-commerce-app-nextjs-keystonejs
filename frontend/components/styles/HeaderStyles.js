@@ -17,14 +17,24 @@ export const HeaderStyles = styled.header`
   padding-right: 50px;
   border: none;
   z-index: 2;
-  a,
-  button {
-    margin: 1.5rem;
+  .cartIcon {
+    height: 3vh;
+    width: auto;
+    cursor: pointer;
+  }
+  a {
+    margin-right: 2rem;
   }
   .userMenu {
     button {
-      border-radius: 30px;
+      border: none;
+      background: white;
       cursor: pointer;
+      margin: 1rem 0 0 0;
+    }
+    .userMenuIcon {
+      height: 3vh;
+      width: auto;
     }
   }
   .cartAmount {

@@ -13,19 +13,21 @@ export const NavStyles = styled.div`
   border: 1px solid black;
   background: white;
   max-width: 12vw;
+  border-radius: 20px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.4);
   div {
     display: flex;
     flex-direction: column;
   }
   h1 {
-    font-size: 1.3vw;
+    font-size: 1.5rem;
     border-bottom: 1px solid black;
     padding-left: 2rem;
     padding-right: 2rem;
     margin: 0;
   }
   button {
-    font-size: 1.3vw;
+    font-size: 1.5rem;
     background: none;
     border: none;
     font-weight: bold;
@@ -39,7 +41,8 @@ export const NavStyles = styled.div`
   a,
   button {
     padding: 2rem;
-    margin: 0;
+    margin: 0 0;
+    font-size: 1.5rem;
   }
   @media only screen and (max-width: 790px) {
     display: none;
