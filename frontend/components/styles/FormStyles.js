@@ -14,6 +14,10 @@ export const FormStyles = styled.form`
     height: 50px;
     object-fit: cover;
   }
+  /* .descriptionInput {
+    height: 7vh;
+    line-height: 7vh;
+  } */
   @media only screen and (max-width: 790px) {
     max-width: 80vw;
   }

@@ -46,6 +46,9 @@ const GlobalStyles = createGlobalStyle`
   button {
     font-family: --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
+  p {
+    cursor: default;
+  }
 `;
 
 const InnerStyles = styled.div`

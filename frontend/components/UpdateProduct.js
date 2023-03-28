@@ -99,6 +99,7 @@ export default function UpdateProduct({ id }) {
             placeholder="Description"
             value={inputs.description}
             onChange={handleInputs}
+            className="descriptionInput"
             required
           />
           <label htmlFor="description">Stock</label>
@@ -109,8 +110,9 @@ export default function UpdateProduct({ id }) {
             placeholder="Stock"
             value={inputs.stock}
             onChange={handleInputs}
+            required
           />
-          <label htmlFor="price">Price</label>
+          <label htmlFor="price">Price in cents</label>
           <input
             type="number"
             name="price"

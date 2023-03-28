@@ -10,12 +10,12 @@ export const SearchStyles = styled.div`
     border-radius: 10px;
   }
   .listDiv.active {
+    ${(props) => props.active && `height: 50vh`};
     display: flex;
     flex-direction: column;
     position: absolute;
     background: white;
     width: 50vw;
-    height: 50vh;
     border: 1px solid black;
     overflow-y: auto;
     a {
@@ -30,7 +30,7 @@ export const SearchStyles = styled.div`
     display: none;
   }
   .singleList:hover {
-    background: grey;
+    background: var(--lightGrey);
   }
   .singleList {
     cursor: pointer;
@@ -41,6 +41,7 @@ export const SearchStyles = styled.div`
   }
   p {
     flex: 1;
+    cursor: pointer;
   }
   img {
     width: 8vh;
@@ -61,10 +62,11 @@ export const SearchStyles = styled.div`
       display: none;
     }
     .listDiv.active {
+      overflow-y: scroll;
       display: flex;
       flex-direction: column;
       width: 100vw;
-      height: fit-content;
+      height: 100vh;
     }
   }
 `;

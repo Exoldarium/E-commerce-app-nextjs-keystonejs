@@ -47,13 +47,13 @@ export default function Search() {
         searchTerms: inputValue,
       },
     });
+    toggleSearchList();
   }
 
   return (
     <SearchStyles active={isSearchActive}>
       <input
         onChange={handleChange}
-        onFocus={toggleSearchList}
         onClick={closeCart}
         type="text"
         name="search"
