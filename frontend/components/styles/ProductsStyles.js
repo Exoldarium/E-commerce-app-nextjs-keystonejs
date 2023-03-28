@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ProductStyles = styled.div`
+export const ProductsStyles = styled.div`
   ${(props) => props.open && `transform: translateX(-20%)`};
   transition: 0.2s;
   display: grid;
@@ -13,7 +13,8 @@ export const ProductStyles = styled.div`
   font-weight: bold;
   margin: 0 auto;
   padding-top: 15%;
-  z-index: -1;
+  /* width: fit-content; */
+  /* z-index: -1; */
   img {
     width: 300px;
     height: 300px;

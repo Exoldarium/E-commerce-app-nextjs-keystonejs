@@ -32,6 +32,7 @@ export const CartSliderStyles = styled.div`
   right: 0;
   top: 0rem;
   height: 100%;
+  width: 30vw;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -39,16 +40,22 @@ export const CartSliderStyles = styled.div`
   border-radius: 5px;
   padding: 10px;
   background: white;
-  width: 30%;
   margin: 0 auto;
   z-index: 2;
   overflow-y: auto;
+  .totalParagraph {
+    font-weight: bold;
+    font-size: 20px;
+  }
   div {
     display: flex;
   }
   .cartLinks {
     display: flex;
     flex-direction: row;
+    border-bottom: 1px solid black;
+    font-weight: bold;
+    width: 100%;
     .closeCartButton {
       margin-left: 10rem;
       align-self: flex-start;
@@ -56,6 +63,10 @@ export const CartSliderStyles = styled.div`
       font-size: 2vw;
       border: none;
       cursor: pointer;
+    }
+    a:hover {
+      color: var(--peach);
+      text-decoration: none;
     }
     p {
       margin: 0 auto;
@@ -75,12 +86,11 @@ export const CartSliderStyles = styled.div`
     cursor: pointer;
   }
   .removeFromCart {
-    align-self: center;
+    align-self: flex-start;
     background: white;
     border: none;
     padding-right: 0;
-    font-size: 2vw;
-    text-align: top;
+    font-size: 25px;
   }
 `;
 
@@ -93,6 +103,7 @@ export const CartMenuPageStyles = styled.div`
   margin: 0.5rem;
   width: 27vw;
   height: 12vh;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   input {
     height: 3vh;
     width: 5vw;
@@ -102,12 +113,25 @@ export const CartMenuPageStyles = styled.div`
   .sliderStyles {
     flex-direction: column;
     align-items: center;
+    border: none;
+    flex: 1;
     p {
       border: none;
+      margin: 0;
+      .priceSpan {
+        font-weight: bold;
+      }
     }
-    div {
+    .buttonAmountDiv {
       display: flex;
       align-items: center;
+      border: 1px solid black;
+      border-radius: 3px;
+      button {
+        background: var(--peach);
+        border: none;
+        border-radius: 3px;
+      }
       .quantityParagraph {
         display: flex;
         align-items: center;
@@ -117,7 +141,7 @@ export const CartMenuPageStyles = styled.div`
         text-align: center;
         font-size: 2rem;
         margin: 0;
-        border: 1px solid black;
+        border: none;
       }
     }
   }
@@ -133,10 +157,10 @@ export const CartMenuPageStyles = styled.div`
     h1 {
       cursor: pointer;
       font-size: 1.3vw;
-      flex: 1;
+      padding-left: 2rem;
     }
     h1:hover {
-      color: violet;
+      color: var(--peach);
     }
   }
   button[aria-disabled='true'] {
@@ -149,12 +173,13 @@ export const CartMenuPageStyles = styled.div`
   .removeFromCartMenu {
     height: 2vh;
   }
-  .maxAmountP {
-    color: red;
-    font-size: 10px;
-  }
   .pdiv {
+    border: none;
     height: 1px;
+    .maxAmountP {
+      color: red;
+      font-size: 10px;
+    }
   }
   @media only screen and (max-width: 790px) {
     display: none;
@@ -182,7 +207,7 @@ export const CartPageStyles = styled.div`
     padding-left: 2rem;
   }
   a:hover {
-    color: violet;
+    color: var(--peach);
     cursor: pointer;
     text-decoration: none;
   }

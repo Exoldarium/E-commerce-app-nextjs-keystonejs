@@ -26,7 +26,7 @@ export function CartItem({ cartItem }) {
         </Link>
       </div>
       <div className="sliderStyles">
-        <div>
+        <div className="buttonAmountDiv">
           <RemoveSingleCartItem id={product?.id} quantity={cartItem.quantity} />
           <p
             onChange={() => setIsAmount(cartItem.quantity)}
@@ -40,7 +40,12 @@ export function CartItem({ cartItem }) {
             quantity={cartItem.quantity}
           />
         </div>
-        <p>Price: {formatMoney(product?.price * cartItem.quantity)}</p>
+        <p>
+          Price:{' '}
+          <span className="priceSpan">
+            {formatMoney(product?.price * cartItem.quantity)}
+          </span>
+        </p>
         <div className="pdiv">
           {maxAmount && <p className="maxAmountP">Max amount available</p>}
         </div>
@@ -61,16 +66,18 @@ export default function CartMenu() {
       <CartSliderStyles open={isCartOpen}>
         <div className="cartLinks">
           <p>
-            <Link href="/checkout">Go to payment</Link>
+            <Link href="/checkout">Payment</Link>
           </p>
           <p>
-            <Link href="/cart">Go to cart</Link>
+            <Link href="/cart">Cart</Link>
           </p>
           <button type="button" onClick={closeCart} className="closeCartButton">
             &times;
           </button>
         </div>
-        <p>Total: {formatMoney(calculateTotalPrice(cartItems))}</p>
+        <p className="totalParagraph">
+          Total: {formatMoney(calculateTotalPrice(cartItems))}
+        </p>
         {cartItems.map((cartItem) => (
           <CartItem cartItem={cartItem} key={cartItem.id} />
         ))}

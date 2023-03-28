@@ -4,7 +4,7 @@ import { useSetState } from '../lib/stateProvider';
 import CartMenu from './CartMenu';
 import Product from './Product';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
-import { ProductStyles } from './styles/ProductsStyles';
+import { ProductsStyles } from './styles/ProductsStyles';
 
 export const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY($take: Int, $skip: Int! = 0) {
@@ -43,11 +43,11 @@ export default function Products({ page }) {
 
   return (
     <>
-      <ProductStyles open={isCartOpen}>
+      <ProductsStyles open={isCartOpen}>
         {products.map((product) => (
           <Product key={product.id} product={product} id={product.id} />
         ))}
-      </ProductStyles>
+      </ProductsStyles>
       <CartMenu />
     </>
   );

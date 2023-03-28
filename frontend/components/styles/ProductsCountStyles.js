@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+// TODO
+// center pagination buttons
+
 export const ProductsCountStyles = styled.div`
   display: flex;
   flex-direction: row;
