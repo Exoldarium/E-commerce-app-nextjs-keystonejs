@@ -7,18 +7,23 @@ export const SearchStyles = styled.div`
   .inputSearch {
     width: 25vw;
     height: 3vh;
+    border-radius: 10px;
   }
   .listDiv.active {
     display: flex;
     flex-direction: column;
     position: absolute;
     background: white;
-    width: 60vw;
-    height: fit-content;
+    width: 50vw;
+    height: 50vh;
     border: 1px solid black;
-    button,
+    overflow-y: auto;
     a {
       margin: 0;
+    }
+    button {
+      position: absolute;
+      right: 0;
     }
   }
   .listDiv.hidden {
@@ -32,7 +37,7 @@ export const SearchStyles = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
   }
   p {
     flex: 1;

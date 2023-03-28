@@ -15,7 +15,7 @@ export const HeaderStyles = styled.header`
   height: 12vh;
   padding-left: 50px;
   padding-right: 50px;
-  border-bottom: 1px solid black;
+  border: none;
   z-index: 2;
   a,
   button {

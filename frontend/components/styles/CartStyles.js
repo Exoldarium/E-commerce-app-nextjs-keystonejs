@@ -42,6 +42,7 @@ export const CartSliderStyles = styled.div`
   width: 30%;
   margin: 0 auto;
   z-index: 2;
+  overflow-y: auto;
   div {
     display: flex;
   }
@@ -74,7 +75,7 @@ export const CartSliderStyles = styled.div`
     cursor: pointer;
   }
   .removeFromCart {
-    align-self: flex-start;
+    align-self: center;
     background: white;
     border: none;
     padding-right: 0;

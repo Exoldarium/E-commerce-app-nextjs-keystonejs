@@ -11,8 +11,10 @@ export const ProductsCountStyles = styled.div`
     opacity: 0.6;
   }
   a {
-    border: 1px solid black;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.4);
+    border-radius: 10px;
     padding: 1rem;
+    background: white;
   }
   div {
     text-align: center;

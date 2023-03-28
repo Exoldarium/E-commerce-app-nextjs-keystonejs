@@ -11,7 +11,6 @@ import { useUser } from './User';
 
 // TODO
 // cart should be available even for users that are logged out
-// cart should have a scroll bar
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;

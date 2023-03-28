@@ -16,6 +16,7 @@ const GlobalStyles = createGlobalStyle`
     --black: #393939;
     --grey: #3A3A3A;
     --gray: var(--grey);
+    --peach: #EEA47FFF;
     --lightGrey: #e1e1e1;
     --lightGray: var(--lightGrey);
     --offWhite: #ededed;
@@ -33,6 +34,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     font-size: 1.5rem;
     line-height: 2;
+    background: var(--offWhite);
   }
   a {
     text-decoration: none;

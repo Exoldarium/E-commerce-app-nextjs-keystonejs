@@ -8,7 +8,7 @@ export const ProductStyles = styled.div`
   gap: 10px;
   grid-auto-rows: minmax(100px, auto);
   justify-items: center;
-  text-align: center;
+  text-align: left;
   font-size: large;
   font-weight: bold;
   margin: 0 auto;
@@ -20,8 +20,8 @@ export const ProductStyles = styled.div`
     object-fit: cover;
   }
   @media only screen and (max-width: 1250px) and (min-width: 790px) {
-    grid-template-columns: repeat(2, 350px);
-    padding-left: 20rem;
+    ${(props) => props.open && `padding-left: 20rem;`};
+    ${(props) => props.open && `grid-template-columns: repeat(2, 350px)`};
   }
   @media only screen and (max-width: 790px) {
     ${(props) => props.open && `transform: translateX(0)`};

@@ -4,6 +4,9 @@ import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
 import { SearchStyles } from './styles/SearchStyles';
 
+// TODO
+// add close on out click
+
 const SEARCH_QUERY = gql`
   query SEARCH_QUERY($searchTerms: String!) {
     products(

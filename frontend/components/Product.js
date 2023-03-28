@@ -17,14 +17,18 @@ export default function Product({ product }) {
           alt={product.description}
         />
       </Link>
-      <p>{product.name}</p>
-      <p>{formatMoney(product.price)}</p>
-      {user && <AddToCart id={product.id} />}
-      {!user && (
-        <button type="button" onClick={() => router.push('/signin')}>
-          Add to Cart
-        </button>
-      )}
+      <div>
+        <div className="buttonDiv">
+          <p>{product.name}</p>
+          {user && <AddToCart id={product.id} />}
+          {!user && (
+            <button type="button" onClick={() => router.push('/signin')}>
+              Add to Cart
+            </button>
+          )}
+        </div>
+        <p className="priceParagraph">{formatMoney(product.price)}</p>
+      </div>
     </ProductStyles>
   );
 }
