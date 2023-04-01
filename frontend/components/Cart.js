@@ -86,6 +86,8 @@ export default function Cart() {
           <p>Total: {formatMoney(calculateTotalPrice(cartItems))}</p>
           <p>
             <Link href="/checkout">Go to payment</Link>
+            <br />
+            <Link href="/products">Continue shopping</Link>
           </p>
         </div>
       </CartStyles>
