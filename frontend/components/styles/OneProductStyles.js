@@ -4,16 +4,27 @@ export const OneProductStyles = styled.div`
   transition: 0.2s;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* gap: 10px; */
   grid-auto-rows: minmax(100px, auto);
   margin: 0 auto;
   padding-top: 25%;
   height: 100vh;
   .product-info {
-    padding-left: 2rem;
+    padding-left: 5rem;
     text-align: left;
+    button {
+      padding: 1rem;
+      background: var(--peach);
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+      border: none;
+      color: white;
+      font-size: 15px;
+      margin: 0 auto;
+    }
   }
   img {
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.4);
+    border-radius: 10px;
     width: 500px;
     height: 500px;
     object-fit: cover;
