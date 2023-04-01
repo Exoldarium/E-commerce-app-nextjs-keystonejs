@@ -6,6 +6,7 @@ import AddToCart from './AddToCart';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { OneProductStyles } from './styles/OneProductStyles';
 import { useUser } from './User';
+import CartMenu from './CartMenu';
 
 export const ONE_PRODUCT_QUERY = gql`
   query ONE_PRODUCT_QUERY($id: ID!) {
@@ -40,22 +41,28 @@ export default function OneProduct({ id }) {
     return <ErrorMessageStyles>Error: {error.message}</ErrorMessageStyles>;
 
   return (
-    <OneProductStyles>
-      <Head>
-        <title> 56 Sugar Gumpaste || {product.name}</title>
-      </Head>
-      <img src={product.photo.image.publicUrlTransformed} alt={product.name} />
-      <div className="product-info">
-        <h1>{product.name}</h1>
-        <p>{product.description}</p>
-        <p className="product-price">{formatMoney(product.price)}</p>
-        {user && <AddToCart id={product.id} />}
-        {!user && (
-          <button type="button" onClick={() => router.push('/signin')}>
-            Add to Cart
-          </button>
-        )}
-      </div>
-    </OneProductStyles>
+    <>
+      <OneProductStyles>
+        <Head>
+          <title> 56 Sugar Gumpaste || {product.name}</title>
+        </Head>
+        <img
+          src={product.photo.image.publicUrlTransformed}
+          alt={product.name}
+        />
+        <div className="product-info">
+          <h1>{product.name}</h1>
+          <p>{product.description}</p>
+          <p className="product-price">{formatMoney(product.price)}</p>
+          {user && <AddToCart id={product.id} />}
+          {!user && (
+            <button type="button" onClick={() => router.push('/signin')}>
+              Add to Cart
+            </button>
+          )}
+        </div>
+      </OneProductStyles>
+      <CartMenu />
+    </>
   );
 }

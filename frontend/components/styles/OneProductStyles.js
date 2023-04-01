@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const OneProductStyles = styled.div`
+  transition: 0.2s;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  /* gap: 10px; */
   grid-auto-rows: minmax(100px, auto);
   margin: 0 auto;
   padding-top: 25%;

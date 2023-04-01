@@ -5,7 +5,7 @@ export const ProductsStyles = styled.div`
   transition: 0.2s;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  /* gap: 10px; */
   grid-auto-rows: minmax(100px, auto);
   justify-items: center;
   text-align: left;
@@ -13,8 +13,6 @@ export const ProductsStyles = styled.div`
   font-weight: bold;
   margin: 0 auto;
   padding-top: 15%;
-  /* width: fit-content; */
-  /* z-index: -1; */
   img {
     width: 300px;
     height: 300px;
