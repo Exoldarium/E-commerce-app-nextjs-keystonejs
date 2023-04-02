@@ -58,7 +58,7 @@ export default function Account() {
           onChange={handleInputs}
           required
         />
-        <Link href="/reset">Request password reset</Link>
+        <Link href="/reset">Request password reset here</Link>
       </fieldset>
       <button type="submit" disabled={loading}>
         Save

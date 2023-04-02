@@ -1,13 +1,43 @@
 import styled from 'styled-components';
 
 export const FormStyles = styled.form`
-  padding-top: 25%;
+  padding-top: 35%;
   max-width: 50%;
   margin: 0 auto;
   height: 100vh;
+  border: none;
   fieldset {
+    border-radius: 3px;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    background: white;
+    padding: 4rem 2rem 4rem 2rem;
+    label {
+      font-weight: bold;
+    }
+    input {
+      border-radius: 3px;
+      /* border: 1px solid black; */
+      height: 2.5vh;
+    }
+    .uploadPhotoInput {
+      width: 12.5vw;
+    }
+  }
+  button {
+    padding: 1rem;
+    background: var(--peach);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border: none;
+    color: white;
+    font-size: 15px;
+    margin-top: 2rem;
+    cursor: pointer;
+  }
+  a {
+    font-weight: bold;
   }
   .productImage {
     width: 50px;

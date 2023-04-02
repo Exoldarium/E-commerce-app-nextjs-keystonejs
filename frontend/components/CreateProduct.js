@@ -72,6 +72,7 @@ export default function CreateProduct() {
           placeholder="Image"
           onChange={handleInputs}
           required
+          className="uploadPhotoInput"
         />
         <label htmlFor="name">Name</label>
         <input
