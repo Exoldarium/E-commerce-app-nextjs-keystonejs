@@ -30,8 +30,8 @@ npm run dev
 ## Technologies
 Project is created with:
 
-* [Next.js](https://nextjs.org/)
-* [Keystone.js](https://keystonejs.com/)
+* [Nextjs](https://nextjs.org/)
+* [Keystonejs](https://keystonejs.com/)
 * [GraphQL](https://graphql.org/)
 * [Apollo Client](https://www.apollographql.com/docs/react/)
 * Inspired by [WesBos](https://github.com/wesbos) and his amazing course!
