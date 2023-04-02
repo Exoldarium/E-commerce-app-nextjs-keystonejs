@@ -62,7 +62,9 @@ export default function Header() {
           Search
         </MobileNavButtonStyles>
         <Link href="/products">
-          <a className="productsLink">Products</a>
+          <a className="productsLink" onClick={closeCart}>
+            Products
+          </a>
         </Link>
         {cartNotEmpty && (
           <Link href="/cart">

@@ -17,6 +17,7 @@ export const HeaderStyles = styled.header`
   padding-right: 50px;
   border: none;
   z-index: 2;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   .cartIcon {
     height: 3vh;
     width: auto;

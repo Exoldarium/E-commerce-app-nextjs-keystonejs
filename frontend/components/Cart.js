@@ -28,8 +28,10 @@ export function CartItem({ cartItem }) {
           <a>{product.name}</a>
         </Link>
       </h1>
+      <div className="pdiv">
+        {maxAmount && <p className="maxAmountP">Max amount available</p>}
+      </div>
       <div className="cartPageInfo">
-        <p>{formatMoney(product?.price * cartItem.quantity)}</p>
         <div className="quantityDiv">
           <RemoveSingleCartItem id={product?.id} quantity={cartItem.quantity} />
           <p
@@ -44,9 +46,9 @@ export function CartItem({ cartItem }) {
             quantity={cartItem.quantity}
           />
         </div>
-        <div className="pdiv">
-          {maxAmount && <p className="maxAmountP">Max amount available</p>}
-        </div>
+        <p className="priceParagraph">
+          {formatMoney(product?.price * cartItem.quantity)}
+        </p>
       </div>
       <RemoveFromCart id={cartItem.id} />
     </CartPageStyles>

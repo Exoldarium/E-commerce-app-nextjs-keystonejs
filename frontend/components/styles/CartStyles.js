@@ -7,8 +7,8 @@ export const CartStyles = styled.div`
   .totalPriceCart {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    padding-right: 2rem;
+    align-items: flex-start;
+    padding-left: 2rem;
     font-size: 2rem;
     font-weight: bold;
   }
@@ -29,6 +29,7 @@ export const CartSliderStyles = styled.div`
   ${(props) => props.open && `transform: translateX(0)`};
   transition: 0.2s;
   position: fixed;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   right: 0;
   top: 0rem;
   height: 100%;
@@ -36,7 +37,6 @@ export const CartSliderStyles = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  border: 1px solid black;
   border-radius: 5px;
   padding: 10px;
   background: white;
@@ -150,6 +150,7 @@ export const CartMenuPageStyles = styled.div`
     flex-direction: row;
     align-items: center;
     img {
+      border-radius: 10px;
       width: 50px;
       height: 50px;
       object-fit: cover;
@@ -179,6 +180,7 @@ export const CartMenuPageStyles = styled.div`
     .maxAmountP {
       color: red;
       font-size: 10px;
+      text-align: center;
     }
   }
   @media only screen and (max-width: 790px) {
@@ -190,16 +192,22 @@ export const CartPageStyles = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 2rem;
-  border: 1px solid black;
+  padding: 1rem;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   border-radius: 5px;
   margin: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  background: white;
+  height: 15vh;
   .cartPageInfo {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    p {
+    align-items: center;
+    padding: 1rem;
+    .priceParagraph {
       font-size: 2rem;
+      margin: 0;
     }
   }
   h1 {
@@ -212,21 +220,23 @@ export const CartPageStyles = styled.div`
     text-decoration: none;
   }
   img {
-    width: 150px;
-    height: 150px;
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
-  }
-  .quantityParagraph {
-    height: 5vh;
-    width: 5vw;
-    text-align: center;
-    font-size: 2rem;
-    text-align: center;
-    margin: 0;
-    border: 1px solid black;
   }
   .quantityDiv {
     display: flex;
+    border: 1px solid black;
+    border-radius: 3px;
+    .quantityParagraph {
+      height: 5vh;
+      width: 5vw;
+      text-align: center;
+      font-size: 2rem;
+      text-align: center;
+      margin: 0;
+    }
   }
   button[aria-disabled='true'] {
     opacity: 0.6;
@@ -234,22 +244,26 @@ export const CartPageStyles = styled.div`
   }
   button {
     height: 5vh;
+    background: var(--peach);
+    border: none;
+    border-radius: 3px;
   }
   .removeFromCart {
-    align-self: flex-start;
+    align-self: center;
     background: white;
     border: none;
     padding-right: 0;
     font-size: 2.5vw;
-    text-align: top;
-  }
-  .maxAmountP {
-    color: red;
-    font-size: 10px;
-    margin: 0 auto;
+    text-align: center;
   }
   .pdiv {
-    height: 60px;
+    padding-right: 1rem;
+    .maxAmountP {
+      color: red;
+      font-size: 12px;
+      font-weight: bold;
+      margin: 0 auto;
+    }
   }
   @media only screen and (max-width: 790px) {
     flex-direction: column;
