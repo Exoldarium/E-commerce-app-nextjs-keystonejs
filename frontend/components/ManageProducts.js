@@ -49,7 +49,7 @@ export default function ManageProducts() {
           )}
         </Head>
         <Link href="/create">
-          <a className="createProductLink">Create new product</a>
+          <a className="createProductLink">Create a new product</a>
         </Link>
         {products?.map((product) => (
           <div key={product.id}>
@@ -79,6 +79,7 @@ export default function ManageProducts() {
         ))}
         <button
           type="button"
+          className="loadMoreButton"
           onClick={async function () {
             await fetchMore({
               variables: {

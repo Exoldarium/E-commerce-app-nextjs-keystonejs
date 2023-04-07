@@ -1,5 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
+import Link from 'next/link';
 import { ErrorMessageStyles } from '../../components/styles/ErrorMessageStyles';
 import { OrderStyles } from '../../components/styles/OrderStyles';
 import formatMoney from '../../lib/formatMoney';
@@ -62,6 +63,7 @@ export default function SingleOrderPage({ query }) {
           </div>
         ))}
         <p className="total">Total: {formatMoney(order.total)}</p>
+        <Link href="/products">Click here to continue shopping</Link>
       </OrderStyles>
     </>
   );
