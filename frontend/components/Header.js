@@ -7,7 +7,6 @@ import { MobileNavButtonStyles } from './styles/ButtonStyles';
 import { HeaderStyles } from './styles/HeaderStyles';
 import { LogoStyles } from './styles/LogoStyles';
 import { useUser } from './User';
-
 // TODO
 // add close on outside click
 

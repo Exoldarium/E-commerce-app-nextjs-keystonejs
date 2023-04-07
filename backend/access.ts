@@ -59,7 +59,7 @@ export const rules = {
     }
     // users that are signed in can see the products they own regardless of it's status
     if (isSignedIn({ session })) {
-      return { user: { id: { equals: session?.itemId } } };
+      return { user: { id: { equals: session?.itemId } } } || { status: { equals: 'AVAILABLE' } };
     }
   },
   canManageUsers: ({ session }: ListAccessArgs) => {
