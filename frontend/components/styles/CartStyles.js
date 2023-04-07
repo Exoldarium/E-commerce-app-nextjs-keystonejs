@@ -249,11 +249,12 @@ export const CartPageStyles = styled.div`
     border-radius: 3px;
   }
   .removeFromCart {
-    align-self: center;
+    align-self: flex-start;
     background: white;
     border: none;
     padding-right: 0;
-    font-size: 2.5vw;
+    height: fit-content;
+    font-size: 25px;
     text-align: center;
   }
   .pdiv {

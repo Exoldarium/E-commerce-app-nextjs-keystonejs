@@ -66,7 +66,7 @@ export default function OrdersPage() {
           <div key={order.id} className="allOrders">
             <div className="productOrders">
               <button type="button" id={order.id} onClick={handleClick}>
-                V
+                &darr;
               </button>
               <p className="chargeP">{order.charge}</p>
               <p className="dateP">{convertDate(order.date)}</p>
@@ -90,6 +90,7 @@ export default function OrdersPage() {
         ))}
         <button
           type="button"
+          className="loadMoreButton"
           onClick={() =>
             fetchMore({
               variables: {

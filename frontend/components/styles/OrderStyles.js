@@ -61,6 +61,17 @@ export const OrderHistoryStyles = styled.div`
   justify-content: center;
   width: 50vw;
   margin: 0 auto;
+  .loadMoreButton {
+    padding: 1rem;
+    background: var(--peach);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border: none;
+    color: white;
+    font-size: 15px;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
   .orderInfo {
     font-weight: bold;
     display: flex;
@@ -93,6 +104,16 @@ export const OrderHistoryStyles = styled.div`
       }
       .chargeP {
         text-align: left;
+        padding-left: 0.5rem;
+      }
+      button {
+        background: var(--peach);
+        border-radius: 3px;
+        border: none;
+        color: white;
+        font-size: 15px;
+        margin: 0 auto;
+        cursor: pointer;
       }
     }
     .orderItems {
