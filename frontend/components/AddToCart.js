@@ -3,6 +3,10 @@ import { useSetState } from '../lib/stateProvider';
 import { CartButtonStyles } from './styles/ButtonStyles';
 import { USER_QUERY } from './User';
 
+// TODO
+// checking if adding cart mutation without user is possible
+// create cart item mutation should happen only through front end
+
 export const ADD_TO_CART_MUTATION = gql`
   mutation ADD_TO_CART_MUTATION($id: ID!) {
     addToCart(productId: $id) {
@@ -26,6 +30,7 @@ export default function AddToCart({ id }) {
   async function handleClick() {
     const res = await addToCart();
     setIsCartOpen(true);
+    console.log(id);
   }
 
   return (

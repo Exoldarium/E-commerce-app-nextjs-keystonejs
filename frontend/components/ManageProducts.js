@@ -38,7 +38,6 @@ export default function ManageProducts() {
   });
   const products = data?.user?.products;
   const productsLength = data?.user?.products?.length <= 1;
-  console.log(products);
 
   if (user) {
     return (

@@ -35,7 +35,7 @@ export default function Products({ page }) {
   });
   const products = data?.products;
 
-  console.log({ data, error, loading });
+  // console.log({ data, error, loading });
 
   if (loading) return <ErrorMessageStyles>Loading...</ErrorMessageStyles>;
   if (error)

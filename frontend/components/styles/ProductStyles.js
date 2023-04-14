@@ -43,6 +43,7 @@ export const ProductStyles = styled.div`
       color: white;
       font-size: 15px;
       margin: 0 10px;
+      cursor: pointer;
     }
   }
   @media only screen and (max-width: 790px) {

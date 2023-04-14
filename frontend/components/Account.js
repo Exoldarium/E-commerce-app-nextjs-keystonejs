@@ -17,7 +17,6 @@ const UPDATE_ACCOUNT_MUTATION = gql`
 
 export default function Account() {
   const user = useUser();
-  console.log(user);
   const { inputs, handleInputs } = useForm(user);
   const [update, { data, loading, error }] = useMutation(
     UPDATE_ACCOUNT_MUTATION,
