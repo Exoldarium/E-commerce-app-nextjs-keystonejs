@@ -9,6 +9,7 @@ export default function StateProvider({ children }) {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAmount, setAmount] = useState('');
+  const [isProductId, setProductId] = useState();
 
   function toggleMenu() {
     setIsMenuActive(!isMenuActive);
@@ -53,6 +54,8 @@ export default function StateProvider({ children }) {
         isUserMenuActive,
         setUserMenuActive,
         toggleUserMenu,
+        isProductId,
+        setProductId,
       }}
     >
       {children}

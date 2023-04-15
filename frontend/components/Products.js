@@ -34,6 +34,9 @@ export default function Products({ page }) {
     },
   });
   const products = data?.products;
+  if (typeof window !== 'undefined') {
+    sessionStorage.setItem('products', JSON.stringify(products));
+  }
 
   // console.log({ data, error, loading });
 

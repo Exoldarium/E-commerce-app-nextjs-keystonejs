@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import { gql, useQuery } from '@apollo/client';
 import calculateTotalPrice from '../lib/calculateTotalPrice';
 import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
@@ -8,6 +9,24 @@ import RemoveFromCart from './RemoveFromCart';
 import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { CartMenuPageStyles, CartSliderStyles } from './styles/CartStyles';
 import { useUser } from './User';
+
+export const SINGLE_PRODUCT_QUERY = gql`
+  query SINGLE_PRODUCT_QUERY($id: ID!) {
+    product(where: { id: $id }) {
+      id
+      name
+      description
+      price
+      stock
+      photo {
+        id
+        image {
+          publicUrlTransformed
+        }
+      }
+    }
+  }
+`;
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
@@ -56,9 +75,31 @@ export function CartItem({ cartItem }) {
 }
 
 export default function CartMenu() {
+  const { isCartOpen, closeCart, isProductId } = useSetState();
+  const { data, loading, error } = useQuery(SINGLE_PRODUCT_QUERY, {
+    variables: {
+      id: isProductId,
+    },
+  });
   const user = useUser();
   const cartItems = user?.cart;
-  const { isCartOpen, closeCart } = useSetState();
+  const product = data?.product;
+  console.log(product);
+
+  // add items to local storage on click
+  function addProduct() {
+    const storedProducts = JSON.parse(sessionStorage.getItem('products'));
+    const storedItems = JSON.parse(sessionStorage.getItem('items') || '[]');
+    for (let i = 0; i < storedProducts.length; i++) {
+      if (isProductId === storedProducts[i].id) {
+        storedItems.push(storedProducts[i]);
+        sessionStorage.setItem('items', JSON.stringify(storedItems));
+      }
+    }
+  }
+  if (!user) {
+    addProduct();
+  }
 
   // if the user is registered
   if (user) {

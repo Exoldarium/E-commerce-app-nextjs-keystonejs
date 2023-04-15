@@ -4,10 +4,16 @@ import formatMoney from '../lib/formatMoney';
 import AddToCart from './AddToCart';
 import { ProductStyles } from './styles/ProductStyles';
 import { useUser } from './User';
+import { useSetState } from '../lib/stateProvider';
 
 export default function Product({ product }) {
   const user = useUser();
   const router = useRouter();
+  const { isProductId, setProductId } = useSetState();
+
+  function onClick(e) {
+    setProductId(e.target.id);
+  }
 
   return (
     <ProductStyles>
@@ -22,7 +28,7 @@ export default function Product({ product }) {
           <p>{product.name}</p>
           {user && <AddToCart id={product.id} />}
           {!user && (
-            <button type="button" onClick={() => router.push('/signin')}>
+            <button type="button" onClick={onClick} id={product.id}>
               Add to Cart
             </button>
           )}
