@@ -14,9 +14,8 @@ a great choice because of its excellent CSR, SSR and routing. I've also learned 
 The projects has also allowed me to gain an insight how an e-commerce website works and all the intricacies from signing up to checking out products, payment and handling access and roles and permissions of different users. There are still things that i'm adding as it's a work in progress. Some of the things i'll be adding in the future:
 
   - Cart access if the user is not logged in
-  - Roles and permissions
-  - Styling (the app has very minimal styling at the moment)
   - Testing
+  - Deployment
 
 ## Installation
 Install dependencies

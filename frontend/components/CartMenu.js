@@ -41,7 +41,7 @@ export function CartItem({ cartItem }) {
           />
         </div>
         <p>
-          Price:{' '}
+          Price:
           <span className="priceSpan">
             {formatMoney(product?.price * cartItem.quantity)}
           </span>
