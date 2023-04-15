@@ -30,7 +30,6 @@ export default function AddToCart({ id }) {
   async function handleClick() {
     const res = await addToCart();
     setIsCartOpen(true);
-    console.log(id);
   }
 
   return (
