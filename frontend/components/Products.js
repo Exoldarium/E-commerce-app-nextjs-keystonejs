@@ -5,6 +5,8 @@ import CartMenu from './CartMenu';
 import Product from './Product';
 import { ErrorMessageStyles } from './styles/ErrorMessageStyles';
 import { ProductsStyles } from './styles/ProductsStyles';
+import { useUser } from './User';
+// import NoUserCartMenu from './NoUserCartMenu';
 
 export const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY($take: Int, $skip: Int! = 0) {
@@ -24,6 +26,7 @@ export const ALL_PRODUCTS_QUERY = gql`
 `;
 
 export default function Products({ page }) {
+  const user = useUser();
   const { isCartOpen, closeCart } = useSetState();
   const { data, loading, error } = useQuery(ALL_PRODUCTS_QUERY, {
     fetchPolicy: 'cache-first',
@@ -51,7 +54,8 @@ export default function Products({ page }) {
           <Product key={product.id} product={product} id={product.id} />
         ))}
       </ProductsStyles>
-      <CartMenu />
+      {!user && <CartMenu />}
+      {/* {!user && <NoUserCartMenu />} */}
     </>
   );
 }
