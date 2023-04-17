@@ -12,22 +12,23 @@ import { useUser } from './User';
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
   const [isAmount, setIsAmount] = useState('');
-  const maxAmount = cartItem.quantity >= product?.stock;
+  const maxAmount = cartItem.quantity >= product.stock;
+  console.log(cartItem);
 
   return (
     <CartMenuPageStyles>
       <div className="imageInfo">
         <img
-          src={product?.photo.image.publicUrlTransformed}
+          src={product.photo.image.publicUrlTransformed}
           alt={product?.name}
         />
-        <Link href={`/product/${product?.id}`}>
-          <h1>{product?.name}</h1>
+        <Link href={`/product/${product.id}`}>
+          <h1>{product.name}</h1>
         </Link>
       </div>
       <div className="sliderStyles">
         <div className="buttonAmountDiv">
-          <RemoveSingleCartItem id={product?.id} quantity={cartItem.quantity} />
+          <RemoveSingleCartItem id={product.id} quantity={cartItem.quantity} />
           <p
             onChange={() => setIsAmount(cartItem.quantity)}
             className="quantityParagraph"
@@ -35,15 +36,15 @@ export function CartItem({ cartItem }) {
             {cartItem.quantity}
           </p>
           <AddSingleCartItem
-            id={product?.id}
-            stock={product?.stock}
+            id={product.id}
+            stock={product.stock}
             quantity={cartItem.quantity}
           />
         </div>
         <p>
           Price:
           <span className="priceSpan">
-            {formatMoney(product?.price * cartItem.quantity)}
+            {formatMoney(product.price * cartItem.quantity)}
           </span>
         </p>
         <div className="pdiv">
@@ -57,52 +58,65 @@ export function CartItem({ cartItem }) {
 
 export default function NoUserCartMenu() {
   const { isCartOpen, closeCart, isProductId } = useSetState();
+  const user = useUser();
+  const storedProducts = JSON.parse(sessionStorage.getItem('products') || '[]');
+  const cartItems = JSON.parse(sessionStorage.getItem('items') || '[]');
 
   // add items to local storage on click
   function addProduct() {
-    const storedProducts = JSON.parse(
-      sessionStorage.getItem('products') || '[]'
-    );
-    const storedItems = JSON.parse(sessionStorage.getItem('items') || '[{ }]');
     for (let i = 0; i < storedProducts.length; i++) {
-      if (isProductId === storedProducts[i].id) {
-        storedItems.push({
-          name: storedProducts[i].name,
+      // if the id is the same, push the product
+      // if the product id is already present do not add that product
+      if (
+        isProductId === storedProducts[i].id &&
+        !cartItems.some((el) => el.id === storedProducts[i].id)
+      ) {
+        cartItems.push({
+          quantity: 0,
           id: storedProducts[i].id,
-          price: storedProducts[i].price,
-          photo: {
-            image: {
-              publicUrlTransformed:
-                storedProducts[i].photo.image.publicUrlTransformed,
+          product: {
+            description: storedProducts[i].description,
+            name: storedProducts[i].name,
+            price: storedProducts[i].price,
+            stock: storedProducts[i].stock,
+            photo: {
+              image: {
+                publicUrlTransformed:
+                  storedProducts[i].photo.image.publicUrlTransformed,
+              },
             },
           },
         });
-        sessionStorage.setItem('items', JSON.stringify(storedItems));
       }
+      sessionStorage.setItem('items', JSON.stringify(cartItems));
     }
   }
+  // if (!user) {
   addProduct();
+  // }
 
   // if the user is registered
-  return (
-    <CartSliderStyles open={isCartOpen}>
-      <div className="cartLinks">
-        <p>
-          <Link href="/checkout">Payment</Link>
+  if (!user) {
+    return (
+      <CartSliderStyles open={isCartOpen}>
+        <div className="cartLinks">
+          <p>
+            <Link href="/checkout">Payment</Link>
+          </p>
+          <p>
+            <Link href="/cart">Cart</Link>
+          </p>
+          <button type="button" onClick={closeCart} className="closeCartButton">
+            &times;
+          </button>
+        </div>
+        <p className="totalParagraph">
+          Total: {formatMoney(calculateTotalPrice(cartItems))}
         </p>
-        <p>
-          <Link href="/cart">Cart</Link>
-        </p>
-        <button type="button" onClick={closeCart} className="closeCartButton">
-          &times;
-        </button>
-      </div>
-      <p className="totalParagraph">
-        Total: {formatMoney(calculateTotalPrice(cartItems))}
-      </p>
-      {cartItems.map((cartItem) => (
-        <CartItem cartItem={cartItem} key={cartItem.id} />
-      ))}
-    </CartSliderStyles>
-  );
+        {cartItems.map((cartItem) => (
+          <CartItem cartItem={cartItem} key={cartItem.id} />
+        ))}
+      </CartSliderStyles>
+    );
+  }
 }

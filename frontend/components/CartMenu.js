@@ -59,65 +59,60 @@ export default function CartMenu() {
   const { isCartOpen, closeCart, isProductId } = useSetState();
   const user = useUser();
   const cartItems = user?.cart;
+  // const storedProducts = JSON.parse(sessionStorage.getItem('products') || '[]');
+  // const storedItems = JSON.parse(sessionStorage.getItem('items') || '[]');
 
   // add items to local storage on click
-  function addProduct() {
-    const storedProducts = JSON.parse(
-      sessionStorage.getItem('products') || '[]'
-    );
-    const storedItems = JSON.parse(sessionStorage.getItem('items') || '[]');
-    let quantityCounter = 0;
-    for (let i = 0; i < storedProducts.length; i++) {
-      if (isProductId === storedProducts[i].id) {
-        storedItems.push({
-          quantity: 0,
-          name: storedProducts[i].name,
-          id: storedProducts[i].id,
-          price: storedProducts[i].price,
-          photo: {
-            image: {
-              publicUrlTransformed:
-                storedProducts[i].photo.image.publicUrlTransformed,
-            },
-          },
-        });
-        for (let j = 0; j < storedItems.length; j++) {
-          if (storedItems[j].id === storedProducts[i].id) {
-            quantityCounter += 1;
-          }
-          storedItems[j].quantity = quantityCounter;
-        }
-        sessionStorage.setItem('items', JSON.stringify(storedItems));
-      }
-    }
-    console.log(quantityCounter);
-  }
-  if (!user) {
-    addProduct();
-  }
+  // function addProduct() {
+  //   for (let i = 0; i < storedProducts.length; i++) {
+  //     // if the id is the same, push the product
+  //     // if the product id is already present do not add that product
+  //     if (
+  //       isProductId === storedProducts[i].id &&
+  //       !storedItems.some((el) => el.id === storedProducts[i].id)
+  //     ) {
+  //       storedItems.push({
+  //         quantity: 0,
+  //         id: storedProducts[i].id,
+  //         product: {
+  //           name: storedProducts[i].name,
+  //           price: storedProducts[i].price,
+  //           photo: {
+  //             image: {
+  //               publicUrlTransformed:
+  //                 storedProducts[i].photo.image.publicUrlTransformed,
+  //             },
+  //           },
+  //         },
+  //       });
+  //     }
+  //     sessionStorage.setItem('items', JSON.stringify(storedItems));
+  //   }
+  // }
+  // if (!user) {
+  //   addProduct();
+  // }
 
   // if the user is registered
-  if (user) {
-    return (
-      <CartSliderStyles open={isCartOpen}>
-        <div className="cartLinks">
-          <p>
-            <Link href="/checkout">Payment</Link>
-          </p>
-          <p>
-            <Link href="/cart">Cart</Link>
-          </p>
-          <button type="button" onClick={closeCart} className="closeCartButton">
-            &times;
-          </button>
-        </div>
-        <p className="totalParagraph">
-          Total: {formatMoney(calculateTotalPrice(cartItems))}
+  return (
+    <CartSliderStyles open={isCartOpen}>
+      <div className="cartLinks">
+        <p>
+          <Link href="/checkout">Payment</Link>
         </p>
-        {cartItems.map((cartItem) => (
-          <CartItem cartItem={cartItem} key={cartItem.id} />
-        ))}
-      </CartSliderStyles>
-    );
-  }
+        <p>
+          <Link href="/cart">Cart</Link>
+        </p>
+        <button type="button" onClick={closeCart} className="closeCartButton">
+          &times;
+        </button>
+      </div>
+      <p className="totalParagraph">
+        Total: {formatMoney(calculateTotalPrice(cartItems))}
+      </p>
+      {cartItems.map((cartItem) => (
+        <CartItem cartItem={cartItem} key={cartItem.id} />
+      ))}
+    </CartSliderStyles>
+  );
 }
