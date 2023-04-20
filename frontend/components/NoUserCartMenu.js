@@ -5,15 +5,16 @@ import formatMoney from '../lib/formatMoney';
 import { useSetState } from '../lib/stateProvider';
 import AddSingleCartItem from './AddSingleCartItem';
 import RemoveFromCart from './RemoveFromCart';
-import RemoveSingleCartItem from './RemoveSingleCartItem';
 import { CartMenuPageStyles, CartSliderStyles } from './styles/CartStyles';
 import { useUser } from './User';
 
 export function CartItem({ cartItem }) {
   const { product } = cartItem;
-  const [isAmount, setIsAmount] = useState('');
   const maxAmount = cartItem.quantity >= product.stock;
-  console.log(cartItem);
+  function decreaseAmount() {
+    cartItem.quantity -= 1;
+  }
+  console.log(cartItem.quantity);
 
   return (
     <CartMenuPageStyles>
@@ -28,13 +29,10 @@ export function CartItem({ cartItem }) {
       </div>
       <div className="sliderStyles">
         <div className="buttonAmountDiv">
-          <RemoveSingleCartItem id={product.id} quantity={cartItem.quantity} />
-          <p
-            onChange={() => setIsAmount(cartItem.quantity)}
-            className="quantityParagraph"
-          >
-            {cartItem.quantity}
-          </p>
+          <button type="button" id={product.id} onClick={decreaseAmount}>
+            -
+          </button>
+          <p className="quantityParagraph">{cartItem.quantity}</p>
           <AddSingleCartItem
             id={product.id}
             stock={product.stock}
@@ -58,6 +56,7 @@ export function CartItem({ cartItem }) {
 
 export default function NoUserCartMenu() {
   const { isCartOpen, closeCart, isProductId } = useSetState();
+  const [isAmount, setIsAmount] = useState(2);
   const user = useUser();
   const storedProducts = JSON.parse(sessionStorage.getItem('products') || '[]');
   const cartItems = JSON.parse(sessionStorage.getItem('items') || '[]');
@@ -72,7 +71,7 @@ export default function NoUserCartMenu() {
         !cartItems.some((el) => el.id === storedProducts[i].id)
       ) {
         cartItems.push({
-          quantity: 0,
+          quantity: isAmount,
           id: storedProducts[i].id,
           product: {
             description: storedProducts[i].description,
@@ -91,11 +90,7 @@ export default function NoUserCartMenu() {
       sessionStorage.setItem('items', JSON.stringify(cartItems));
     }
   }
-  // if (!user) {
   addProduct();
-  // }
-
-  // if the user is registered
   if (!user) {
     return (
       <CartSliderStyles open={isCartOpen}>

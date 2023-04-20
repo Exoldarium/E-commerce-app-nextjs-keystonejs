@@ -55,7 +55,7 @@ export default function Products({ page }) {
           <Product key={product.id} product={product} id={product.id} />
         ))}
       </ProductsStyles>
-      {user && <CartMenu />}
+      <CartMenu />
       <NoUserCartMenu />
     </>
   );

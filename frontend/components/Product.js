@@ -9,10 +9,11 @@ import { useSetState } from '../lib/stateProvider';
 export default function Product({ product }) {
   const user = useUser();
   const router = useRouter();
-  const { isProductId, setProductId } = useSetState();
+  const { isProductId, setProductId, setIsCartOpen } = useSetState();
 
   function onClick(e) {
     setProductId(e.target.id);
+    setIsCartOpen(true);
   }
 
   return (

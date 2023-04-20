@@ -28,7 +28,7 @@ export default function StateProvider({ children }) {
   }
 
   function toggleCart() {
-    setIsCartOpen(true);
+    setIsCartOpen(!isCartOpen);
   }
 
   function closeCart() {

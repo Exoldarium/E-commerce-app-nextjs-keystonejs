@@ -59,60 +59,29 @@ export default function CartMenu() {
   const { isCartOpen, closeCart, isProductId } = useSetState();
   const user = useUser();
   const cartItems = user?.cart;
-  // const storedProducts = JSON.parse(sessionStorage.getItem('products') || '[]');
-  // const storedItems = JSON.parse(sessionStorage.getItem('items') || '[]');
-
-  // add items to local storage on click
-  // function addProduct() {
-  //   for (let i = 0; i < storedProducts.length; i++) {
-  //     // if the id is the same, push the product
-  //     // if the product id is already present do not add that product
-  //     if (
-  //       isProductId === storedProducts[i].id &&
-  //       !storedItems.some((el) => el.id === storedProducts[i].id)
-  //     ) {
-  //       storedItems.push({
-  //         quantity: 0,
-  //         id: storedProducts[i].id,
-  //         product: {
-  //           name: storedProducts[i].name,
-  //           price: storedProducts[i].price,
-  //           photo: {
-  //             image: {
-  //               publicUrlTransformed:
-  //                 storedProducts[i].photo.image.publicUrlTransformed,
-  //             },
-  //           },
-  //         },
-  //       });
-  //     }
-  //     sessionStorage.setItem('items', JSON.stringify(storedItems));
-  //   }
-  // }
-  // if (!user) {
-  //   addProduct();
-  // }
 
   // if the user is registered
-  return (
-    <CartSliderStyles open={isCartOpen}>
-      <div className="cartLinks">
-        <p>
-          <Link href="/checkout">Payment</Link>
+  if (user) {
+    return (
+      <CartSliderStyles open={isCartOpen}>
+        <div className="cartLinks">
+          <p>
+            <Link href="/checkout">Payment</Link>
+          </p>
+          <p>
+            <Link href="/cart">Cart</Link>
+          </p>
+          <button type="button" onClick={closeCart} className="closeCartButton">
+            &times;
+          </button>
+        </div>
+        <p className="totalParagraph">
+          Total: {formatMoney(calculateTotalPrice(cartItems))}
         </p>
-        <p>
-          <Link href="/cart">Cart</Link>
-        </p>
-        <button type="button" onClick={closeCart} className="closeCartButton">
-          &times;
-        </button>
-      </div>
-      <p className="totalParagraph">
-        Total: {formatMoney(calculateTotalPrice(cartItems))}
-      </p>
-      {cartItems.map((cartItem) => (
-        <CartItem cartItem={cartItem} key={cartItem.id} />
-      ))}
-    </CartSliderStyles>
-  );
+        {cartItems.map((cartItem) => (
+          <CartItem cartItem={cartItem} key={cartItem.id} />
+        ))}
+      </CartSliderStyles>
+    );
+  }
 }

@@ -7,7 +7,7 @@ export const FormStyles = styled.form`
   height: 100vh;
   border: none;
   fieldset {
-    border-radius: 3px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
